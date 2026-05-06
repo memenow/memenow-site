@@ -31,3 +31,7 @@ vite.config.ts.timestamp-*
 # Local AI tooling state — not committed
 .serena/
 .gitnexus/
+
+# Brand-asset staging: chatgpt-create-image source variants kept locally
+# as audit trail, never committed.
+.brand-staging/

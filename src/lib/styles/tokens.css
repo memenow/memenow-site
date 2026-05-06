@@ -1,0 +1,204 @@
+/**
+ * memenow design tokens.
+ *
+ * Two-tone palette: sage green (primary) + coral pink (highlight, identical
+ * to the logo) + warm white. Components must consume tokens, never literals.
+ */
+
+:root {
+	/* Surface — warm white */
+	--surface-base: #faf9f6;
+	--surface-raised: #ffffff;
+	--surface-sunken: #f0f2ee;
+	--surface-ink: #2c3a30;
+	--surface-overlay: rgba(44, 58, 48, 0.55);
+
+	/* Text — deep green ink */
+	--text-primary: #2c3a30;
+	--text-secondary: #4f6253;
+	--text-muted: #8a9690;
+	--text-inverse: #ffffff;
+
+	/* Border — warm hairlines */
+	--border-default: #e2dfd8;
+	--border-strong: #c7cdc4;
+	--border-focus: #4a7c59;
+
+	/* Brand — sage green (primary) */
+	--accent-green: #4a7c59;
+	--accent-green-light: #6e9c7a;
+	--accent-green-soft: rgba(74, 124, 89, 0.12);
+
+	/* Brand — coral pink (highlight, replaces vermilion seal) */
+	--accent-pink: #da8579;
+	--accent-pink-light: #e89a8e;
+	--accent-pink-soft: rgba(218, 133, 121, 0.14);
+
+	/* Brand coral alias — same value as accent-pink, used by logo and
+	   adjacent signature elements only. */
+	--brand-coral: var(--accent-pink);
+	--brand-coral-soft: var(--accent-pink-soft);
+
+	/* Status — minimal aliases on the two-tone palette */
+	--status-success: var(--accent-green);
+	--status-error: var(--accent-pink);
+	--status-warning: var(--accent-pink);
+	--status-info: var(--accent-green);
+
+	/* Type — single sans (Manrope variable) for everything; Inter as fallback */
+	--font-display:
+		'Manrope Variable', 'Manrope', 'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
+	--font-body:
+		'Inter', 'Manrope Variable', -apple-system, 'Segoe UI', Roboto, system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+	--type-display-xl: clamp(3.75rem, 13vw, 10rem);
+	--type-display: clamp(3rem, 9vw, 7.5rem);
+	--type-heading-1: clamp(2.5rem, 6vw, 4.75rem);
+	--type-heading-2: clamp(1.875rem, 4vw, 2.75rem);
+	--type-heading-3: clamp(1.25rem, 2vw, 1.625rem);
+	--type-body: clamp(0.9375rem, 1.05vw, 1.0625rem);
+	--type-small: 0.875rem;
+	--type-caption: 0.75rem;
+	--type-overline: 0.6875rem;
+
+	--leading-tight: 1.1;
+	--leading-snug: 1.25;
+	--leading-normal: 1.6;
+	--leading-relaxed: 1.7;
+
+	--ls-display: -0.04em;
+	--ls-heading: -0.02em;
+	--ls-body: 0;
+	--ls-overline: 0.16em;
+	--ls-ritual: 0.12em;
+
+	/* Spacing — 4 px modular */
+	--spacing-1: 0.25rem;
+	--spacing-2: 0.5rem;
+	--spacing-3: 0.75rem;
+	--spacing-4: 1rem;
+	--spacing-5: 1.25rem;
+	--spacing-6: 1.5rem;
+	--spacing-8: 2rem;
+	--spacing-10: 2.5rem;
+	--spacing-12: 3rem;
+	--spacing-16: 4rem;
+	--spacing-20: 5rem;
+	--spacing-24: 6rem;
+	--spacing-32: 8rem;
+
+	/* Radius — small only; >12 px discouraged in new code */
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-lg: 12px;
+	--radius-pill: 9999px;
+
+	/* Shadow — warm grey, restrained */
+	--shadow-sm: 0 1px 2px rgba(44, 58, 48, 0.06);
+	--shadow-md: 0 8px 24px rgba(44, 58, 48, 0.08);
+	--shadow-lg: 0 16px 40px rgba(44, 58, 48, 0.12);
+	--shadow-xl: 0 24px 64px rgba(44, 58, 48, 0.16);
+
+	/* Motion */
+	--motion-duration-fast: 150ms;
+	--motion-duration-base: 250ms;
+	--motion-duration-slow: 400ms;
+	--motion-ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+	--motion-ease-out: cubic-bezier(0, 0, 0.25, 1);
+
+	/* Container widths */
+	--container-narrow: 720px;
+	--container-max: 1200px;
+	--container-wide: 1400px;
+
+	/* Z-index ladder */
+	--z-dropdown: 100;
+	--z-sticky: 200;
+	--z-overlay: 300;
+	--z-modal: 400;
+	--z-toast: 500;
+
+	/* Misc */
+	--nav-height: 64px;
+}
+
+/* Dark theme */
+[data-theme='dark'] {
+	--surface-base: #1a201c;
+	--surface-raised: #232a26;
+	--surface-sunken: #141815;
+	--surface-ink: #0d100e;
+	--surface-overlay: rgba(0, 0, 0, 0.65);
+
+	--text-primary: #e8ebe6;
+	--text-secondary: #c2c8c1;
+	--text-muted: #8a9690;
+	--text-inverse: #faf9f6;
+
+	--border-default: #38423b;
+	--border-strong: #54605a;
+	--border-focus: #88b895;
+
+	--accent-green: #88b895;
+	--accent-green-light: #a0c8a9;
+	--accent-green-soft: rgba(136, 184, 149, 0.18);
+
+	--accent-pink: #f0a99e;
+	--accent-pink-light: #f5bfb5;
+	--accent-pink-soft: rgba(240, 169, 158, 0.18);
+
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+	--shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
+	--shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.65);
+}
+
+/* Base typographic baseline */
+html {
+	color-scheme: light dark;
+	background: var(--surface-base);
+	color: var(--text-primary);
+	font-family: var(--font-body);
+	font-size: 16px;
+	line-height: var(--leading-normal);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	margin: 0;
+	min-height: 100dvh;
+	background: var(--surface-base);
+	color: var(--text-primary);
+	transition:
+		background var(--motion-duration-slow) var(--motion-ease-standard),
+		color var(--motion-duration-slow) var(--motion-ease-standard);
+}
+
+a {
+	color: inherit;
+	text-decoration-color: var(--border-strong);
+	text-underline-offset: 0.18em;
+	text-decoration-thickness: 1px;
+}
+
+a:hover {
+	text-decoration-color: var(--text-primary);
+}
+
+:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

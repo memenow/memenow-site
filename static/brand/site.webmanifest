@@ -1,0 +1,21 @@
+{
+  "name": "memenow",
+  "short_name": "memenow",
+  "description": "Make AI your partner.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F7EE",
+  "theme_color": "#F7F7EE",
+  "icons": [
+    {
+      "src": "/brand/app-icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/brand/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

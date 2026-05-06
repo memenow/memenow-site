@@ -1,3 +1,11 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+@import '../lib/styles/tokens.css';
+@import '../lib/styles/scene.css';
+@import '../lib/styles/layout.css';
+@import '../lib/styles/components.css';
+@import '../lib/styles/world-layer.css';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));

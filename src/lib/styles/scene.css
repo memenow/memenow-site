@@ -1,0 +1,52 @@
+/**
+ * Scene tokens — gradient stacks for hero scrim and per-route fog veils.
+ *
+ * Set on <html data-route-family="..."> by the root layout effect, so a
+ * route's fog follows SPA navigation without the loader needing to re-run.
+ */
+
+:root {
+	--scene-fog-celestial:
+		radial-gradient(circle at 22% 22%, rgba(232, 240, 229, 0.55), transparent 45%),
+		radial-gradient(circle at 78% 26%, rgba(252, 232, 228, 0.35), transparent 50%),
+		radial-gradient(circle at 50% 90%, rgba(74, 124, 89, 0.08), transparent 55%);
+
+	--scene-fog-legal: linear-gradient(
+		180deg,
+		rgba(250, 249, 246, 0) 0%,
+		rgba(250, 249, 246, 0.5) 100%
+	);
+
+	--scene-scrim-soft: linear-gradient(
+		180deg,
+		rgba(44, 58, 48, 0) 0%,
+		rgba(44, 58, 48, 0.32) 70%,
+		rgba(44, 58, 48, 0.55) 100%
+	);
+
+	--scene-scrim-strong: linear-gradient(
+		180deg,
+		rgba(0, 0, 0, 0) 0%,
+		rgba(0, 0, 0, 0.4) 60%,
+		rgba(0, 0, 0, 0.72) 100%
+	);
+
+	--scene-fog-active: var(--scene-fog-celestial);
+}
+
+[data-theme='dark'] {
+	--scene-fog-celestial:
+		radial-gradient(circle at 22% 22%, rgba(136, 184, 149, 0.18), transparent 45%),
+		radial-gradient(circle at 78% 26%, rgba(240, 169, 158, 0.14), transparent 50%),
+		radial-gradient(circle at 50% 90%, rgba(74, 124, 89, 0.1), transparent 55%);
+
+	--scene-fog-legal: linear-gradient(180deg, rgba(26, 32, 28, 0) 0%, rgba(26, 32, 28, 0.5) 100%);
+}
+
+[data-route-family='legal'] {
+	--scene-fog-active: var(--scene-fog-legal);
+}
+
+[data-route-family='threshold'] {
+	--scene-fog-active: var(--scene-fog-celestial);
+}

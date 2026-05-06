@@ -38,8 +38,12 @@ export default defineConfig(
 		}
 	},
 	{
-		// Override or add rule settings here, such as:
-		// 'svelte/button-has-type': 'error'
-		rules: {}
+		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
+		rules: {
+			// Project base path is '/' and is not configured to change. Requiring
+			// resolve() on every static href would only add boilerplate without
+			// catching real bugs.
+			'svelte/no-navigation-without-resolve': 'off'
+		}
 	}
 );

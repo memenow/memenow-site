@@ -1,0 +1,104 @@
+/**
+ * World layer — Tai Chi geometry overlay + brushstroke edges.
+ *
+ * The world layer is a fixed underlay that sits behind every route. It
+ * provides ambient texture (fog gradients + subtle Tai Chi geometry) so the
+ * full site reads as one continuous narrative world rather than a stack of
+ * independent pages.
+ */
+
+.world-layer {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: -1;
+	background: var(--scene-fog-active, var(--scene-fog-celestial));
+	opacity: 0.7;
+	transition: opacity var(--motion-duration-slow) var(--motion-ease-standard);
+}
+
+.world-layer__taichi {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	opacity: 0.06;
+	mix-blend-mode: multiply;
+}
+
+[data-theme='dark'] .world-layer__taichi {
+	opacity: 0.1;
+	mix-blend-mode: screen;
+}
+
+.world-layer__brush {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 1.25rem;
+	opacity: 0.16;
+	pointer-events: none;
+}
+
+.world-layer__brush--top {
+	top: 0;
+}
+
+.world-layer__brush--bottom {
+	bottom: 0;
+	transform: scaleY(-1);
+}
+
+/* Hero scene container */
+.c-route-scene {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-height: clamp(540px, 80dvh, 920px);
+	isolation: isolate;
+	overflow: hidden;
+}
+
+.c-route-scene__media {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+}
+
+.c-route-scene__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.c-route-scene__scrim {
+	position: absolute;
+	inset: 0;
+	background: var(--scene-scrim-soft);
+	z-index: -1;
+}
+
+.c-route-scene__content {
+	position: relative;
+	width: 100%;
+	max-width: var(--container-max);
+	margin-inline: auto;
+	padding: clamp(4rem, 12vh, 8rem) clamp(1.25rem, 4vw, 3rem);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: clamp(1.25rem, 2.5vw, 2.5rem);
+	flex: 1;
+}
+
+.c-route-scene--centered .c-route-scene__content {
+	justify-content: center;
+}
+
+/* Hairline placeholder used while a hero image has not yet been generated */
+.c-route-scene__placeholder {
+	position: absolute;
+	inset: clamp(2rem, 6vw, 4rem);
+	border: 1px solid var(--border-strong);
+	z-index: -1;
+}
