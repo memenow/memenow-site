@@ -5,6 +5,9 @@
 
 	let theme = $state<Theme>('light');
 
+	// app.html boot script seeds `data-theme` from localStorage or system pref.
+	// We sync once on mount and only update on explicit click — manual choice
+	// stays sticky across OS theme changes by design.
 	onMount(() => {
 		const current = document.documentElement.getAttribute('data-theme');
 		theme = current === 'dark' ? 'dark' : 'light';

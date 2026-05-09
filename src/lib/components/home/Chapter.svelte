@@ -24,8 +24,10 @@
 		cta
 	}: {
 		id?: string;
-		number: string;
-		label: string;
+		// Required when the chapter renders a header (default). Optional when
+		// `headless` hides the number/label row entirely.
+		number?: string;
+		label?: string;
 		title: string;
 		image?: SceneImage;
 		align?: Align;
@@ -46,7 +48,7 @@
 >
 	<div class="c-chapter__inner">
 		<header class="c-chapter__head">
-			{#if !headless}
+			{#if !headless && number && label}
 				<span class="c-chapter__num reveal-fade" use:reveal>
 					<span>{number}</span>
 					<span class="c-chapter__num-label">— {label}</span>

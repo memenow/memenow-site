@@ -63,12 +63,21 @@ export function reveal(node: HTMLElement, options: RevealOptions = {}) {
 	if (splitWords) {
 		const text = node.textContent ?? '';
 		const words = text.trim().split(/\s+/);
-		node.innerHTML = words
-			.map((w, i) => {
-				const space = i < words.length - 1 ? '&nbsp;' : '';
-				return `<span class="reveal-word"><span class="reveal-word-inner" style="--i:${i}">${w}${space}</span></span>`;
-			})
-			.join('');
+		// Build via DOM nodes (not innerHTML) so word content is treated as text.
+		// textContent round-trips entity-decoded characters; concatenating into an
+		// HTML string would let `<` / `>` parse as markup.
+		while (node.firstChild) node.removeChild(node.firstChild);
+		words.forEach((word, i) => {
+			const outer = document.createElement('span');
+			outer.className = 'reveal-word';
+			const inner = document.createElement('span');
+			inner.className = 'reveal-word-inner';
+			inner.style.setProperty('--i', String(i));
+			inner.textContent = word;
+			if (i < words.length - 1) inner.append(' ');
+			outer.appendChild(inner);
+			node.appendChild(outer);
+		});
 	}
 
 	node.dataset.revealed = 'false';
@@ -95,11 +104,14 @@ export function reveal(node: HTMLElement, options: RevealOptions = {}) {
 /**
  * Svelte action that gives an element a magnetic hover — translate it toward
  * the cursor by a small fraction of the offset, with smooth release.
+ *
+ * `strength === 0` (or reduced motion) makes the action a no-op so callers can
+ * pass the strength conditionally without branching the template.
  */
 export function magnetic(node: HTMLElement, strength = 0.22) {
 	const reduced =
 		typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	if (reduced) return { destroy() {} };
+	if (reduced || strength === 0) return { destroy() {} };
 
 	let raf = 0;
 	let tx = 0;

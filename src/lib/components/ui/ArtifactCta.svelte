@@ -25,31 +25,16 @@
 	} & HTMLAnchorAttributes = $props();
 </script>
 
-{#if magnet}
-	<a
-		{href}
-		use:magnetic={0.22}
-		class={cn(
-			'c-artifact-cta',
-			palette === 'ritual' && 'c-artifact-cta--ritual',
-			size !== 'md' && `c-artifact-cta--${size}`,
-			className
-		)}
-		{...rest}
-	>
-		{@render children()}
-	</a>
-{:else}
-	<a
-		{href}
-		class={cn(
-			'c-artifact-cta',
-			palette === 'ritual' && 'c-artifact-cta--ritual',
-			size !== 'md' && `c-artifact-cta--${size}`,
-			className
-		)}
-		{...rest}
-	>
-		{@render children()}
-	</a>
-{/if}
+<a
+	{href}
+	use:magnetic={magnet ? 0.22 : 0}
+	class={cn(
+		'c-artifact-cta',
+		palette === 'ritual' && 'c-artifact-cta--ritual',
+		size !== 'md' && `c-artifact-cta--${size}`,
+		className
+	)}
+	{...rest}
+>
+	{@render children()}
+</a>

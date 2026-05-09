@@ -1,22 +1,11 @@
 import type { RequestHandler } from './$types';
+import { SITEMAP_ROUTES } from '$lib/data/sitemap';
 
 const BASE = 'https://memenow.xyz';
 
-const ROUTES = [
-	'/',
-	'/products',
-	'/products/yinyang',
-	'/products/quant',
-	'/company',
-	'/privacy',
-	'/terms',
-	'/disclaimer'
-];
-
 export const GET: RequestHandler = () => {
-	const today = new Date().toISOString().slice(0, 10);
-	const urls = ROUTES.map(
-		(path) => `	<url>\n		<loc>${BASE}${path}</loc>\n		<lastmod>${today}</lastmod>\n	</url>`
+	const urls = SITEMAP_ROUTES.map(
+		([path, lastmod]) => `	<url>\n		<loc>${BASE}${path}</loc>\n		<lastmod>${lastmod}</lastmod>\n	</url>`
 	).join('\n');
 	const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 	return new Response(body, {
@@ -26,3 +15,5 @@ export const GET: RequestHandler = () => {
 		}
 	});
 };
+
+export const prerender = true;

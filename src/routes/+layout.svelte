@@ -8,6 +8,7 @@
 	import './layout.css';
 	import AppShell from '$lib/components/layout/AppShell.svelte';
 	import { startLenis, stopLenis } from '$lib/utils/motion';
+	import { resolveRouteFamily } from '$lib/utils/route-family';
 
 	let { children } = $props();
 
@@ -16,22 +17,11 @@
 		return () => stopLenis();
 	});
 
-	type RouteFamily = 'threshold' | 'legal' | 'state';
-
-	function resolveFamily(pathname: string): RouteFamily {
-		if (
-			pathname.startsWith('/privacy') ||
-			pathname.startsWith('/terms') ||
-			pathname.startsWith('/disclaimer')
-		) {
-			return 'legal';
-		}
-		return 'threshold';
-	}
-
 	$effect(() => {
 		if (typeof document === 'undefined') return;
-		const family = resolveFamily(page.url.pathname);
+		// SSR seeds this attribute via hooks.server.ts; this effect is the SPA
+		// navigation fallback (hooks don't run on client-side transitions).
+		const family = resolveRouteFamily(page.url.pathname);
 		document.documentElement.setAttribute('data-route-family', family);
 	});
 </script>

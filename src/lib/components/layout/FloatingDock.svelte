@@ -17,7 +17,7 @@
 			<img
 				src="/brand/mark.png"
 				srcset="/brand/mark@2x.png 2x"
-				alt="memenow"
+				alt=""
 				width="24"
 				height="24"
 				loading="eager"
