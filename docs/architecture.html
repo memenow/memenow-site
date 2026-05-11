@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Architecture — memenow-site documentation</title>
+		<meta name="description" content="Architecture overview for memenow-site." />
+		<link rel="stylesheet" href="./_shared.css" />
+	</head>
+	<body>
+		<aside class="toc">
+			<div class="brand">memenow-site</div>
+			<div class="subtitle">Documentation</div>
+			<nav>
+				<a href="./index.html">Overview</a>
+				<span class="section">Engineering</span>
+				<a class="current" href="./architecture.html">Architecture</a>
+				<a href="./routes.html">Routes &amp; content</a>
+				<a href="./components.html">Components</a>
+				<a href="./styling.html">Styling &amp; tokens</a>
+				<a href="./motion.html">Motion &amp; reveal</a>
+				<span class="section">Operations</span>
+				<a href="./deployment.html">Deployment</a>
+				<a href="./brand-assets.html">Brand assets</a>
+			</nav>
+		</aside>
+
+		<main class="doc">
+			<header class="title">
+				<div class="eyebrow">Engineering</div>
+				<h1>Architecture</h1>
+				<p class="lede">
+					memenow-site is a SvelteKit 2 application running on a Cloudflare Worker. It serves SSR
+					HTML for first paint, hydrates as an SPA, and treats the entire site as a single
+					continuous editorial scene.
+				</p>
+			</header>
+
+			<h2>The moving parts</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Layer</th>
+						<th>Responsibility</th>
+						<th>Where it lives</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Worker entrypoint</td>
+						<td>
+							Serves SSR HTML, hydrates client, serves static assets via the
+							<code>ASSETS</code> binding.
+						</td>
+						<td>
+							<code>.svelte-kit/cloudflare/_worker.js</code> (built); <code>wrangler.jsonc</code>
+						</td>
+					</tr>
+					<tr>
+						<td>SSR hooks</td>
+						<td>
+							Resolves the route family and rewrites the <code>data-route-family</code> placeholder
+							in the HTML stream so per-route fog is correct on first paint.
+						</td>
+						<td><code>src/hooks.server.ts</code></td>
+					</tr>
+					<tr>
+						<td>Document shell</td>
+						<td>
+							Inline boot script picks up the saved theme, OG / Twitter / icon meta, manifest,
+							route-family placeholder.
+						</td>
+						<td><code>src/app.html</code></td>
+					</tr>
+					<tr>
+						<td>Root layout</td>
+						<td>
+							Imports the Tailwind v4 entrypoint, boots Lenis on mount, mirrors the route family on
+							SPA navigations.
+						</td>
+						<td><code>src/routes/+layout.svelte</code></td>
+					</tr>
+					<tr>
+						<td>Routes</td>
+						<td>
+							One <code>+page.svelte</code> per public URL plus the prerendered
+							<code>/sitemap.xml</code>.
+						</td>
+						<td><code>src/routes/**</code></td>
+					</tr>
+					<tr>
+						<td>Component library</td>
+						<td>Brand, layout, home, and UI primitives consumed by the routes.</td>
+						<td><code>src/lib/components/</code></td>
+					</tr>
+					<tr>
+						<td>Data sources</td>
+						<td>Single source of truth for navigation, products, and the sitemap URL list.</td>
+						<td><code>src/lib/data/</code></td>
+					</tr>
+					<tr>
+						<td>Styling</td>
+						<td>
+							Design tokens, scene fog, layout utilities, component primitives, world-layer overlay.
+						</td>
+						<td><code>src/lib/styles/</code></td>
+					</tr>
+					<tr>
+						<td>Utilities</td>
+						<td>
+							Class composition (<code>cn</code>), motion (<code>startLenis</code>,
+							<code>reveal</code>, <code>magnetic</code>), route classification.
+						</td>
+						<td><code>src/lib/utils/</code></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Request lifecycle</h2>
+			<p>A first request to <code>/products/yinyang</code> walks the system as follows:</p>
+			<ol>
+				<li>
+					Cloudflare Workers invokes <code>_worker.js</code>. The SvelteKit adapter hands the
+					request to the platform handler.
+				</li>
+				<li>
+					<code>hooks.server.ts</code> calls <code>resolveRouteFamily('/products/yinyang')</code>,
+					gets <code>'threshold'</code>, and rewrites <code>data-route-family="pending"</code> in
+					the HTML stream to <code>data-route-family="threshold"</code>. The CSS selectors in
+					<code>scene.css</code> can now activate the correct fog without waiting for hydration.
+				</li>
+				<li>
+					SvelteKit renders <code>+page.svelte</code> on the Worker (no
+					<code>+page.server.ts</code> for this route, so there is no extra load step) and streams
+					the full document. Only <code>/sitemap.xml</code> is prerendered; every other route is
+					server-rendered on each request.
+				</li>
+				<li>
+					The browser receives HTML, runs the inline theme boot script in
+					<code>app.html</code> to apply the saved or system theme to <code>data-theme</code>, and
+					begins parsing.
+				</li>
+				<li>
+					Hydration runs <code>+layout.svelte</code>, which boots Lenis (skipped under reduced
+					motion) and registers an <code>$effect</code> that re-runs
+					<code>resolveRouteFamily</code> for SPA navigations.
+				</li>
+				<li>
+					The page itself renders <code>EditorialHero</code> and a stack of <code>Chapter</code>s.
+					Each one has a <code>reveal</code> action attached to its title and lede; an
+					<code>IntersectionObserver</code> flips <code>data-revealed="true"</code> on each element
+					as it scrolls into view.
+				</li>
+			</ol>
+
+			<h2>SSR and SPA share one classifier</h2>
+			<p>Two pieces of code consume <code>resolveRouteFamily</code>:</p>
+			<ul>
+				<li>
+					<code>src/hooks.server.ts</code> — runs on every full document load. Its
+					<code>transformPageChunk</code> rewrites the placeholder in the HTML stream.
+				</li>
+				<li>
+					<code>src/routes/+layout.svelte</code> — an <code>$effect</code> reading
+					<code>page.url.pathname</code> updates <code>document.documentElement</code> after
+					client-side navigations (where hooks do not run).
+				</li>
+			</ul>
+			<p>
+				Both call the same exported function so the result cannot drift. The unit tests in
+				<code>src/lib/utils/route-family.test.ts</code> guard the classification rules — including
+				the deliberate equality + segment-boundary check that prevents
+				<code>/privacy-mode</code> from being misclassified as legal.
+			</p>
+
+			<h2>SvelteKit configuration</h2>
+			<ul>
+				<li>
+					<strong>Adapter:</strong>
+					<code>@sveltejs/adapter-cloudflare</code>. The build emits to
+					<code>.svelte-kit/cloudflare/</code> and <code>wrangler.jsonc</code> points at it.
+				</li>
+				<li>
+					<strong>Forced runes mode.</strong>
+					<code>svelte.config.js</code> sets <code>compilerOptions.runes</code> to
+					<code>true</code> for every file outside <code>node_modules</code>. Library code is
+					exempt.
+				</li>
+				<li>
+					<strong>TypeScript strict + checkJs.</strong>
+					<code>tsconfig.json</code> extends the SvelteKit-generated config and adds
+					<code>strict</code>, <code>checkJs</code>, <code>rewriteRelativeImportExtensions</code>,
+					and the Cloudflare runtime types via
+					<code>types: ['./src/worker-configuration.d.ts', 'node']</code>.
+				</li>
+				<li>
+					<strong>App.Platform typing.</strong>
+					<code>src/app.d.ts</code> declares the platform as
+					<code>{ env: Env; cf: CfProperties; ctx: ExecutionContext; }</code> backed by the
+					generated runtime types.
+				</li>
+			</ul>
+
+			<h2>Worker configuration</h2>
+			<ul>
+				<li>
+					<code>compatibility_date: "2026-05-06"</code>,
+					<code>compatibility_flags: ["nodejs_compat", "nodejs_als"]</code>.
+				</li>
+				<li>
+					<code>assets.binding: "ASSETS"</code> with
+					<code>directory: ".svelte-kit/cloudflare"</code> — the SvelteKit adapter handles asset
+					wiring.
+				</li>
+				<li>
+					<code>observability.enabled: true</code> and <code>upload_source_maps: true</code> are on
+					so production tracebacks resolve to source.
+				</li>
+				<li>
+					No bindings are declared today (no KV, D1, R2, Durable Objects, services). Add new
+					bindings to <code>wrangler.jsonc</code> and run <code>pnpm cf-typegen</code> to refresh
+					<code>src/worker-configuration.d.ts</code>.
+				</li>
+			</ul>
+
+			<h2>Test architecture</h2>
+			<p><code>vite.config.ts</code> defines two Vitest projects:</p>
+			<ul>
+				<li>
+					<strong>client</strong> — uses <code>@vitest/browser-playwright</code> with headless
+					Chromium. Includes only <code>src/**/*.svelte.{test,spec}.{js,ts}</code>; excludes
+					<code>src/lib/server/**</code>.
+				</li>
+				<li>
+					<strong>server</strong> — Node environment for everything else under
+					<code>src/**/*.{test,spec}.{js,ts}</code>.
+				</li>
+			</ul>
+			<p>
+				<code>expect.requireAssertions</code> is on, so a passing test that contains no assertions
+				fails. Run all of them once with <code>pnpm test</code>; use
+				<code>pnpm test:unit</code> only in interactive sessions.
+			</p>
+
+			<div class="callout callout--warn">
+				<strong>Don't edit the worker types by hand</strong>
+				<code>src/worker-configuration.d.ts</code> is regenerated whenever
+				<code>wrangler.jsonc</code> bindings change. Hand edits will be lost the next time
+				<code>pnpm cf-typegen</code> runs. The file is excluded from Prettier and ESLint for the
+				same reason.
+			</div>
+
+			<footer class="meta">
+				<span>memenow-site · architecture</span>
+				<a href="./routes.html">Next: routes &amp; content →</a>
+			</footer>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Motion &amp; reveal — memenow-site documentation</title>
+		<meta
+			name="description"
+			content="Motion system, scroll-driven reveals, and reduced-motion handling."
+		/>
+		<link rel="stylesheet" href="./_shared.css" />
+	</head>
+	<body>
+		<aside class="toc">
+			<div class="brand">memenow-site</div>
+			<div class="subtitle">Documentation</div>
+			<nav>
+				<a href="./index.html">Overview</a>
+				<span class="section">Engineering</span>
+				<a href="./architecture.html">Architecture</a>
+				<a href="./routes.html">Routes &amp; content</a>
+				<a href="./components.html">Components</a>
+				<a href="./styling.html">Styling &amp; tokens</a>
+				<a class="current" href="./motion.html">Motion &amp; reveal</a>
+				<span class="section">Operations</span>
+				<a href="./deployment.html">Deployment</a>
+				<a href="./brand-assets.html">Brand assets</a>
+			</nav>
+		</aside>
+
+		<main class="doc">
+			<header class="title">
+				<div class="eyebrow">Engineering</div>
+				<h1>Motion &amp; reveal</h1>
+				<p class="lede">
+					Smooth scroll, scroll-triggered reveals, and a magnetic hover. Three primitives, three
+					tests, and a single non-negotiable rule:
+					<code>prefers-reduced-motion: reduce</code> turns every one of them off.
+				</p>
+			</header>
+
+			<h2>Smooth scroll — Lenis</h2>
+			<p>
+				<code>startLenis()</code> in <code>src/lib/utils/motion.ts</code> dynamically imports the
+				<code>lenis</code> package and starts a single instance, driving its <code>raf</code> loop
+				until <code>stopLenis()</code> is called. The root layout boots it on mount and tears it
+				down on destroy:
+			</p>
+			<pre><code>// src/routes/+layout.svelte
+import { startLenis, stopLenis } from '$lib/utils/motion';
+
+onMount(() =&gt; {
+    startLenis();
+    return () =&gt; stopLenis();
+});</code></pre>
+			<p>
+				The lifecycle is server-safe: <code>startLenis</code> early-returns when
+				<code>window</code> is undefined, when reduced motion is requested, or when an instance is
+				already running. The dynamic import keeps Lenis off the SSR critical path.
+			</p>
+
+			<h2>Scroll-triggered reveals — <code>reveal</code> action</h2>
+			<p>
+				The <code>reveal</code> Svelte action attaches an <code>IntersectionObserver</code> and
+				flips <code>data-revealed="true"</code> on the element when it crosses the threshold. CSS
+				rules in <code>components.css</code> animate from there.
+			</p>
+
+			<h3>Reveal targets</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Pattern</th>
+						<th>Markup</th>
+						<th>CSS</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Word-by-word title</td>
+						<td><code>use:reveal={{ splitWords: true }}</code></td>
+						<td>
+							<code>.reveal-word</code> + <code>.reveal-word-inner</code> (translate-Y stagger via
+							the <code>--i</code> custom property)
+						</td>
+					</tr>
+					<tr>
+						<td>Soft fade-in</td>
+						<td><code>class="reveal-fade" use:reveal</code></td>
+						<td><code>.reveal-fade</code> (opacity + 20px translate)</td>
+					</tr>
+					<tr>
+						<td>Image clip-reveal</td>
+						<td><code>class="reveal-clip" use:reveal</code></td>
+						<td><code>.reveal-clip</code> (clip-path inset from bottom)</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h3>Word-splitting safety</h3>
+			<p>
+				When <code>splitWords: true</code> is passed, the action rebuilds the element's content
+				word-by-word. It uses DOM nodes (not <code>innerHTML</code>) so any <code>&lt;</code> or
+				<code>&gt;</code> characters in the source text are treated as inert text. The regression
+				test in <code>motion.svelte.test.ts</code> covers an XSS attempt (<code
+					>&lt;img src=x onerror=alert(1)&gt;</code
+				>) and verifies it never becomes markup.
+			</p>
+
+			<h3>Children are preserved when not splitting</h3>
+			<p>
+				The non-splitting path leaves the existing element subtree intact and only attaches the
+				observer. This is what makes <code>use:reveal</code> safe on rich content (<em>em</em>,
+				<em>strong</em>, etc.).
+			</p>
+
+			<h2>Magnetic hover — <code>magnetic</code> action</h2>
+			<p>
+				<code>use:magnetic={strength}</code> nudges an element toward the cursor by a fraction of
+				the offset, with an inertial release. Used by <code>ArtifactCta</code> with
+				<code>strength = 0.22</code>. <code>strength === 0</code> or reduced motion makes the action
+				a no-op so callers can pass the strength conditionally without branching the template.
+			</p>
+			<pre><code>&lt;a href={href} use:magnetic={magnet ? 0.22 : 0} class="c-artifact-cta"&gt;
+    {@render children()}
+&lt;/a&gt;</code></pre>
+
+			<h2>Reduced motion</h2>
+			<p>
+				Every motion primitive checks <code>prefers-reduced-motion: reduce</code> and degrades
+				gracefully:
+			</p>
+			<ul>
+				<li>
+					<code>startLenis</code> never instantiates Lenis — native browser scroll stays in effect.
+				</li>
+				<li>
+					<code>reveal</code> sets <code>data-revealed="true"</code> immediately and skips the
+					word-splitting transform; existing children remain untouched.
+				</li>
+				<li>
+					<code>magnetic</code> returns the no-op cleanup form — no event listeners attached, no
+					transforms applied.
+				</li>
+				<li>
+					<code>tokens.css</code> contains a global override: <code>animation-duration</code>,
+					<code>transition-duration</code>, and <code>scroll-behavior</code> all collapse to
+					near-zero.
+				</li>
+				<li>
+					<code>components.css</code> nukes the reveal transforms and clip paths under the same
+					media query so anything we missed still ends up visible.
+				</li>
+			</ul>
+
+			<div class="callout">
+				<strong>House rule</strong>
+				If you add a new motion primitive, add a reduced-motion branch on the same commit. It is
+				reviewer-blocking; the existing tests demonstrate the pattern.
+			</div>
+
+			<h2>Page-level transitions</h2>
+			<p>
+				The site does not use a route transition library. The continuous scene is created by the
+				world-layer overlay (<code>world-layer.css</code>), the per-route fog
+				(<code>scene.css</code>), and the route-family attribute swap on
+				<code>&lt;html&gt;</code> — none of which require remounting content.
+			</p>
+
+			<h2>Test coverage</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Spec</th>
+						<th>Project</th>
+						<th>Covers</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>motion.svelte.test.ts</code></td>
+						<td>client</td>
+						<td>
+							Word-split DOM safety, child-preserving non-split path, immediate-reveal under reduced
+							motion.
+						</td>
+					</tr>
+					<tr>
+						<td><code>route-family.test.ts</code></td>
+						<td>server</td>
+						<td>Classification rules including segment-boundary guard.</td>
+					</tr>
+					<tr>
+						<td><code>Chapter.svelte.test.ts</code></td>
+						<td>client</td>
+						<td>Alignment modifiers, headless toggle, optional id.</td>
+					</tr>
+					<tr>
+						<td><code>ThemeSwitch.svelte.test.ts</code></td>
+						<td>client</td>
+						<td>Mount sync, toggle persistence, storage-failure tolerance.</td>
+					</tr>
+					<tr>
+						<td><code>sitemap.xml/server.test.ts</code></td>
+						<td>server</td>
+						<td>Content type, cache-control, route × lastmod pairing, well-formed urlset.</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<footer class="meta">
+				<span>memenow-site · motion &amp; reveal</span>
+				<a href="./deployment.html">Next: deployment →</a>
+			</footer>
+		</main>
+	</body>
+</html>

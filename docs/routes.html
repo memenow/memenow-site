@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Routes &amp; content — memenow-site documentation</title>
+		<meta name="description" content="Public routes and where their content lives." />
+		<link rel="stylesheet" href="./_shared.css" />
+	</head>
+	<body>
+		<aside class="toc">
+			<div class="brand">memenow-site</div>
+			<div class="subtitle">Documentation</div>
+			<nav>
+				<a href="./index.html">Overview</a>
+				<span class="section">Engineering</span>
+				<a href="./architecture.html">Architecture</a>
+				<a class="current" href="./routes.html">Routes &amp; content</a>
+				<a href="./components.html">Components</a>
+				<a href="./styling.html">Styling &amp; tokens</a>
+				<a href="./motion.html">Motion &amp; reveal</a>
+				<span class="section">Operations</span>
+				<a href="./deployment.html">Deployment</a>
+				<a href="./brand-assets.html">Brand assets</a>
+			</nav>
+		</aside>
+
+		<main class="doc">
+			<header class="title">
+				<div class="eyebrow">Engineering</div>
+				<h1>Routes &amp; content</h1>
+				<p class="lede">
+					Every public URL on memenow.xyz, the chapter it represents, and the file that owns the
+					copy. The site reads as one continuous narrative — additions belong in this map.
+				</p>
+			</header>
+
+			<h2>Route map</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Path</th>
+						<th>Family</th>
+						<th>Indexed?</th>
+						<th>Source</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>/</code></td>
+						<td>threshold</td>
+						<td>yes</td>
+						<td><code>src/routes/+page.svelte</code></td>
+					</tr>
+					<tr>
+						<td><code>/products</code></td>
+						<td>threshold</td>
+						<td>yes</td>
+						<td><code>src/routes/products/+page.svelte</code></td>
+					</tr>
+					<tr>
+						<td><code>/products/yinyang</code></td>
+						<td>threshold</td>
+						<td>yes</td>
+						<td><code>src/routes/products/yinyang/+page.svelte</code></td>
+					</tr>
+					<tr>
+						<td><code>/products/quant</code></td>
+						<td>threshold</td>
+						<td>yes</td>
+						<td><code>src/routes/products/quant/+page.svelte</code></td>
+					</tr>
+					<tr>
+						<td><code>/company</code></td>
+						<td>threshold</td>
+						<td>yes</td>
+						<td><code>src/routes/company/+page.svelte</code></td>
+					</tr>
+					<tr>
+						<td><code>/privacy</code></td>
+						<td>legal</td>
+						<td>no (<code>noindex</code>)</td>
+						<td><code>src/routes/privacy/+page.svelte</code></td>
+					</tr>
+					<tr>
+						<td><code>/terms</code></td>
+						<td>legal</td>
+						<td>no (<code>noindex</code>)</td>
+						<td><code>src/routes/terms/+page.svelte</code></td>
+					</tr>
+					<tr>
+						<td><code>/disclaimer</code></td>
+						<td>legal</td>
+						<td>no (<code>noindex</code>)</td>
+						<td><code>src/routes/disclaimer/+page.svelte</code></td>
+					</tr>
+					<tr>
+						<td><code>/sitemap.xml</code></td>
+						<td>—</td>
+						<td>—</td>
+						<td><code>src/routes/sitemap.xml/+server.ts</code> (prerendered)</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				The <em>family</em> column controls which fog gradient activates on
+				<code>html[data-route-family]</code> via <code>src/lib/styles/scene.css</code>. Legal pages
+				get a near-flat veil so the eye stays on the type; threshold pages get the celestial fog.
+				Classification logic lives in <code>src/lib/utils/route-family.ts</code>.
+			</p>
+
+			<h2>Home — <code>/</code></h2>
+			<p>
+				The home page is the canonical example of how the site reads. An
+				<code>EditorialHero</code> sits above four <code>Chapter</code> sections.
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Label</th>
+						<th>Title</th>
+						<th>Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>—</td>
+						<td>Hero</td>
+						<td>Make AI your partner.</td>
+						<td>Image: <code>/images/home-hero.*</code></td>
+					</tr>
+					<tr>
+						<td>01</td>
+						<td>The studio</td>
+						<td>We don't sell AI — we sit beside you.</td>
+						<td>Headless chapter (no number/label row)</td>
+					</tr>
+					<tr>
+						<td>02</td>
+						<td>Yinyang Agent</td>
+						<td>A Bazi reading you can return to.</td>
+						<td>Split alignment; CTA links to <code>yinyang.memenow.xyz</code></td>
+					</tr>
+					<tr>
+						<td>03</td>
+						<td>Quant Research</td>
+						<td>Small models, repeatable edges.</td>
+						<td>Banner image; CTA links to <code>/products/quant</code></td>
+					</tr>
+					<tr>
+						<td>04</td>
+						<td>Contact</td>
+						<td>A studio, distributed.</td>
+						<td>CTA: mailto <code>hello@memenow.xyz</code></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Products — <code>/products</code> and children</h2>
+			<p><code>/products</code> is the index. The two sub-routes are deeper readings.</p>
+			<ul>
+				<li>
+					<strong><code>/products/yinyang</code></strong> — narrative pitch for the Yinyang Agent.
+					Two chapters (<em>The reading</em>, <em>The discipline</em>) and a CTA out to the product
+					domain. Defines its own OG image (<code>/og/og-yinyang.jpeg</code>).
+				</li>
+				<li>
+					<strong><code>/products/quant</code></strong> — capability brief for the Quant Research
+					practice. Opens with a coral-pink disclaimer card (<code
+						>Card variant="outlined" element="pink"</code
+					>) that re-states <em>this is not an offer</em> and links to <code>/disclaimer</code>;
+					followed by chapters for <em>Crypto perpetuals</em> and <em>A-shares</em>. Has its own OG
+					image (<code>/og/og-quant.jpeg</code>).
+				</li>
+			</ul>
+
+			<h2>Company — <code>/company</code></h2>
+			<p>
+				Studio page. Three chapters: <em>The studio</em>, <em>How we work</em>,
+				<em>Get in touch</em>. The hero image is <code>/images/company.*</code>.
+			</p>
+
+			<h2>Legal trio — <code>/privacy</code>, <code>/terms</code>, <code>/disclaimer</code></h2>
+			<p>
+				All three carry <code>&lt;meta name="robots" content="noindex"&gt;</code> and have no hero
+				image — the page renders against the legal fog only. They are still listed in the sitemap
+				because the URLs are stable and we want them discoverable from the footer.
+			</p>
+			<p>
+				<strong><code>/privacy</code></strong> is intentionally short: no third-party analytics, no
+				advertising, single browser-local key (<code>memenow.theme</code>) for the theme toggle, and
+				Cloudflare's standard request metadata.
+			</p>
+			<p>
+				<strong><code>/terms</code></strong> covers scope (memenow.xyz only), no warranty, the
+				explicit "no offer" clause, and Delaware governing law.
+			</p>
+			<p>
+				<strong><code>/disclaimer</code></strong> is the long form of the warning surfaced on
+				<code>/products/quant</code>. It is linked from the Quant disclaimer card and from the
+				footer.
+			</p>
+
+			<h2>Sitemap — <code>/sitemap.xml</code></h2>
+			<p>
+				The sitemap is a <code>+server.ts</code> route with <code>prerender = true</code> so it
+				ships as a static file inside the asset bundle. Its URL list lives in
+				<code>src/lib/data/sitemap.ts</code> as a <code>ReadonlyArray</code> of
+				<code>[path, lastmod]</code> pairs.
+				<strong>Hand-bump the lastmod when content meaningfully changes</strong> — search crawlers
+				discount uniform "everything updated today" stamps.
+			</p>
+			<pre><code>// src/lib/data/sitemap.ts
+export const SITEMAP_ROUTES: ReadonlyArray&lt;readonly [path: string, lastmod: string]&gt; = [
+    ['/', '2026-05-06'],
+    ['/products', '2026-05-06'],
+    // …
+];</code></pre>
+			<p>
+				The handler in <code>+server.ts</code> emits a one-hour <code>Cache-Control</code>. Tests in
+				<code>server.test.ts</code> verify the content type, the cache header, and that every URL
+				appears exactly once paired with its frozen lastmod.
+			</p>
+
+			<h2>Adding a new route</h2>
+			<ol>
+				<li>
+					Create <code>src/routes/&lt;path&gt;/+page.svelte</code>. Compose with
+					<code>EditorialHero</code> + <code>Chapter</code>; provide
+					<code>&lt;svelte:head&gt;</code> with <code>title</code>, <code>description</code>, and
+					(if it deserves social sharing) <code>og:title</code> / <code>og:description</code> /
+					<code>og:image</code>.
+				</li>
+				<li>
+					Decide the route family. If the URL belongs in the legal trio, add it to
+					<code>LEGAL_PREFIXES</code> in <code>src/lib/utils/route-family.ts</code> and add a test
+					case.
+				</li>
+				<li>
+					If you want it in the floating dock or footer, add it to
+					<code>src/lib/data/navigation.ts</code>.
+				</li>
+				<li>
+					Append the path and a <code>YYYY-MM-DD</code> lastmod to
+					<code>src/lib/data/sitemap.ts</code>. Update the lastmod whenever the page's content
+					meaningfully changes.
+				</li>
+				<li>
+					If the page should be hidden from indexing, add
+					<code>&lt;meta name="robots" content="noindex"&gt;</code> in its
+					<code>&lt;svelte:head&gt;</code>.
+				</li>
+				<li>
+					Run <code>pnpm lint &amp;&amp; pnpm check &amp;&amp; pnpm test</code> before pushing.
+				</li>
+			</ol>
+
+			<div class="callout">
+				<strong>Editorial language</strong>
+				All copy on the public site uses standard American English. Keep chapter titles short
+				(typically &lt;= 18 characters per visual line) and write ledes at human-thoughtful cadence
+				rather than marketing copy.
+			</div>
+
+			<footer class="meta">
+				<span>memenow-site · routes &amp; content</span>
+				<a href="./components.html">Next: components →</a>
+			</footer>
+		</main>
+	</body>
+</html>

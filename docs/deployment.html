@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Deployment — memenow-site documentation</title>
+		<meta name="description" content="Cloudflare Workers deployment, verification, and rollback." />
+		<link rel="stylesheet" href="./_shared.css" />
+	</head>
+	<body>
+		<aside class="toc">
+			<div class="brand">memenow-site</div>
+			<div class="subtitle">Documentation</div>
+			<nav>
+				<a href="./index.html">Overview</a>
+				<span class="section">Engineering</span>
+				<a href="./architecture.html">Architecture</a>
+				<a href="./routes.html">Routes &amp; content</a>
+				<a href="./components.html">Components</a>
+				<a href="./styling.html">Styling &amp; tokens</a>
+				<a href="./motion.html">Motion &amp; reveal</a>
+				<span class="section">Operations</span>
+				<a class="current" href="./deployment.html">Deployment</a>
+				<a href="./brand-assets.html">Brand assets</a>
+			</nav>
+		</aside>
+
+		<main class="doc">
+			<header class="title">
+				<div class="eyebrow">Operations</div>
+				<h1>Deployment</h1>
+				<p class="lede">
+					The site builds with the SvelteKit Cloudflare adapter and ships to a single Cloudflare
+					Worker via Wrangler. Production is gated by the verification pipeline.
+				</p>
+			</header>
+
+			<h2>Production target</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Worker name</td>
+						<td><code>memenow-site</code></td>
+					</tr>
+					<tr>
+						<td>Public host</td>
+						<td><code>memenow.xyz</code></td>
+					</tr>
+					<tr>
+						<td>Build output</td>
+						<td><code>.svelte-kit/cloudflare/</code></td>
+					</tr>
+					<tr>
+						<td>Worker entry</td>
+						<td><code>.svelte-kit/cloudflare/_worker.js</code></td>
+					</tr>
+					<tr>
+						<td>Asset binding</td>
+						<td><code>ASSETS</code> → <code>.svelte-kit/cloudflare/</code></td>
+					</tr>
+					<tr>
+						<td>Compatibility date</td>
+						<td><code>2026-05-06</code></td>
+					</tr>
+					<tr>
+						<td>Compatibility flags</td>
+						<td><code>nodejs_compat</code>, <code>nodejs_als</code></td>
+					</tr>
+					<tr>
+						<td>Observability</td>
+						<td>enabled</td>
+					</tr>
+					<tr>
+						<td>Source maps</td>
+						<td>uploaded (<code>upload_source_maps: true</code>)</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Authentication</h2>
+			<p>
+				The deploying user needs a Wrangler session against the Cloudflare account that owns the
+				<code>memenow-site</code> Worker. <code>wrangler login</code> must be run interactively in
+				the terminal — it cannot be automated from a coding agent.
+			</p>
+			<pre><code>wrangler whoami
+# if not logged in:
+wrangler login</code></pre>
+
+			<h2>Pre-deploy verification</h2>
+			<p>
+				Run the verification pipeline before every deploy. The
+				<code>/verify</code> Claude skill wraps it; manually it is:
+			</p>
+			<pre><code>pnpm lint        # prettier --check &amp;&amp; eslint
+pnpm check       # svelte-kit sync &amp;&amp; svelte-check
+pnpm test        # vitest --run (client + server projects)</code></pre>
+			<p>
+				If lint fails, <code>pnpm format</code> auto-fixes most issues. If a browser test cannot
+				launch Chromium, install it once with <code>pnpm exec playwright install chromium</code>.
+			</p>
+
+			<h2>Local Worker preview</h2>
+			<p>
+				When the change touches <code>src/hooks.server.ts</code>, a <code>+server.ts</code> route,
+				or <code>wrangler.jsonc</code>, smoke-test the production build locally before deploying:
+			</p>
+			<pre><code>pnpm preview</code></pre>
+			<p>
+				This runs <code>pnpm build</code> and then <code>wrangler dev</code> against the built
+				Worker. Hit the routes that changed; watch the Wrangler output for compatibility, binding,
+				or asset errors.
+			</p>
+
+			<h2>Deploy</h2>
+			<pre><code>pnpm deploy</code></pre>
+			<p>
+				This runs <code>pnpm build</code> followed by <code>wrangler deploy</code>. The deploy URL
+				appears in the Wrangler output; capture it and confirm a 200 from <code>/</code>,
+				<code>/sitemap.xml</code>, and the route that motivated the deploy.
+			</p>
+
+			<div class="callout callout--warn">
+				<strong>Confirm before deploying</strong>
+				The <code>/deploy-cf</code> Claude skill is human-invocation only (<code
+					>disable-model-invocation: true</code
+				>) — agents cannot trigger it autonomously. Always confirm with the user before running
+				<code>pnpm deploy</code>.
+			</div>
+
+			<h2>Rollback</h2>
+			<p>If a deploy regresses production, roll back via:</p>
+			<pre><code>wrangler rollback</code></pre>
+			<p>
+				or via the Cloudflare dashboard:
+				<em>Workers &amp; Pages → memenow-site → Deployments → Rollback</em>.
+			</p>
+
+			<h2>Adding a binding</h2>
+			<ol>
+				<li>
+					Declare the binding (KV, D1, R2, Queue, Service, Durable Object) in
+					<code>wrangler.jsonc</code> under the documented section.
+				</li>
+				<li>
+					Run <code>pnpm cf-typegen</code> to regenerate <code>src/worker-configuration.d.ts</code>.
+					Commit the regenerated file alongside the <code>wrangler.jsonc</code> change.
+				</li>
+				<li>
+					Use the binding from <code>App.Platform</code> via the
+					<code>event.platform.env</code> handle in server hooks or <code>+server.ts</code> routes.
+					The platform shape is declared in <code>src/app.d.ts</code>.
+				</li>
+				<li>
+					If the binding holds secrets (API keys, tokens), use
+					<code>wrangler secret put NAME</code>. Never commit <code>.dev.vars</code>.
+				</li>
+				<li>Run <code>pnpm preview</code> with the binding present locally before deploying.</li>
+			</ol>
+
+			<h2>Hidden files and side artifacts</h2>
+			<ul>
+				<li><code>.wrangler/</code> — local Wrangler state (cache, sessions). Gitignored.</li>
+				<li>
+					<code>.svelte-kit/</code> — SvelteKit build output. Gitignored; rewritten by
+					<code>svelte-kit sync</code> and the build.
+				</li>
+				<li>
+					<code>static/.assetsignore</code> excludes <code>_worker.js</code> and
+					<code>_routes.json</code> so the Cloudflare asset bundle does not double-package the
+					Worker entry alongside the static assets.
+				</li>
+			</ul>
+
+			<h2>Environments</h2>
+			<p>
+				Today there is a single environment (production). To add a staging environment, introduce an
+				<code>[env.staging]</code> block in <code>wrangler.jsonc</code> and deploy with
+				<code>wrangler deploy --env staging</code>. The <code>/deploy-cf</code> skill accepts an
+				environment hint as its argument.
+			</p>
+
+			<footer class="meta">
+				<span>memenow-site · deployment</span>
+				<a href="./brand-assets.html">Next: brand assets →</a>
+			</footer>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Brand assets — memenow-site documentation</title>
+		<meta name="description" content="Brand asset pipeline and the regeneration script." />
+		<link rel="stylesheet" href="./_shared.css" />
+	</head>
+	<body>
+		<aside class="toc">
+			<div class="brand">memenow-site</div>
+			<div class="subtitle">Documentation</div>
+			<nav>
+				<a href="./index.html">Overview</a>
+				<span class="section">Engineering</span>
+				<a href="./architecture.html">Architecture</a>
+				<a href="./routes.html">Routes &amp; content</a>
+				<a href="./components.html">Components</a>
+				<a href="./styling.html">Styling &amp; tokens</a>
+				<a href="./motion.html">Motion &amp; reveal</a>
+				<span class="section">Operations</span>
+				<a href="./deployment.html">Deployment</a>
+				<a class="current" href="./brand-assets.html">Brand assets</a>
+			</nav>
+		</aside>
+
+		<main class="doc">
+			<header class="title">
+				<div class="eyebrow">Operations</div>
+				<h1>Brand assets</h1>
+				<p class="lede">
+					The mark, lockups, and app icons all derive from a small set of PNG masters via
+					<code>scripts/build-brand-assets.py</code>. Replace the master, run the script, commit the
+					regenerated derivatives.
+				</p>
+			</header>
+
+			<h2>Inputs</h2>
+			<p>
+				Source PNGs live in <code>static/brand/originals/</code>. The script expects four files:
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Master</th>
+						<th>Used for</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>lockup-vertical.png</code></td>
+						<td>Vertical lockup variants and the cropped square mark.</td>
+					</tr>
+					<tr>
+						<td><code>lockup-horizontal.png</code></td>
+						<td>Horizontal lockup variants.</td>
+					</tr>
+					<tr>
+						<td><code>reverse-on-coral.png</code></td>
+						<td>Reverse lockup on the coral background. The coral is preserved verbatim.</td>
+					</tr>
+					<tr>
+						<td><code>app-icon.png</code></td>
+						<td>App icon raster, scaled down to PWA / favicon sizes.</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<p>Running <code>python3 scripts/build-brand-assets.py</code> produces:</p>
+			<ul>
+				<li>For each lockup and the square mark: PNG, WebP, and AVIF at @1x / @2x / @3x.</li>
+				<li>
+					<code>app-icon-{16,32,180,512}.png</code> for browser tabs, manifest, and Apple touch
+					icons.
+				</li>
+				<li>
+					<code>static/favicon.ico</code> as a multi-resolution (<code>16</code> / <code>32</code> /
+					<code>48</code>) ICO.
+				</li>
+				<li><code>static/brand/site.webmanifest</code> referenced by <code>app.html</code>.</li>
+			</ul>
+			<p>
+				The mark is derived by cropping the top ~66% of the vertical lockup and trimming
+				transparency. The parchment background of the source PNGs is replaced with full transparency
+				using a per-channel fuzz of 12 (covers JPEG-style ringing and dithering).
+			</p>
+
+			<h2>Pipeline</h2>
+			<pre><code>python3 scripts/build-brand-assets.py</code></pre>
+			<p>
+				The script depends on <code>Pillow</code> (PIL). It is invoked manually whenever a master
+				changes; there is no build hook. Always run it from the repo root so the derived paths land
+				in the right place.
+			</p>
+
+			<h2>Where assets are referenced</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Asset</th>
+						<th>Consumer</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>brand/mark.{png,webp,avif}</code></td>
+						<td>
+							<code>FloatingDock.svelte</code> (24px in the dock pill);
+							<code>MemenowMark variant="mark"</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>brand/lockup-horizontal.{png,webp,avif}</code></td>
+						<td>
+							<code>Footer.svelte</code> via <code>MemenowMark variant="lockup-horizontal"</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>brand/lockup-vertical.{png,webp,avif}</code></td>
+						<td>
+							Reserved for future hero / press treatments via
+							<code>MemenowMark variant="lockup-vertical"</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>brand/reverse-on-coral.{png,webp,avif}</code></td>
+						<td>
+							Reserved for dark / coral surfaces via <code>MemenowMark variant="reverse"</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>brand/app-icon-{16,32,180,512}.png</code></td>
+						<td><code>app.html</code> link tags + <code>brand/site.webmanifest</code>.</td>
+					</tr>
+					<tr>
+						<td><code>favicon.ico</code></td>
+						<td><code>app.html</code> top-of-document <code>&lt;link rel="icon"&gt;</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>The signature ornament</h2>
+			<p>
+				The coral pink diamond is the only ornament in the system. It is rendered as a CSS mask (no
+				extra image asset) by <code>SealMark.svelte</code> and as a pseudo-element on chapter
+				numbers in <code>components.css</code>. Do not substitute SVG, emoji, or Unicode glyphs.
+			</p>
+
+			<h2>Open Graph imagery</h2>
+			<p>
+				<code>static/og/</code> holds the share images: <code>og-default.jpeg</code> wired into
+				<code>app.html</code>, plus per-product overrides for <code>og-yinyang.jpeg</code> and
+				<code>og-quant.jpeg</code> consumed by their respective <code>+page.svelte</code> heads.
+				These are hand-authored, not generated.
+			</p>
+
+			<div class="callout">
+				<strong>Don't commit staging masters</strong>
+				<code>.brand-staging/</code> is gitignored — it holds chatgpt-create-image exploratory
+				variants kept locally as an audit trail. Production masters live in
+				<code>static/brand/originals/</code>.
+			</div>
+
+			<footer class="meta">
+				<span>memenow-site · brand assets</span>
+				<a href="./index.html">Back to overview →</a>
+			</footer>
+		</main>
+	</body>
+</html>

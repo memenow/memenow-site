@@ -1,0 +1,321 @@
+/* memenow-site documentation — local-only stylesheet for the docs/ HTML pages.
+   Mirrors the live site's two-tone palette (sage green + coral pink + warm
+   white) so the docs read in the same visual key as the product. */
+
+:root {
+	color-scheme: light dark;
+
+	--surface-base: #faf9f6;
+	--surface-raised: #ffffff;
+	--surface-sunken: #f0f2ee;
+	--text-primary: #2c3a30;
+	--text-secondary: #4f6253;
+	--text-muted: #8a9690;
+	--border-default: #e2dfd8;
+	--border-strong: #c7cdc4;
+	--accent-green: #4a7c59;
+	--accent-pink: #da8579;
+	--accent-pink-soft: rgba(218, 133, 121, 0.14);
+
+	--font-sans: 'Inter', -apple-system, 'Segoe UI', Roboto, system-ui, sans-serif;
+	--font-display: 'Manrope', 'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--surface-base: #1a201c;
+		--surface-raised: #232a26;
+		--surface-sunken: #141815;
+		--text-primary: #e8ebe6;
+		--text-secondary: #c2c8c1;
+		--text-muted: #8a9690;
+		--border-default: #38423b;
+		--border-strong: #54605a;
+		--accent-green: #88b895;
+		--accent-pink: #f0a99e;
+		--accent-pink-soft: rgba(240, 169, 158, 0.18);
+	}
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--surface-base);
+	color: var(--text-primary);
+	font-family: var(--font-sans);
+	font-size: 16px;
+	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	margin: 0;
+	min-height: 100dvh;
+	display: grid;
+	grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+}
+
+@media (max-width: 880px) {
+	body {
+		grid-template-columns: 1fr;
+	}
+}
+
+aside.toc {
+	border-right: 1px solid var(--border-default);
+	background: var(--surface-sunken);
+	padding: 2.5rem 1.75rem;
+	position: sticky;
+	top: 0;
+	align-self: start;
+	height: 100dvh;
+	overflow-y: auto;
+}
+
+@media (max-width: 880px) {
+	aside.toc {
+		position: static;
+		height: auto;
+		border-right: 0;
+		border-bottom: 1px solid var(--border-default);
+	}
+}
+
+aside.toc .brand {
+	font-family: var(--font-display);
+	font-weight: 600;
+	font-size: 1rem;
+	letter-spacing: -0.01em;
+	margin-bottom: 0.25rem;
+}
+
+aside.toc .subtitle {
+	font-size: 0.75rem;
+	color: var(--text-muted);
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	margin-bottom: 2rem;
+}
+
+aside.toc nav {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+}
+
+aside.toc nav a {
+	color: var(--text-secondary);
+	text-decoration: none;
+	font-size: 0.9rem;
+	padding: 0.35rem 0.5rem;
+	border-radius: 4px;
+}
+
+aside.toc nav a:hover {
+	color: var(--text-primary);
+	background: var(--surface-raised);
+}
+
+aside.toc nav a.current {
+	color: var(--accent-green);
+	background: var(--surface-raised);
+	border-left: 2px solid var(--accent-pink);
+}
+
+aside.toc nav .section {
+	font-size: 0.7rem;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--text-muted);
+	margin: 1.25rem 0 0.4rem;
+	padding-left: 0.5rem;
+}
+
+main.doc {
+	max-width: 880px;
+	padding: 4rem clamp(1.5rem, 5vw, 4rem) 6rem;
+}
+
+main.doc header.title {
+	margin-bottom: 3rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--border-default);
+}
+
+main.doc header.title .eyebrow {
+	font-size: 0.75rem;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--text-muted);
+	margin-bottom: 0.75rem;
+}
+
+main.doc header.title h1 {
+	font-family: var(--font-display);
+	font-weight: 500;
+	font-size: clamp(2rem, 4vw, 3rem);
+	letter-spacing: -0.02em;
+	line-height: 1.1;
+	margin: 0 0 0.75rem;
+	color: var(--text-primary);
+}
+
+main.doc header.title p.lede {
+	font-size: 1.05rem;
+	color: var(--text-secondary);
+	margin: 0;
+	max-width: 60ch;
+}
+
+main.doc h2 {
+	font-family: var(--font-display);
+	font-weight: 500;
+	font-size: 1.5rem;
+	letter-spacing: -0.01em;
+	margin: 3rem 0 1rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--border-default);
+}
+
+main.doc h2:first-of-type {
+	border-top: 0;
+	padding-top: 0;
+}
+
+main.doc h3 {
+	font-family: var(--font-display);
+	font-weight: 500;
+	font-size: 1.125rem;
+	margin: 2rem 0 0.75rem;
+	color: var(--text-primary);
+}
+
+main.doc p,
+main.doc li {
+	color: var(--text-secondary);
+}
+
+main.doc strong {
+	color: var(--text-primary);
+}
+
+main.doc a {
+	color: var(--accent-green);
+	text-decoration-color: var(--accent-green);
+	text-underline-offset: 0.2em;
+}
+
+main.doc code {
+	font-family: var(--font-mono);
+	font-size: 0.875em;
+	background: var(--accent-pink-soft);
+	color: var(--text-primary);
+	padding: 0.05em 0.4em;
+	border-radius: 3px;
+}
+
+main.doc pre {
+	background: var(--surface-sunken);
+	border: 1px solid var(--border-default);
+	border-radius: 6px;
+	padding: 1rem 1.25rem;
+	overflow-x: auto;
+	font-family: var(--font-mono);
+	font-size: 0.85rem;
+	line-height: 1.5;
+}
+
+main.doc pre code {
+	background: transparent;
+	padding: 0;
+	border-radius: 0;
+}
+
+main.doc table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.25rem 0;
+	font-size: 0.9rem;
+}
+
+main.doc th {
+	text-align: left;
+	font-weight: 600;
+	color: var(--text-primary);
+	padding: 0.6rem 0.8rem;
+	border-bottom: 1px solid var(--border-strong);
+	background: var(--surface-sunken);
+}
+
+main.doc td {
+	padding: 0.6rem 0.8rem;
+	border-bottom: 1px solid var(--border-default);
+	vertical-align: top;
+}
+
+main.doc td code {
+	white-space: nowrap;
+}
+
+main.doc blockquote {
+	border-left: 3px solid var(--accent-pink);
+	margin: 1.5rem 0;
+	padding: 0.5rem 0 0.5rem 1.25rem;
+	color: var(--text-secondary);
+	font-style: italic;
+}
+
+main.doc ul,
+main.doc ol {
+	padding-left: 1.5rem;
+}
+
+main.doc li + li {
+	margin-top: 0.4rem;
+}
+
+main.doc .callout {
+	border: 1px solid var(--border-default);
+	border-left: 3px solid var(--accent-green);
+	background: var(--surface-raised);
+	padding: 1rem 1.25rem;
+	border-radius: 4px;
+	margin: 1.5rem 0;
+}
+
+main.doc .callout--warn {
+	border-left-color: var(--accent-pink);
+}
+
+main.doc .callout strong {
+	display: block;
+	font-size: 0.75rem;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--accent-green);
+	margin-bottom: 0.4rem;
+}
+
+main.doc .callout--warn strong {
+	color: var(--accent-pink);
+}
+
+main.doc footer.meta {
+	margin-top: 4rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--border-default);
+	font-size: 0.8rem;
+	color: var(--text-muted);
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+main.doc footer.meta a {
+	color: var(--text-muted);
+}

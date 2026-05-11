@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Components — memenow-site documentation</title>
+		<meta name="description" content="Component catalog for memenow-site." />
+		<link rel="stylesheet" href="./_shared.css" />
+	</head>
+	<body>
+		<aside class="toc">
+			<div class="brand">memenow-site</div>
+			<div class="subtitle">Documentation</div>
+			<nav>
+				<a href="./index.html">Overview</a>
+				<span class="section">Engineering</span>
+				<a href="./architecture.html">Architecture</a>
+				<a href="./routes.html">Routes &amp; content</a>
+				<a class="current" href="./components.html">Components</a>
+				<a href="./styling.html">Styling &amp; tokens</a>
+				<a href="./motion.html">Motion &amp; reveal</a>
+				<span class="section">Operations</span>
+				<a href="./deployment.html">Deployment</a>
+				<a href="./brand-assets.html">Brand assets</a>
+			</nav>
+		</aside>
+
+		<main class="doc">
+			<header class="title">
+				<div class="eyebrow">Engineering</div>
+				<h1>Components</h1>
+				<p class="lede">
+					The Svelte component catalog grouped by responsibility. Every component is a Svelte 5
+					rune-mode module — props are declared with <code>$props()</code>, never with
+					<code>export let</code>.
+				</p>
+			</header>
+
+			<h2>Brand</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Component</th>
+						<th>Path</th>
+						<th>Purpose</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>MemenowMark</code></td>
+						<td><code>lib/components/brand/MemenowMark.svelte</code></td>
+						<td>
+							The brand mark and lockups, served as a <code>&lt;picture&gt;</code> with avif / webp
+							/ png at @1x and @2x.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<code>MemenowMark</code> accepts a <code>variant</code> (<code>mark</code>,
+				<code>lockup-vertical</code>, <code>lockup-horizontal</code>, <code>reverse</code>), a
+				<code>size</code> (<code>sm</code> | <code>md</code> | <code>lg</code> |
+				<code>xl</code> mapped to a height in pixels), and an optional <code>eager</code> flag to
+				opt out of lazy loading. The image base URL is derived from the variant — never hand-write
+				<code>&lt;img src="/brand/…"&gt;</code>; use this component.
+			</p>
+
+			<h2>Home — narrative scroll primitives</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Component</th>
+						<th>Path</th>
+						<th>Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>EditorialHero</code></td>
+						<td><code>lib/components/home/EditorialHero.svelte</code></td>
+						<td>
+							Full-viewport hero with optional background image, scrim, eyebrow row, large title,
+							lede, and scroll cue. Title uses <code>reveal</code> with
+							<code>splitWords: true</code>; lede and cue use <code>reveal-fade</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>Chapter</code></td>
+						<td><code>lib/components/home/Chapter.svelte</code></td>
+						<td>
+							One narrative section. Supports <code>align</code> (<code>center</code> |
+							<code>left</code> | <code>split</code>), <code>banner</code> (extends image to inner
+							edge), and <code>headless</code> (drops the number / label row). Optional
+							<code>cta</code> snippet renders below the body.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h3>Chapter alignment recipes</h3>
+			<ul>
+				<li>
+					<strong><code>align="center"</code></strong> (default) — title centered, body centered,
+					single column. Best for openers and short statements.
+				</li>
+				<li>
+					<strong><code>align="left"</code></strong> — title and body left-aligned. Used for quieter
+					chapters that don't carry a hero image.
+				</li>
+				<li>
+					<strong><code>align="split"</code></strong> — sticky title in the left column, body /
+					image / CTA flow in the right. Used by the Yinyang and Quant chapters on
+					<code>/</code> and <code>/products</code>.
+				</li>
+				<li>
+					<strong><code>banner</code></strong> — image extends to the chapter's inner edge with a
+					21:9 aspect ratio. Used by the Quant chapter on the home page.
+				</li>
+				<li>
+					<strong><code>headless</code></strong> — drops the <code>01 — Label</code> row and keeps
+					just the title. Used when adjacent chapters already establish the cadence (e.g. home
+					<em>The studio</em>).
+				</li>
+			</ul>
+			<p>
+				The <code>Chapter</code> component has dedicated browser tests in
+				<code>Chapter.svelte.test.ts</code> covering each alignment and the
+				<code>headless</code> behavior.
+			</p>
+
+			<h2>Layout</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Component</th>
+						<th>Path</th>
+						<th>Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>AppShell</code></td>
+						<td><code>lib/components/layout/AppShell.svelte</code></td>
+						<td>
+							Wraps every page: <code>&lt;main id="main"&gt;</code> + slotted children + optional
+							<code>Footer</code> + always-on <code>FloatingDock</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>FloatingDock</code></td>
+						<td><code>lib/components/layout/FloatingDock.svelte</code></td>
+						<td>
+							Glass-pill primary nav fixed at the bottom of the viewport. Reads
+							<code>primaryNav</code> from <code>lib/data/navigation.ts</code> and shows
+							<code>aria-current="page"</code> on the active route.
+						</td>
+					</tr>
+					<tr>
+						<td><code>Footer</code></td>
+						<td><code>lib/components/layout/Footer.svelte</code></td>
+						<td>
+							Three-column footer (Memenow / Legal / GitHub) plus copyright row. Reads
+							<code>footerSections</code> from <code>lib/data/navigation.ts</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>RouteScene</code></td>
+						<td><code>lib/components/layout/RouteScene.svelte</code></td>
+						<td>
+							Generic hero scene primitive used outside the home / product routes when a page wants
+							a full-viewport image with scrim. Currently unused by site routes; kept available for
+							future legal / company variants.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>UI primitives</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Component</th>
+						<th>Path</th>
+						<th>Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>Button</code></td>
+						<td><code>lib/components/ui/Button.svelte</code></td>
+						<td>
+							Native <code>&lt;button&gt;</code> with the <code>.c-button</code> primitive.
+							<code>variant</code>: <code>primary</code> | <code>secondary</code> |
+							<code>ghost</code> | <code>link</code> | <code>on-scrim</code>. <code>size</code>:
+							<code>sm</code> | <code>md</code> | <code>lg</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>ButtonLink</code></td>
+						<td><code>lib/components/ui/ButtonLink.svelte</code></td>
+						<td>
+							Same visual API as <code>Button</code> but renders as <code>&lt;a&gt;</code>. Use this
+							for navigation; do not give <code>Button</code> an <code>onclick</code> that calls
+							<code>window.location</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>ArtifactCta</code></td>
+						<td><code>lib/components/ui/ArtifactCta.svelte</code></td>
+						<td>
+							The studio's signature call-to-action. Coral pink diamond suffix, magnetic hover.
+							<code>palette</code> picks the surface treatment (<code>celestial</code> outline /
+							<code>ritual</code> filled). Drops the magnet under reduced motion.
+						</td>
+					</tr>
+					<tr>
+						<td><code>Card</code></td>
+						<td><code>lib/components/ui/Card.svelte</code></td>
+						<td>
+							Either a <code>&lt;div&gt;</code> or, when <code>href</code> is supplied, an
+							<code>&lt;a&gt;</code>. <code>variant</code>: <code>outlined</code> |
+							<code>elevated</code>. <code>element</code> tints the left border green or pink. Used
+							for the Quant disclaimer card on <code>/products/quant</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>Badge</code></td>
+						<td><code>lib/components/ui/Badge.svelte</code></td>
+						<td>
+							Inline overline badge. <code>tone</code>: <code>green</code> | <code>pink</code> |
+							<code>default</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>SealMark</code></td>
+						<td><code>lib/components/ui/SealMark.svelte</code></td>
+						<td>
+							The coral-pink diamond ornament rendered as a CSS mask. The <em>only</em> visual
+							ornament in the system — never substitute custom SVG or emoji.
+						</td>
+					</tr>
+					<tr>
+						<td><code>ThemeSwitch</code></td>
+						<td><code>lib/components/ui/ThemeSwitch.svelte</code></td>
+						<td>
+							Sun / moon icon button. Mirrors <code>data-theme</code> on mount, toggles on click,
+							persists to <code>localStorage.memenow.theme</code>. Tolerant of storage failures
+							(Safari private mode, quota exceeded). Browser tests cover every branch.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Class composition</h2>
+			<p>
+				<code>cn(...inputs)</code> in <code>src/lib/utils/cn.ts</code> is a thin
+				<code>clsx</code> wrapper. There is no <code>tailwind-merge</code>: components in this
+				codebase are <code>.c-*</code> primitives that do not stack conflicting Tailwind utilities.
+				If you ever need to compose conflicting utilities, swap in <code>tailwind-merge</code> at
+				that site rather than working around the limitation.
+			</p>
+			<pre><code>import { cn } from '$lib/utils/cn';
+
+&lt;button class={cn('c-button', `c-button--${variant}`, size !== 'md' &amp;&amp; `c-button--${size}`, className)}&gt;
+    {@render children()}
+&lt;/button&gt;</code></pre>
+
+			<h2>Snippets &amp; children</h2>
+			<p>
+				Components that wrap content take a <code>children: Snippet</code> prop and call
+				<code>{@render children()}</code>. Components with optional secondary slots (CTA, header)
+				take a named <code>cta</code> or similar <code>Snippet</code>. There is no slot fallback API
+				in runes mode; use a default <code>Snippet</code> argument instead.
+			</p>
+
+			<div class="callout">
+				<strong>Adding a new component</strong>
+				Pick a directory by responsibility (<code>brand</code>, <code>home</code>,
+				<code>layout</code>, <code>ui</code>). Add a matching <code>.c-*</code> primitive in
+				<code>src/lib/styles/components.css</code> if it needs styling beyond what the existing
+				primitives offer. If it has interactive behavior, add a
+				<code>*.svelte.test.ts</code> alongside it so the browser project picks it up.
+			</div>
+
+			<footer class="meta">
+				<span>memenow-site · components</span>
+				<a href="./styling.html">Next: styling &amp; tokens →</a>
+			</footer>
+		</main>
+	</body>
+</html>

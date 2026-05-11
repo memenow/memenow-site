@@ -1,3 +1,6 @@
+// Single source of truth for site navigation. `primaryNav` feeds the
+// floating dock; `footerSections` feeds the bottom-of-page navigation.
+// Add new top-level routes here, not by editing the components.
 export interface NavLink {
 	label: string;
 	href: string;

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>memenow-site documentation</title>
+		<meta name="description" content="Engineering and product documentation for memenow-site." />
+		<link rel="stylesheet" href="./_shared.css" />
+	</head>
+	<body>
+		<aside class="toc">
+			<div class="brand">memenow-site</div>
+			<div class="subtitle">Documentation</div>
+			<nav>
+				<a class="current" href="./index.html">Overview</a>
+				<span class="section">Engineering</span>
+				<a href="./architecture.html">Architecture</a>
+				<a href="./routes.html">Routes &amp; content</a>
+				<a href="./components.html">Components</a>
+				<a href="./styling.html">Styling &amp; tokens</a>
+				<a href="./motion.html">Motion &amp; reveal</a>
+				<span class="section">Operations</span>
+				<a href="./deployment.html">Deployment</a>
+				<a href="./brand-assets.html">Brand assets</a>
+			</nav>
+		</aside>
+
+		<main class="doc">
+			<header class="title">
+				<div class="eyebrow">memenow-site · Documentation</div>
+				<h1>One studio, one continuous narrative.</h1>
+				<p class="lede">
+					This site is the editorial home of the memenow studio. It is a SvelteKit application
+					rendered on Cloudflare Workers, designed so each route reads as a chapter of a single
+					long-form piece rather than as an independent page in a marketing tree.
+				</p>
+			</header>
+
+			<h2>What lives here</h2>
+			<p>
+				These pages are the human-readable companion to the source. The Markdown files at the repo
+				root (<code>README.md</code>, <code>CLAUDE.md</code>, <code>AGENTS.md</code>) and the skill
+				files under <code>.claude/</code> are written for tooling and contributors; the HTML files
+				here describe how the system is shaped and why.
+			</p>
+			<p>If you are coming to the codebase fresh, read the documents in this order:</p>
+			<ol>
+				<li>
+					<a href="./architecture.html">Architecture</a> — the moving parts and how they connect.
+				</li>
+				<li>
+					<a href="./routes.html">Routes &amp; content</a> — every public URL, the chapter it
+					represents, and where its copy lives.
+				</li>
+				<li>
+					<a href="./components.html">Components</a> — the catalog of brand, layout, home, and UI
+					primitives.
+				</li>
+				<li>
+					<a href="./styling.html">Styling &amp; tokens</a> — design tokens, the <code>.c-*</code> /
+					<code>.l-*</code> namespaces, and the world-layer overlay.
+				</li>
+				<li>
+					<a href="./motion.html">Motion &amp; reveal</a> — Lenis, the scroll-driven reveals, and
+					the rules for honoring <code>prefers-reduced-motion</code>.
+				</li>
+				<li>
+					<a href="./deployment.html">Deployment</a> — the Cloudflare Workers pipeline, the
+					verification gate, and how to roll back.
+				</li>
+				<li>
+					<a href="./brand-assets.html">Brand assets</a> — the logo system and the script that
+					regenerates every variant.
+				</li>
+			</ol>
+
+			<h2>House rules at a glance</h2>
+			<ul>
+				<li>
+					<strong>Svelte 5 runes only.</strong> The compiler is in forced runes mode for everything
+					outside <code>node_modules</code>. Use <code>$state</code>, <code>$props</code>,
+					<code>$derived</code>, <code>$effect</code>; never <code>$:</code> or
+					<code>export let</code>.
+				</li>
+				<li>
+					<strong>Tailwind CSS v4 in CSS.</strong> Plugins are declared in
+					<code>src/routes/layout.css</code>; there is no <code>tailwind.config.{js,ts}</code>.
+					Class lists are sorted by <code>prettier-plugin-tailwindcss</code> — do not hand-order
+					them.
+				</li>
+				<li>
+					<strong>Components are <code>.c-*</code> primitives.</strong> The visual system is built
+					from BEM-style component classes that consume tokens, not from raw Tailwind utility soup.
+				</li>
+				<li>
+					<strong>Reduced motion is honored everywhere.</strong> Every animation utility — Lenis,
+					<code>reveal</code>, <code>magnetic</code>, the matching CSS — has a
+					<code>prefers-reduced-motion: reduce</code> branch.
+				</li>
+				<li>
+					<strong>pnpm only.</strong> <code>engine-strict=true</code> is set, and
+					<code>npm</code>/<code>yarn</code> lockfiles must never appear.
+				</li>
+				<li>
+					<strong>Pre-push gate.</strong>
+					<code>pnpm lint &amp;&amp; pnpm check &amp;&amp; pnpm test</code>, or invoke the
+					<code>/verify</code> Claude skill.
+				</li>
+			</ul>
+
+			<div class="callout">
+				<strong>Updating the docs</strong>
+				When you change a route, component, or pipeline, update the matching HTML page in this
+				directory. The Markdown files at the repo root cover the same surface for tooling — keep
+				them in sync, but write the long-form prose here.
+			</div>
+
+			<footer class="meta">
+				<span>memenow-site documentation</span>
+				<a href="../README.md">View README →</a>
+			</footer>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Styling &amp; tokens — memenow-site documentation</title>
+		<meta
+			name="description"
+			content="Styling system, design tokens, and namespacing for memenow-site."
+		/>
+		<link rel="stylesheet" href="./_shared.css" />
+	</head>
+	<body>
+		<aside class="toc">
+			<div class="brand">memenow-site</div>
+			<div class="subtitle">Documentation</div>
+			<nav>
+				<a href="./index.html">Overview</a>
+				<span class="section">Engineering</span>
+				<a href="./architecture.html">Architecture</a>
+				<a href="./routes.html">Routes &amp; content</a>
+				<a href="./components.html">Components</a>
+				<a class="current" href="./styling.html">Styling &amp; tokens</a>
+				<a href="./motion.html">Motion &amp; reveal</a>
+				<span class="section">Operations</span>
+				<a href="./deployment.html">Deployment</a>
+				<a href="./brand-assets.html">Brand assets</a>
+			</nav>
+		</aside>
+
+		<main class="doc">
+			<header class="title">
+				<div class="eyebrow">Engineering</div>
+				<h1>Styling &amp; tokens</h1>
+				<p class="lede">
+					A two-tone palette (sage green + coral pink + warm white), one display family (Manrope)
+					and one body family (Inter), and a strict
+					<code>.c-*</code> / <code>.l-*</code> namespacing convention. Every value comes from a CSS
+					custom property — never a literal.
+				</p>
+			</header>
+
+			<h2>Stylesheet hierarchy</h2>
+			<p>
+				<code>src/routes/layout.css</code> is the only file Tailwind sees. It imports the framework,
+				declares the v4 plugins, and pulls the rest of the stylesheets:
+			</p>
+			<pre><code>@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@import '../lib/styles/tokens.css';
+@import '../lib/styles/scene.css';
+@import '../lib/styles/layout.css';
+@import '../lib/styles/components.css';
+@import '../lib/styles/world-layer.css';
+
+@custom-variant dark (&amp;:where([data-theme='dark'], [data-theme='dark'] *));</code></pre>
+			<p>
+				The order matters. Tokens load first, then scene fog (so it can read tokens), then layout
+				utilities, then component primitives, then the world-layer overlay. The
+				<code>dark</code> custom variant lets Tailwind utilities respond to
+				<code>data-theme="dark"</code> without relying on the OS-level
+				<code>prefers-color-scheme</code>.
+			</p>
+
+			<h2>Design tokens (<code>tokens.css</code>)</h2>
+			<h3>Color</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Token</th>
+						<th>Light</th>
+						<th>Dark</th>
+						<th>Use</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>--surface-base</code></td>
+						<td><code>#faf9f6</code></td>
+						<td><code>#1a201c</code></td>
+						<td>Page background</td>
+					</tr>
+					<tr>
+						<td><code>--surface-raised</code></td>
+						<td><code>#ffffff</code></td>
+						<td><code>#232a26</code></td>
+						<td>Cards, dialogs</td>
+					</tr>
+					<tr>
+						<td><code>--surface-sunken</code></td>
+						<td><code>#f0f2ee</code></td>
+						<td><code>#141815</code></td>
+						<td>Inputs, hover wells</td>
+					</tr>
+					<tr>
+						<td><code>--text-primary</code></td>
+						<td><code>#2c3a30</code></td>
+						<td><code>#e8ebe6</code></td>
+						<td>Headings, primary copy</td>
+					</tr>
+					<tr>
+						<td><code>--text-secondary</code></td>
+						<td><code>#4f6253</code></td>
+						<td><code>#c2c8c1</code></td>
+						<td>Body, ledes</td>
+					</tr>
+					<tr>
+						<td><code>--text-muted</code></td>
+						<td><code>#8a9690</code></td>
+						<td><code>#8a9690</code></td>
+						<td>Captions, eyebrows</td>
+					</tr>
+					<tr>
+						<td><code>--accent-green</code></td>
+						<td><code>#4a7c59</code></td>
+						<td><code>#88b895</code></td>
+						<td>Brand primary, focus ring</td>
+					</tr>
+					<tr>
+						<td><code>--accent-pink</code></td>
+						<td><code>#da8579</code></td>
+						<td><code>#f0a99e</code></td>
+						<td>Brand highlight, seal mark, the only ornament</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<code>--brand-coral</code> is an alias of <code>--accent-pink</code> reserved for the logo's
+				adjacent signature elements; do not introduce a third coral token.
+			</p>
+
+			<h3>Type</h3>
+			<ul>
+				<li>
+					<strong>Display</strong> — Manrope Variable, with Inter as fallback. Used for hero and
+					chapter titles, ledes, lockup typography. Letter-spacing tightens at display sizes (<code
+						>--ls-display: -0.04em</code
+					>).
+				</li>
+				<li>
+					<strong>Body</strong> — Inter, 400 / 500 / 600 weights. Used for everything that isn't a
+					heading.
+				</li>
+				<li>
+					<strong>Mono</strong> — JetBrains Mono / IBM Plex Mono / system mono. Used for eyebrow
+					rows, the dock chips, and inline code.
+				</li>
+				<li>
+					Type sizes use fluid <code>clamp()</code> ramps: <code>--type-display-xl</code> down to
+					<code>--type-overline</code>. Reach for the token, not a hard <code>rem</code> value.
+				</li>
+			</ul>
+
+			<h3>Spacing</h3>
+			<p>
+				A 4-pixel modular scale: <code>--spacing-1</code> (<code>0.25rem</code>) through
+				<code>--spacing-32</code> (<code>8rem</code>). Use the token, not a hand-tuned
+				<code>padding</code>.
+			</p>
+
+			<h3>Radius, shadow, motion</h3>
+			<ul>
+				<li>
+					<strong>Radius</strong> — keep small. <code>--radius-sm</code> (<code>4px</code>) is the
+					default, <code>--radius-md</code> (<code>8px</code>) for cards and media,
+					<code>--radius-lg</code> (<code>12px</code>) only when something genuinely demands it.
+					<code>--radius-pill</code> for the floating dock and tags.
+				</li>
+				<li>
+					<strong>Shadow</strong> — warm grey. <code>--shadow-sm</code> through
+					<code>--shadow-xl</code>. Dark theme overrides them with proper black.
+				</li>
+				<li>
+					<strong>Motion</strong> — <code>--motion-duration-fast</code> / <code>-base</code> /
+					<code>-slow</code> = <code>150ms</code> / <code>250ms</code> / <code>400ms</code>.
+					<code>--motion-ease-standard</code> for symmetric easing,
+					<code>--motion-ease-out</code> for entrances. Reduced motion strips them.
+				</li>
+			</ul>
+
+			<h2>Namespaces</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Namespace</th>
+						<th>Where</th>
+						<th>Purpose</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>.l-*</code></td>
+						<td><code>lib/styles/layout.css</code></td>
+						<td>
+							Layout utilities. <code>.l-content</code>, <code>.l-stack</code>,
+							<code>.l-grid</code>, <code>.l-section</code>, <code>.l-divider</code>,
+							<code>.l-sr-only</code>. Routes and pages own composition; these are the frames they
+							hang composition on.
+						</td>
+					</tr>
+					<tr>
+						<td><code>.c-*</code></td>
+						<td><code>lib/styles/components.css</code></td>
+						<td>
+							Component primitives. Every Svelte component in <code>lib/components/</code> that has
+							visual style maps to a single <code>.c-*</code> root with optional
+							<code>--variant</code> modifiers (<code>.c-button--primary</code>,
+							<code>.c-chapter--align-split</code>, …). Variants and elements use BEM modifiers,
+							never extra classes from another namespace.
+						</td>
+					</tr>
+					<tr>
+						<td><code>.world-layer</code> / <code>.c-route-scene</code></td>
+						<td><code>lib/styles/world-layer.css</code></td>
+						<td>
+							The fixed underlay (<code>.world-layer</code>) and the hero scene container
+							(<code>.c-route-scene</code>). The world layer reads
+							<code>--scene-fog-active</code> from <code>scene.css</code> so navigating between
+							routes shifts the fog without remounting anything.
+						</td>
+					</tr>
+					<tr>
+						<td><code>data-revealed</code> / <code>.reveal-*</code></td>
+						<td><code>lib/styles/components.css</code></td>
+						<td>
+							Wired to the <code>reveal</code> Svelte action in <code>lib/utils/motion.ts</code>.
+							<code>.reveal-fade</code>, <code>.reveal-clip</code>, and the
+							<code>.reveal-word</code> / <code>.reveal-word-inner</code> pair for word-by-word
+							splits.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Per-route fog</h2>
+			<p>
+				<code>scene.css</code> defines two named fog stacks (<code>--scene-fog-celestial</code>,
+				<code>--scene-fog-legal</code>) and selects between them based on
+				<code>html[data-route-family]</code>:
+			</p>
+			<pre><code>:root {
+    --scene-fog-active: var(--scene-fog-celestial);
+}
+[data-route-family='legal']     { --scene-fog-active: var(--scene-fog-legal); }
+[data-route-family='threshold'] { --scene-fog-active: var(--scene-fog-celestial); }</code></pre>
+			<p>
+				The world-layer overlay reads <code>--scene-fog-active</code>, so swapping the family
+				attribute during navigation is enough to retint the underlay without redrawing the DOM. Hero
+				scrims (<code>--scene-scrim-soft</code>, <code>--scene-scrim-strong</code>) live in the same
+				file and are consumed by <code>RouteScene</code> and <code>EditorialHero</code>.
+			</p>
+
+			<h2>Theming</h2>
+			<p>
+				Light is the default. <code>data-theme="dark"</code> on <code>&lt;html&gt;</code> re-binds
+				every token at the document root. The <code>app.html</code> boot script selects between user
+				choice (<code>localStorage.memenow.theme</code>) and system preference before SvelteKit
+				hydrates so there is no light-flash on dark systems. <code>ThemeSwitch.svelte</code> writes
+				both the attribute and the storage key when the user toggles.
+			</p>
+
+			<div class="callout callout--warn">
+				<strong>No raw color literals</strong>
+				If you find yourself writing <code>color: #4a7c59</code> in a component, it should probably
+				be <code>color: var(--accent-green)</code>. The token is what survives a future palette
+				tweak.
+			</div>
+
+			<h2>Tailwind v4 specifics</h2>
+			<ul>
+				<li>
+					<strong>No config file.</strong> Plugins are declared with
+					<code>@plugin '...'</code> inside <code>src/routes/layout.css</code>. Adding a Tailwind
+					plugin means adding the devDependency and the <code>@plugin</code> line.
+				</li>
+				<li>
+					<strong>Class lists are sorted by Prettier.</strong>
+					<code>prettier-plugin-tailwindcss</code> reads
+					<code>tailwindStylesheet: './src/routes/layout.css'</code> from
+					<code>.prettierrc</code> and orders utility classes deterministically. Do not hand-order
+					them.
+				</li>
+				<li>
+					<strong>Components first, utilities second.</strong> The site is built from
+					<code>.c-*</code> primitives consuming tokens. Tailwind utilities are reserved for ad-hoc
+					spacing or flex tweaks inside a route, not for replicating component styles.
+				</li>
+			</ul>
+
+			<footer class="meta">
+				<span>memenow-site · styling &amp; tokens</span>
+				<a href="./motion.html">Next: motion &amp; reveal →</a>
+			</footer>
+		</main>
+	</body>
+</html>
