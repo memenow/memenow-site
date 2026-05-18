@@ -4,6 +4,14 @@
  * Routes own composition; these utilities provide the frame.
  */
 
+/* Defensive overflow guard. `clip` (vs `hidden`) does not create a scroll
+   container and does not break `position: sticky` descendants — preferred for
+   page-level overflow containment. */
+html,
+body {
+	overflow-x: clip;
+}
+
 .l-content {
 	width: 100%;
 	max-width: var(--container-max);
@@ -108,4 +116,30 @@
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border: 0;
+}
+
+/* Skip-link: visually hidden until keyboard-focused, then anchors to top-left
+   so screen-reader / keyboard users can bypass the dock and reach <main>. */
+.l-skip-link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: var(--z-toast);
+	transform: translateY(-150%);
+	padding: var(--spacing-3) var(--spacing-4);
+	background: var(--surface-raised);
+	color: var(--text-primary);
+	border: 1px solid var(--border-focus);
+	border-radius: var(--radius-sm);
+	font-family: var(--font-body);
+	font-size: var(--type-small);
+	text-decoration: none;
+	transition: transform var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.l-skip-link:focus,
+.l-skip-link:focus-visible {
+	transform: translateY(var(--spacing-3));
+	outline: 2px solid var(--border-focus);
+	outline-offset: 2px;
 }

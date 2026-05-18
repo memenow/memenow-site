@@ -5,11 +5,24 @@ export interface NavLink {
 	label: string;
 	href: string;
 	external?: boolean;
+	/**
+	 * Extra path prefixes that should also mark this link as the current page.
+	 * Useful when one nav entry represents a group of routes (e.g. "Legal"
+	 * covers /privacy, /terms, /disclaimer).
+	 */
+	match?: string[];
 }
+
+export const homeLink: NavLink = { label: 'Home', href: '/' };
 
 export const primaryNav: NavLink[] = [
 	{ label: 'Products', href: '/products' },
-	{ label: 'Company', href: '/company' }
+	{ label: 'Company', href: '/company' },
+	{
+		label: 'Legal',
+		href: '/disclaimer',
+		match: ['/privacy', '/terms', '/disclaimer']
+	}
 ];
 
 export interface FooterSection {

@@ -1,11 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { primaryNav } from '$lib/data/navigation';
+	import { homeLink, primaryNav, type NavLink } from '$lib/data/navigation';
 	import ThemeSwitch from '$lib/components/ui/ThemeSwitch.svelte';
 
-	function isCurrent(href: string): boolean {
-		if (href === '/') return page.url.pathname === '/';
-		return page.url.pathname === href || page.url.pathname.startsWith(`${href}/`);
+	function matches(path: string, pathname: string): boolean {
+		if (path === '/') return pathname === '/';
+		return pathname === path || pathname.startsWith(`${path}/`);
+	}
+
+	function isCurrent(link: NavLink): boolean {
+		const candidates = link.match ?? [link.href];
+		return candidates.some((p) => matches(p, page.url.pathname));
 	}
 </script>
 
@@ -28,13 +33,15 @@
 
 	<span class="c-dock__divider" aria-hidden="true"></span>
 
-	<a class="c-dock__item" href="/" aria-current={isCurrent('/') ? 'page' : undefined}>Home</a>
+	<a
+		class="c-dock__item"
+		href={homeLink.href}
+		aria-current={isCurrent(homeLink) ? 'page' : undefined}
+	>
+		{homeLink.label}
+	</a>
 	{#each primaryNav as link (link.href)}
-		<a
-			class="c-dock__item"
-			href={link.href}
-			aria-current={isCurrent(link.href) ? 'page' : undefined}
-		>
+		<a class="c-dock__item" href={link.href} aria-current={isCurrent(link) ? 'page' : undefined}>
 			{link.label}
 		</a>
 	{/each}
