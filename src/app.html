@@ -14,9 +14,11 @@
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="memenow" />
 		<meta property="og:description" content="Make AI your partner." />
-		<meta property="og:image" content="/og/og-default.jpeg" />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:image" content="/og/og-default.jpeg" />
+		<!-- og:image and twitter:image are intentionally set per route in each
+		     page's <svelte:head>; a global fallback would emit twice in SSR HTML
+		     because <svelte:head> does not de-duplicate identical `property`s. -->
+
 		<link rel="icon" href="/favicon.ico" sizes="any" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/brand/app-icon-32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/brand/app-icon-16.png" />
