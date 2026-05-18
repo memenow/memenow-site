@@ -10,6 +10,13 @@
 		name="description"
 		content="memenow is a studio building AI agents that think alongside us — for clarity in life, and discipline in markets."
 	/>
+	<meta property="og:title" content="memenow — Make AI your partner." />
+	<meta
+		property="og:description"
+		content="A studio in Lewes, Delaware building AI agents for clarity in life and discipline in markets."
+	/>
+	<meta property="og:image" content="/og/og-home.jpeg" />
+	<meta name="twitter:image" content="/og/og-home.jpeg" />
 </svelte:head>
 
 <EditorialHero

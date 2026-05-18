@@ -7,6 +7,10 @@
 	<title>Terms — memenow</title>
 	<meta name="description" content="memenow.xyz terms of use." />
 	<meta name="robots" content="noindex" />
+	<meta property="og:title" content="Terms — memenow" />
+	<meta property="og:description" content="memenow.xyz terms of use." />
+	<meta property="og:image" content="/og/og-home.jpeg" />
+	<meta name="twitter:image" content="/og/og-home.jpeg" />
 </svelte:head>
 
 <EditorialHero

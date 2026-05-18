@@ -7,6 +7,10 @@
 	<title>Privacy — memenow</title>
 	<meta name="description" content="memenow.xyz privacy notice." />
 	<meta name="robots" content="noindex" />
+	<meta property="og:title" content="Privacy — memenow" />
+	<meta property="og:description" content="memenow.xyz privacy notice." />
+	<meta property="og:image" content="/og/og-home.jpeg" />
+	<meta name="twitter:image" content="/og/og-home.jpeg" />
 </svelte:head>
 
 <EditorialHero

@@ -7,6 +7,13 @@
 <svelte:head>
 	<title>Products — memenow</title>
 	<meta name="description" content="memenow's products: Yinyang Agent and Quant Research." />
+	<meta property="og:title" content="Products — memenow" />
+	<meta
+		property="og:description"
+		content="Two products, one studio: a Bazi agent that reads with you, and a quant practice held to the same patience."
+	/>
+	<meta property="og:image" content="/og/og-home.jpeg" />
+	<meta name="twitter:image" content="/og/og-home.jpeg" />
 </svelte:head>
 
 <EditorialHero

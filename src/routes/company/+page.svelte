@@ -10,6 +10,13 @@
 		name="description"
 		content="memenow is a small studio in Lewes, Delaware, founded in 2024, building AI agents that think alongside us."
 	/>
+	<meta property="og:title" content="Company — memenow" />
+	<meta
+		property="og:description"
+		content="A small studio in Lewes, Delaware. Founded 2024. AI agents that think alongside us."
+	/>
+	<meta property="og:image" content="/og/og-company.jpeg" />
+	<meta name="twitter:image" content="/og/og-company.jpeg" />
 </svelte:head>
 
 <EditorialHero

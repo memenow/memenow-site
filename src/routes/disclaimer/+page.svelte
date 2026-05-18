@@ -10,6 +10,13 @@
 		content="memenow investor disclaimer for the Quant Research capability brief."
 	/>
 	<meta name="robots" content="noindex" />
+	<meta property="og:title" content="Disclaimer — memenow" />
+	<meta
+		property="og:description"
+		content="memenow investor disclaimer for the Quant Research capability brief."
+	/>
+	<meta property="og:image" content="/og/og-home.jpeg" />
+	<meta name="twitter:image" content="/og/og-home.jpeg" />
 </svelte:head>
 
 <EditorialHero

@@ -1,3 +1,15 @@
+<!--
+@component
+ArtifactCta is the project's single narrative-pivot CTA primitive. It is an
+anchor (`<a>`) with the diamond seal mark (`::after`), a magnetic hover
+action, and two palettes — `celestial` (outlined, accent green) for outbound
+references and `ritual` (filled, accent green) for in-flow conversions.
+
+Use it for every page-level call-to-action. The project intentionally has no
+`Card` component; if you need a non-interactive container, use a `<section>`
+with chapter / layout primitives (`.c-chapter__inner`, `.l-stack`, etc.) and
+let `ArtifactCta` be the only branded "click here" surface.
+-->
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
