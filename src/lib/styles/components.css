@@ -190,6 +190,11 @@
 	padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
 
+.c-chapter__inner--center {
+	display: flex;
+	justify-content: center;
+}
+
 .c-chapter__head {
 	display: flex;
 	flex-direction: column;

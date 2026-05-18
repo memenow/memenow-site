@@ -145,3 +145,12 @@ body {
 	outline: 2px solid var(--border-focus);
 	outline-offset: 2px;
 }
+
+/* Explicitly honor reduced-motion: the global tokens.css reset already
+   clamps transition-duration to 0.01ms, but stating it locally documents
+   the intent so future edits do not regress. */
+@media (prefers-reduced-motion: reduce) {
+	.l-skip-link {
+		transition: none;
+	}
+}

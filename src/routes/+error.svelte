@@ -3,14 +3,16 @@
 	import EditorialHero from '$lib/components/home/EditorialHero.svelte';
 	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
 
-	const status = $derived(page.status);
-	const isNotFound = $derived(status === 404);
+	const isNotFound = $derived(page.status === 404);
 	const title = $derived(isNotFound ? 'This path leads nowhere.' : 'A break in the signal.');
+	// Always render a pre-defined user-facing copy. `page.error?.message` is set
+	// by SvelteKit's `error()` helper or by an unhandled server-side throw and
+	// can leak implementation details (e.g. database error strings) — server
+	// observability is the right place for the original message.
 	const lede = $derived(
-		page.error?.message ??
-			(isNotFound
-				? 'The page you were looking for has moved, been renamed, or never existed.'
-				: 'Something went wrong on our end. Try again in a moment.')
+		isNotFound
+			? 'The page you were looking for has moved, been renamed, or never existed.'
+			: 'Something went wrong on our end. Try again in a moment.'
 	);
 </script>
 
@@ -28,7 +30,7 @@
 />
 
 <section class="c-chapter">
-	<div class="c-chapter__inner" style="display: flex; justify-content: center;">
+	<div class="c-chapter__inner c-chapter__inner--center">
 		<ArtifactCta href="/" palette="celestial" size="lg">Back to home</ArtifactCta>
 	</div>
 </section>
