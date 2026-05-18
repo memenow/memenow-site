@@ -198,6 +198,9 @@ body {
 	min-height: 100dvh;
 	background: var(--surface-base);
 	color: var(--text-primary);
+	/* Stop iOS Safari's rubber-band scroll from bleeding past the page and
+	   fighting Lenis's smooth scroll loop. */
+	overscroll-behavior-y: contain;
 	transition:
 		background var(--motion-duration-slow) var(--motion-ease-standard),
 		color var(--motion-duration-slow) var(--motion-ease-standard);

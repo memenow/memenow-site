@@ -30,6 +30,11 @@
 		children: Snippet;
 		cta?: Snippet;
 	} = $props();
+
+	// When `id` is supplied, the section is announced as a labeled landmark
+	// (`<section aria-labelledby="…">`); without an `id` we render a plain
+	// section to avoid colliding `aria-labelledby` references.
+	const titleId = $derived(id ? `${id}-title` : undefined);
 </script>
 
 <section
@@ -39,6 +44,7 @@
 	class:c-chapter--banner={banner}
 	class:c-chapter--headless={headless}
 	{id}
+	aria-labelledby={titleId}
 >
 	<div class="c-chapter__inner">
 		<header class="c-chapter__head">
@@ -48,7 +54,7 @@
 					<span class="c-chapter__num-label">— {label}</span>
 				</span>
 			{/if}
-			<h2 class="c-chapter__title" use:reveal={{ splitWords: true }}>{title}</h2>
+			<h2 id={titleId} class="c-chapter__title" use:reveal={{ splitWords: true }}>{title}</h2>
 		</header>
 
 		<div class="c-chapter__body">

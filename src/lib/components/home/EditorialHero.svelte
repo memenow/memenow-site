@@ -8,7 +8,8 @@
 		title,
 		lede,
 		cue,
-		image
+		image,
+		id = 'editorial-hero'
 	}: {
 		eyebrowLeft: string;
 		eyebrowRight: string;
@@ -16,10 +17,19 @@
 		lede: string;
 		cue: string;
 		image?: SceneImage;
+		/** DOM id base; the section becomes `${id}` and the title `${id}-title`. */
+		id?: string;
 	} = $props();
+
+	const titleId = $derived(`${id}-title`);
 </script>
 
-<section class="c-editorial-hero" data-has-image={image ? 'true' : 'false'}>
+<section
+	class="c-editorial-hero"
+	data-has-image={image ? 'true' : 'false'}
+	{id}
+	aria-labelledby={titleId}
+>
 	{#if image}
 		<div class="c-editorial-hero__media" aria-hidden="true">
 			<picture>
@@ -45,7 +55,11 @@
 	</div>
 
 	<div class="c-editorial-hero__bottom">
-		<h1 class="c-editorial-hero__title" use:reveal={{ splitWords: true, threshold: 0 }}>
+		<h1
+			id={titleId}
+			class="c-editorial-hero__title"
+			use:reveal={{ splitWords: true, threshold: 0 }}
+		>
 			{title}
 		</h1>
 		<p class="c-editorial-hero__lede reveal-fade" use:reveal>{lede}</p>

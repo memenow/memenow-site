@@ -1,6 +1,4 @@
 @import 'tailwindcss';
-@plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
 
 @import '../lib/styles/tokens.css';
 @import '../lib/styles/scene.css';
