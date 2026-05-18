@@ -1,12 +1,6 @@
 <script lang="ts">
 	import { reveal } from '$lib/utils/motion';
-
-	type SceneImage = {
-		avif?: string;
-		webp?: string;
-		png: string;
-		alt?: string;
-	};
+	import type { SceneImage } from '$lib/types';
 
 	let {
 		eyebrowLeft,
@@ -31,7 +25,15 @@
 			<picture>
 				{#if image.avif}<source srcset={image.avif} type="image/avif" />{/if}
 				{#if image.webp}<source srcset={image.webp} type="image/webp" />{/if}
-				<img src={image.png} alt={image.alt ?? ''} />
+				<img
+					src={image.png}
+					alt={image.alt ?? ''}
+					width={image.w}
+					height={image.h}
+					loading="eager"
+					decoding="async"
+					fetchpriority="high"
+				/>
 			</picture>
 		</div>
 		<div class="c-editorial-hero__scrim" aria-hidden="true"></div>

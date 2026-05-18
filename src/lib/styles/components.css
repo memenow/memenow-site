@@ -16,8 +16,8 @@
 [data-revealed] .reveal-word-inner {
 	display: inline-block;
 	transform: translateY(110%);
-	transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
-	transition-delay: calc(var(--i, 0) * 55ms);
+	transition: transform var(--motion-duration-reveal) var(--motion-ease-reveal);
+	transition-delay: calc(var(--i, 0) * var(--motion-stagger));
 	will-change: transform;
 }
 
@@ -29,8 +29,9 @@
 	opacity: 0;
 	transform: translateY(20px);
 	transition:
-		opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s,
-		transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+		opacity var(--motion-duration-reveal) var(--motion-ease-reveal) var(--motion-delay-reveal-fade),
+		transform var(--motion-duration-reveal) var(--motion-ease-reveal)
+			var(--motion-delay-reveal-fade);
 	will-change: opacity, transform;
 }
 
@@ -41,7 +42,7 @@
 
 .reveal-clip {
 	clip-path: inset(0 0 100% 0);
-	transition: clip-path 1.25s cubic-bezier(0.65, 0, 0.35, 1);
+	transition: clip-path var(--motion-duration-reveal-clip) var(--motion-ease-reveal-clip);
 	will-change: clip-path;
 }
 
@@ -76,7 +77,7 @@
 .c-editorial-hero__media {
 	position: absolute;
 	inset: 0;
-	z-index: -2;
+	z-index: var(--z-below-2);
 }
 
 .c-editorial-hero__media img {
@@ -88,12 +89,14 @@
 .c-editorial-hero__scrim {
 	position: absolute;
 	inset: 0;
-	z-index: -1;
+	z-index: var(--z-below);
+	/* Mid-band opacity raised from 0.46 → 0.60 (light) / 0.40 → 0.55 (dark)
+	   so the cue / lede copy clears WCAG AA over busy hero photography. */
 	background: linear-gradient(
 		180deg,
 		rgba(250, 249, 246, 0.78) 0%,
-		rgba(250, 249, 246, 0.46) 38%,
-		rgba(250, 249, 246, 0.62) 78%,
+		rgba(250, 249, 246, 0.6) 38%,
+		rgba(250, 249, 246, 0.72) 78%,
 		rgba(250, 249, 246, 0.92) 100%
 	);
 }
@@ -102,8 +105,8 @@
 	background: linear-gradient(
 		180deg,
 		rgba(26, 32, 28, 0.7) 0%,
-		rgba(26, 32, 28, 0.4) 38%,
-		rgba(26, 32, 28, 0.6) 78%,
+		rgba(26, 32, 28, 0.55) 38%,
+		rgba(26, 32, 28, 0.7) 78%,
 		rgba(26, 32, 28, 0.9) 100%
 	);
 }
@@ -440,22 +443,22 @@
 .c-dock {
 	position: fixed;
 	left: 50%;
-	bottom: clamp(1rem, 3vh, 1.75rem);
+	/* Honor iPhone home-indicator / notch by adding the bottom safe-area
+	   inset before the visual gap; works with viewport-fit=cover. */
+	bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(1rem, 3vh, 1.75rem));
 	transform: translateX(-50%);
 	display: inline-flex;
 	align-items: center;
 	gap: var(--spacing-1);
-	padding: 0.3rem 0.4rem;
+	padding: var(--spacing-1) var(--spacing-2);
 	border-radius: var(--radius-pill);
-	background: color-mix(in srgb, var(--surface-ink) 92%, transparent);
+	background: var(--surface-dock);
 	backdrop-filter: blur(16px) saturate(140%);
 	-webkit-backdrop-filter: blur(16px) saturate(140%);
-	border: 1px solid rgba(255, 255, 255, 0.07);
-	box-shadow:
-		0 16px 40px rgba(0, 0, 0, 0.18),
-		0 1px 0 rgba(255, 255, 255, 0.04) inset;
+	border: 1px solid var(--border-dock);
+	box-shadow: var(--shadow-dock);
 	z-index: var(--z-sticky);
-	color: rgba(255, 255, 255, 0.92);
+	color: var(--text-dock);
 }
 
 .c-dock__brand {
@@ -465,7 +468,7 @@
 	justify-content: center;
 	width: 2rem;
 	height: 2rem;
-	padding: 0.25rem;
+	padding: var(--spacing-1);
 	border-radius: var(--radius-pill);
 	color: inherit;
 	text-decoration: none;
@@ -484,7 +487,7 @@
 }
 
 .c-dock__brand:hover {
-	background: rgba(255, 255, 255, 0.08);
+	background: var(--surface-dock-hover);
 }
 
 .c-dock__brand img {
@@ -497,19 +500,23 @@
 .c-dock__divider {
 	width: 1px;
 	align-self: stretch;
-	background: rgba(255, 255, 255, 0.08);
-	margin: 0.25rem 0.15rem;
+	background: var(--border-dock-divider);
+	margin: var(--spacing-1) var(--spacing-0-5);
 }
 
 .c-dock__item {
 	position: relative;
 	font-family: var(--font-mono);
+	/* Sits intentionally between --type-overline (0.6875rem) and --type-caption
+	   (0.75rem); dock labels are short and need just-readable density. */
 	font-size: 0.7rem;
 	font-weight: 500;
-	letter-spacing: 0.16em;
+	letter-spacing: var(--ls-overline);
 	text-transform: uppercase;
-	color: rgba(255, 255, 255, 0.78);
-	padding: 0.5rem 0.95rem;
+	color: var(--text-dock-muted);
+	/* Horizontal padding is tuned to the dock pill geometry; no spacing token
+	   maps to 0.95rem, so the literal is kept and documented here. */
+	padding: var(--spacing-2) 0.95rem;
 	border-radius: var(--radius-pill);
 	cursor: pointer;
 	background: transparent;
@@ -531,13 +538,13 @@
 }
 
 .c-dock__item:hover {
-	color: #ffffff;
-	background: rgba(255, 255, 255, 0.06);
+	color: var(--text-dock-hover);
+	background: var(--surface-dock-item-hover);
 }
 
 .c-dock__item[aria-current='page'],
 .c-dock__item[data-active='true'] {
-	background: rgba(255, 255, 255, 0.1);
+	background: var(--surface-dock-active);
 	color: var(--accent-pink);
 }
 
@@ -563,7 +570,7 @@
 }
 
 .c-dock__menu:hover {
-	background: rgba(255, 255, 255, 0.08);
+	background: var(--surface-dock-hover);
 }
 
 .c-dock__menu svg {
@@ -571,11 +578,14 @@
 }
 
 /* Tighten the dock on narrow phones so the pill stays clear of the safe area
-   without resorting to an icons-only menu (the four labels are short enough). */
+   without resorting to an icons-only menu (the four labels are short enough).
+   The remaining literals (0.55rem horizontal padding, 0.625rem font size,
+   0.05rem divider margin) have no matching token — they are dock-specific
+   density tuning and kept inline for that reason. */
 @media (max-width: 540px) {
 	.c-dock {
 		gap: 0;
-		padding: 0.25rem 0.3rem;
+		padding: var(--spacing-1);
 	}
 
 	.c-dock__brand {
@@ -584,13 +594,13 @@
 	}
 
 	.c-dock__item {
-		padding: 0.4rem 0.55rem;
+		padding: var(--spacing-2) 0.55rem;
 		font-size: 0.625rem;
 		letter-spacing: 0.1em;
 	}
 
 	.c-dock__divider {
-		margin: 0.2rem 0.05rem;
+		margin: var(--spacing-0-5) 0.05rem;
 	}
 }
 
@@ -867,6 +877,44 @@
 	color: var(--accent-pink);
 	border-color: var(--accent-pink-soft);
 	background: var(--accent-pink-soft);
+}
+
+/* ── Disclaimer banner — legal / regulatory pivot block ── */
+
+.c-disclaimer-banner {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+	padding: var(--spacing-6);
+	border: 1px solid var(--border-strong);
+	border-left: 3px solid var(--accent-pink);
+	border-radius: var(--radius-md);
+	background: var(--surface-raised);
+}
+
+.c-disclaimer-banner__title {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	font-family: var(--font-mono);
+	font-weight: 500;
+	font-size: var(--type-overline);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--accent-pink);
+	margin: 0;
+}
+
+.c-disclaimer-banner__body {
+	color: var(--text-secondary);
+	font-size: var(--type-small);
+	line-height: var(--leading-relaxed);
+	max-width: 76ch;
+	margin: 0;
+}
+
+.c-disclaimer-banner__body a {
+	color: inherit;
 }
 
 /* ── Coral pink diamond mark — the only ornament ──────── */

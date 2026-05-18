@@ -19,7 +19,9 @@
 		avif: '/images/home-hero.avif',
 		webp: '/images/home-hero.webp',
 		png: '/images/home-hero.png',
-		alt: ''
+		alt: '',
+		w: 1672,
+		h: 941
 	}}
 />
 
@@ -33,7 +35,9 @@
 		avif: '/images/products-yinyang.avif',
 		webp: '/images/products-yinyang.webp',
 		png: '/images/products-yinyang.png',
-		alt: ''
+		alt: '',
+		w: 1672,
+		h: 941
 	}}
 >
 	<p class="c-chapter__lede">AI-powered Eight-Pillars analysis. Read once, revisit forever.</p>
@@ -61,7 +65,9 @@
 		avif: '/images/products-quant.avif',
 		webp: '/images/products-quant.webp',
 		png: '/images/products-quant.png',
-		alt: ''
+		alt: '',
+		w: 1672,
+		h: 941
 	}}
 >
 	<p class="c-chapter__lede">

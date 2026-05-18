@@ -1,7 +1,6 @@
 <script lang="ts">
 	import EditorialHero from '$lib/components/home/EditorialHero.svelte';
 	import Chapter from '$lib/components/home/Chapter.svelte';
-	import Card from '$lib/components/ui/Card.svelte';
 </script>
 
 <svelte:head>
@@ -29,18 +28,20 @@
 		avif: '/images/products-quant.avif',
 		webp: '/images/products-quant.webp',
 		png: '/images/products-quant.png',
-		alt: ''
+		alt: '',
+		w: 1672,
+		h: 941
 	}}
 />
 
 <section class="c-chapter" id="disclaimer">
 	<div class="c-chapter__inner">
-		<Card variant="outlined" element="pink">
-			<p class="quant-disclaimer__title">
+		<aside class="c-disclaimer-banner">
+			<p class="c-disclaimer-banner__title">
 				<span class="c-seal" aria-hidden="true"></span>
 				Capability brief, not an offer.
 			</p>
-			<p class="quant-disclaimer__body">
+			<p class="c-disclaimer-banner__body">
 				This page describes research and engineering capabilities. It is
 				<strong>not an offer to sell</strong> or a solicitation to buy any security, fund interest,
 				or financial instrument, and it is <strong>not investment advice</strong>. Specific
@@ -48,7 +49,7 @@
 				channels.
 				<a href="/disclaimer">Read the full disclaimer</a>.
 			</p>
-		</Card>
+		</aside>
 	</div>
 </section>
 
@@ -77,28 +78,3 @@
 		data, and stop regimes that no longer hold.
 	</p>
 </Chapter>
-
-<style>
-	.quant-disclaimer__title {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--spacing-3);
-		font-family: var(--font-mono);
-		font-weight: 500;
-		font-size: var(--type-overline);
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		color: var(--accent-pink);
-		margin: 0;
-	}
-	.quant-disclaimer__body {
-		color: var(--text-secondary);
-		font-size: var(--type-small);
-		line-height: var(--leading-relaxed);
-		max-width: 76ch;
-		margin: 0;
-	}
-	.quant-disclaimer__body a {
-		color: inherit;
-	}
-</style>

@@ -73,7 +73,9 @@
 	--ls-overline: 0.16em;
 	--ls-ritual: 0.12em;
 
-	/* Spacing — 4 px modular */
+	/* Spacing — 4 px modular. `--spacing-0-5` is the only half-step, reserved
+	   for hit-area extenders where exactly half a grid unit is required. */
+	--spacing-0-5: 0.125rem;
 	--spacing-1: 0.25rem;
 	--spacing-2: 0.5rem;
 	--spacing-3: 0.75rem;
@@ -107,17 +109,42 @@
 	--motion-ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
 	--motion-ease-out: cubic-bezier(0, 0, 0.25, 1);
 
+	/* Reveal — scroll-triggered word / fade / clip animations share one
+	   exit-cubic; the clip variant used for image masks runs a touch slower
+	   with a softer in-out curve. */
+	--motion-duration-reveal: 0.95s;
+	--motion-duration-reveal-clip: 1.25s;
+	--motion-delay-reveal-fade: 0.05s;
+	--motion-stagger: 55ms;
+	--motion-ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+	--motion-ease-reveal-clip: cubic-bezier(0.65, 0, 0.35, 1);
+
 	/* Container widths */
 	--container-narrow: 720px;
 	--container-max: 1200px;
 	--container-wide: 1400px;
 
 	/* Z-index ladder */
+	--z-below-2: -2;
+	--z-below: -1;
 	--z-dropdown: 100;
 	--z-sticky: 200;
 	--z-overlay: 300;
 	--z-modal: 400;
 	--z-toast: 500;
+
+	/* Floating dock — glassmorphic dark pill, kept stable across light/dark
+	   themes (the dock is intentionally one finish). */
+	--surface-dock: color-mix(in srgb, var(--surface-ink) 92%, transparent);
+	--surface-dock-hover: rgba(255, 255, 255, 0.08);
+	--surface-dock-active: rgba(255, 255, 255, 0.1);
+	--surface-dock-item-hover: rgba(255, 255, 255, 0.06);
+	--text-dock: rgba(255, 255, 255, 0.92);
+	--text-dock-muted: rgba(255, 255, 255, 0.78);
+	--text-dock-hover: #ffffff;
+	--border-dock: rgba(255, 255, 255, 0.07);
+	--border-dock-divider: rgba(255, 255, 255, 0.08);
+	--shadow-dock: 0 16px 40px rgba(0, 0, 0, 0.18), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
 
 	/* Misc */
 	--nav-height: 64px;
@@ -181,6 +208,12 @@ a {
 	text-decoration-color: var(--border-strong);
 	text-underline-offset: 0.18em;
 	text-decoration-thickness: 1px;
+}
+
+/* Suppress iOS Safari's translucent grey tap flash on every interactive
+   element; the component-level :focus-visible ring is the real feedback. */
+* {
+	-webkit-tap-highlight-color: transparent;
 }
 
 a:hover {

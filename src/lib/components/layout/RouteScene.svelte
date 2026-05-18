@@ -1,12 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-
-	type SceneImage = {
-		avif?: string;
-		webp?: string;
-		png: string;
-		alt?: string;
-	};
+	import type { SceneImage } from '$lib/types';
 
 	let {
 		image,
@@ -27,7 +21,14 @@
 			<picture>
 				{#if image.avif}<source srcset={image.avif} type="image/avif" />{/if}
 				{#if image.webp}<source srcset={image.webp} type="image/webp" />{/if}
-				<img src={image.png} alt={image.alt ?? alt} />
+				<img
+					src={image.png}
+					alt={image.alt ?? alt}
+					width={image.w}
+					height={image.h}
+					loading="lazy"
+					decoding="async"
+				/>
 			</picture>
 		{:else}
 			<div class="c-route-scene__placeholder"></div>

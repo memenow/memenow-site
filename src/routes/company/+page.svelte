@@ -22,7 +22,9 @@
 		avif: '/images/company.avif',
 		webp: '/images/company.webp',
 		png: '/images/company.png',
-		alt: ''
+		alt: '',
+		w: 1672,
+		h: 941
 	}}
 />
 

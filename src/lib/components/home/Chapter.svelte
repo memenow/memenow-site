@@ -1,13 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { reveal } from '$lib/utils/motion';
-
-	type SceneImage = {
-		avif?: string;
-		webp?: string;
-		png: string;
-		alt?: string;
-	};
+	import type { SceneImage } from '$lib/types';
 
 	type Align = 'center' | 'left' | 'split';
 
@@ -66,7 +60,14 @@
 				<picture>
 					{#if image.avif}<source srcset={image.avif} type="image/avif" />{/if}
 					{#if image.webp}<source srcset={image.webp} type="image/webp" />{/if}
-					<img src={image.png} alt={image.alt ?? ''} loading="lazy" decoding="async" />
+					<img
+						src={image.png}
+						alt={image.alt ?? ''}
+						width={image.w}
+						height={image.h}
+						loading="lazy"
+						decoding="async"
+					/>
 				</picture>
 			</figure>
 		{/if}

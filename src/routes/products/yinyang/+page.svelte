@@ -26,7 +26,9 @@
 		avif: '/images/products-yinyang.avif',
 		webp: '/images/products-yinyang.webp',
 		png: '/images/products-yinyang.png',
-		alt: ''
+		alt: '',
+		w: 1672,
+		h: 941
 	}}
 />
 
