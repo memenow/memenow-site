@@ -28,14 +28,7 @@
 />
 
 <section class="c-chapter">
-	<div class="c-chapter__inner c-error__inner">
+	<div class="c-chapter__inner" style="display: flex; justify-content: center;">
 		<ArtifactCta href="/" palette="celestial" size="lg">Back to home</ArtifactCta>
 	</div>
 </section>
-
-<style>
-	.c-error__inner {
-		display: flex;
-		justify-content: center;
-	}
-</style>

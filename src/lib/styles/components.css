@@ -475,7 +475,7 @@
 .c-dock__brand::before {
 	content: '';
 	position: absolute;
-	inset: -0.5rem;
+	inset: calc(-1 * var(--spacing-2));
 }
 
 .c-dock__brand:hover {
@@ -518,7 +518,10 @@
 .c-dock__item::before {
 	content: '';
 	position: absolute;
-	inset-block: -0.5rem;
+	inset-block: calc(-1 * var(--spacing-2));
+	/* Half a spacing step — dock gap is var(--spacing-1) = 0.25rem, so each
+	   side expands 0.125rem to fill the gap exactly without overlapping the
+	   adjacent item's hit-area. No token exists for half-step values. */
 	inset-inline: -0.125rem;
 }
 
@@ -551,7 +554,7 @@
 .c-dock__menu::before {
 	content: '';
 	position: absolute;
-	inset: -0.5rem;
+	inset: calc(-1 * var(--spacing-2));
 }
 
 .c-dock__menu:hover {
@@ -957,7 +960,7 @@
 .c-theme-switch::before {
 	content: '';
 	position: absolute;
-	inset: -0.5rem;
+	inset: calc(-1 * var(--spacing-2));
 }
 
 .c-theme-switch:hover {

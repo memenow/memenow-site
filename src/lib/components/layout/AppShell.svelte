@@ -25,7 +25,9 @@
 		flex-direction: column;
 	}
 
-	.page-main:focus {
+	/* Suppress outline only when focus arrived programmatically (e.g. from the
+	   skip-link). Keyboard focus must still show a visible ring (WCAG 2.4.7). */
+	.page-main:focus:not(:focus-visible) {
 		outline: none;
 	}
 </style>

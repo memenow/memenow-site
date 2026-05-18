@@ -125,7 +125,9 @@ body {
 	top: 0;
 	left: 0;
 	z-index: var(--z-toast);
-	transform: translateY(-150%);
+	/* Translate fully off-canvas plus one spacing step of gap — robust to
+	   future padding/font changes (no magic 150% factor). */
+	transform: translateY(calc(-100% - var(--spacing-3)));
 	padding: var(--spacing-3) var(--spacing-4);
 	background: var(--surface-raised);
 	color: var(--text-primary);
