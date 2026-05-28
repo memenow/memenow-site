@@ -22,14 +22,6 @@
 	title="A Bazi reading you can return to."
 	lede="Eight Pillars, read the way a thoughtful teacher would — slowly, sourced, re-readable on demand."
 	cue="Scroll · 01 The reading"
-	image={{
-		avif: '/images/products-yinyang.avif',
-		webp: '/images/products-yinyang.webp',
-		png: '/images/products-yinyang.png',
-		alt: '',
-		w: 1672,
-		h: 941
-	}}
 />
 
 <Chapter
@@ -38,6 +30,14 @@
 	label="The reading"
 	align="left"
 	title="Read once, revisit forever."
+	image={{
+		avif: '/images/products-yinyang.avif',
+		webp: '/images/products-yinyang.webp',
+		png: '/images/products-yinyang.png',
+		alt: '',
+		w: 1672,
+		h: 941
+	}}
 >
 	<p class="c-chapter__lede">
 		Long-form reading from your birth time and place. Four pillars, five elements — written as

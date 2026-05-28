@@ -24,14 +24,6 @@
 	title="Small models, repeatable edges."
 	lede="Discipline beats cleverness. The model you can audit beats the model you can't."
 	cue="Scroll · Disclaimer"
-	image={{
-		avif: '/images/products-quant.avif',
-		webp: '/images/products-quant.webp',
-		png: '/images/products-quant.png',
-		alt: '',
-		w: 1672,
-		h: 941
-	}}
 />
 
 <section class="c-chapter" id="disclaimer">
@@ -54,27 +46,28 @@
 </section>
 
 <Chapter
-	id="crypto"
+	id="tracks"
 	number="01"
-	label="Crypto perpetuals"
-	align="split"
-	title="A market that never sleeps deserves a model that does."
->
-	<p class="c-chapter__lede">
-		Funding-rate structure, basis, microstructure. Position limits, drawdown stops, and
-		out-of-sample testing treated as gates — not commentary.
-	</p>
-</Chapter>
-
-<Chapter
-	id="ashares"
-	number="02"
-	label="A-shares"
+	label="The tracks"
 	align="left"
-	title="Mainland China, with eyes open."
+	title="Two tracks, one discipline."
 >
-	<p class="c-chapter__lede">
-		Fundamental factors and sector flows from public disclosures. We publish assumptions, version
-		data, and stop regimes that no longer hold.
-	</p>
+	<div class="c-stack-grid">
+		<div class="c-stack-grid__item">
+			<span class="c-stack-grid__num">Crypto perpetuals</span>
+			<h3 class="c-stack-grid__title">A market that never sleeps deserves a model that does.</h3>
+			<p class="c-stack-grid__body">
+				Funding-rate structure, basis, microstructure. Position limits, drawdown stops, and
+				out-of-sample testing treated as gates — not commentary.
+			</p>
+		</div>
+		<div class="c-stack-grid__item">
+			<span class="c-stack-grid__num">A-shares</span>
+			<h3 class="c-stack-grid__title">Mainland China, with eyes open.</h3>
+			<p class="c-stack-grid__body">
+				Fundamental factors and sector flows from public disclosures. We publish assumptions,
+				version data, and stop regimes that no longer hold.
+			</p>
+		</div>
+	</div>
 </Chapter>

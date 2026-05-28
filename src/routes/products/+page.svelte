@@ -22,14 +22,6 @@
 	title="One reading. One discipline."
 	lede="Two products, one studio. A Bazi agent that reads with you, and a quant practice held to the same patience."
 	cue="Scroll · 01 Yinyang Agent"
-	image={{
-		avif: '/images/home-hero.avif',
-		webp: '/images/home-hero.webp',
-		png: '/images/home-hero.png',
-		alt: '',
-		w: 1672,
-		h: 941
-	}}
 />
 
 <Chapter
