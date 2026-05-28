@@ -24,6 +24,23 @@
 	place-items: center;
 	opacity: 0.06;
 	mix-blend-mode: multiply;
+	color: var(--text-primary);
+	/* Scroll-driven parallax drift; the root layout writes --world-scroll (0–1).
+	   Reduced motion zeroes the transform in the media query below. */
+	transform: translate3d(0, calc(var(--world-scroll, 0) * -4vh), 0)
+		scale(calc(1 + var(--world-scroll, 0) * 0.05));
+	will-change: transform;
+}
+
+.world-layer__taichi svg {
+	width: min(82vmin, 880px);
+	height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.world-layer__taichi {
+		transform: none;
+	}
 }
 
 [data-theme='dark'] .world-layer__taichi {

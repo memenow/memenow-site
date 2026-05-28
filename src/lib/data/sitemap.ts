@@ -8,12 +8,12 @@
 // only allows a fixed set of named exports from `+server.ts`. Sharing the array
 // with the route handler's tests keeps the URL list authoritative in one place.
 export const SITEMAP_ROUTES: ReadonlyArray<readonly [path: string, lastmod: string]> = [
-	['/', '2026-05-18'],
-	['/products', '2026-05-18'],
-	['/products/yinyang', '2026-05-18'],
-	['/products/quant', '2026-05-18'],
-	['/company', '2026-05-18'],
-	['/privacy', '2026-05-18'],
-	['/terms', '2026-05-18'],
-	['/disclaimer', '2026-05-18']
+	['/', '2026-05-28'],
+	['/products', '2026-05-28'],
+	['/products/yinyang', '2026-05-28'],
+	['/products/quant', '2026-05-28'],
+	['/company', '2026-05-28'],
+	['/privacy', '2026-05-28'],
+	['/terms', '2026-05-28'],
+	['/disclaimer', '2026-05-28']
 ];

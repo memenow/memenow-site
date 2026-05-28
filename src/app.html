@@ -40,6 +40,28 @@
 				}
 			})();
 		</script>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "Organization",
+						"@id": "https://memenow.xyz/#organization",
+						"name": "memenow",
+						"url": "https://memenow.xyz",
+						"logo": "https://memenow.xyz/brand/mark.png",
+						"sameAs": ["https://github.com/memenow"]
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://memenow.xyz/#website",
+						"url": "https://memenow.xyz",
+						"name": "memenow",
+						"publisher": { "@id": "https://memenow.xyz/#organization" }
+					}
+				]
+			}
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

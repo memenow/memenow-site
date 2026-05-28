@@ -2,9 +2,12 @@
 	import type { Snippet } from 'svelte';
 	import Footer from './Footer.svelte';
 	import FloatingDock from './FloatingDock.svelte';
+	import WorldLayer from './WorldLayer.svelte';
 
 	let { children, footer = true }: { children: Snippet; footer?: boolean } = $props();
 </script>
+
+<WorldLayer />
 
 <a class="l-skip-link" href="#main">Skip to main content</a>
 

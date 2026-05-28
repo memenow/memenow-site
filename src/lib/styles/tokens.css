@@ -16,7 +16,9 @@
 	/* Text — deep green ink */
 	--text-primary: #2c3a30;
 	--text-secondary: #4f6253;
-	--text-muted: #8a9690;
+	/* Darkened from #8a9690 to clear WCAG AA (>=4.5:1) for small label text on
+	   light surfaces; the dark theme keeps the lighter grey, which already passes. */
+	--text-muted: #62716a;
 	--text-inverse: #ffffff;
 
 	/* Border — warm hairlines */
@@ -191,19 +193,20 @@ html {
 	line-height: var(--leading-normal);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	transition: background var(--motion-duration-slow) var(--motion-ease-standard);
 }
 
 body {
 	margin: 0;
 	min-height: 100dvh;
-	background: var(--surface-base);
+	/* Transparent so the fixed .world-layer (per-route fog + Tai Chi geometry)
+	   behind it stays visible; the opaque base color now lives on <html>. */
+	background: transparent;
 	color: var(--text-primary);
 	/* Stop iOS Safari's rubber-band scroll from bleeding past the page and
 	   fighting Lenis's smooth scroll loop. */
 	overscroll-behavior-y: contain;
-	transition:
-		background var(--motion-duration-slow) var(--motion-ease-standard),
-		color var(--motion-duration-slow) var(--motion-ease-standard);
+	transition: color var(--motion-duration-slow) var(--motion-ease-standard);
 }
 
 a {

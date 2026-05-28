@@ -78,8 +78,8 @@ src/
     ├── components/
     │   ├── brand/          # MemenowMark (multi-format <picture>)
     │   ├── home/           # EditorialHero, Chapter — narrative scroll primitives
-    │   ├── layout/         # AppShell, Footer, FloatingDock, RouteScene
-    │   └── ui/             # Button, ButtonLink, Card, Badge, SealMark, ThemeSwitch, ArtifactCta
+    │   ├── layout/         # AppShell, Footer, FloatingDock
+    │   └── ui/             # ThemeSwitch, ArtifactCta
     ├── data/               # navigation.ts, products.ts, sitemap.ts (single source of truth)
     ├── styles/             # tokens.css, scene.css, layout.css, components.css, world-layer.css
     └── utils/              # cn.ts (clsx wrapper), motion.ts (Lenis + reveal/magnetic), route-family.ts
@@ -101,8 +101,8 @@ run `pnpm cf-typegen` to refresh `src/worker-configuration.d.ts`).
 
 - **Svelte 5 with runes mode forced** outside `node_modules` — use `$state`, `$props`,
   `$derived`, `$effect`. Legacy reactive syntax (`$:`, `export let`) is not supported.
-- **Tailwind CSS v4** — configured in CSS via `@import 'tailwindcss'` and `@plugin '...'` in
-  `src/routes/layout.css`. There is no `tailwind.config.{js,ts}`.
+- **Tailwind CSS v4** — configured in CSS via `@import 'tailwindcss'` in `src/routes/layout.css`;
+  no Tailwind plugins are registered and there is no `tailwind.config.{js,ts}`.
 - **CSS architecture** — design tokens (`tokens.css`) drive component primitives in the `.c-*`
   namespace (`components.css`) and layout utilities in the `.l-*` namespace (`layout.css`).
   The world-layer overlay (`world-layer.css`) plus per-route fog (`scene.css`) make the whole

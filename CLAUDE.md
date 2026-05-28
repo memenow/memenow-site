@@ -15,10 +15,11 @@ SvelteKit application deployed to Cloudflare Workers via `@sveltejs/adapter-clou
   files outside `node_modules`. Use `$state`, `$props`, `$derived`, `$effect` — do not use Svelte 4
   reactive syntax (`$:`, `export let`).
 - **Tailwind CSS v4.** Tailwind is loaded via `@tailwindcss/vite` and configured in CSS, not in
-  `tailwind.config.{js,ts}`. The single stylesheet `src/routes/layout.css` declares plugins via the
-  v4 `@import 'tailwindcss'` and `@plugin '...'` syntax (`@tailwindcss/forms`,
-  `@tailwindcss/typography`). Components in this repo are primarily `.c-*` BEM primitives consuming
-  design tokens from `lib/styles/tokens.css`, not raw Tailwind utility soup.
+  `tailwind.config.{js,ts}`. The single stylesheet `src/routes/layout.css` pulls in the framework
+  with `@import 'tailwindcss'`, then imports the local design layers (`tokens`, `scene`, `layout`,
+  `components`, `world-layer`) and declares the `dark` custom variant. No Tailwind plugins are
+  currently registered. Components in this repo are primarily `.c-*` BEM primitives consuming design
+  tokens from `lib/styles/tokens.css`, not raw Tailwind utility soup.
 - **Theme + route-family attributes.** `<html>` carries `data-theme` (light/dark) and
   `data-route-family` (`legal` for /privacy, /terms, /disclaimer; `threshold` everywhere else).
   Both are double-driven: `app.html` ships an inline boot script for theme, `hooks.server.ts`
@@ -91,8 +92,9 @@ Chromium is not installed (`pnpm exec playwright install chromium`).
 - `src/lib/` — code shared via the `$lib` alias.
   - `components/brand/` — `MemenowMark.svelte` (`<picture>` with avif/webp/png at @1x/@2x).
   - `components/home/` — `EditorialHero.svelte`, `Chapter.svelte` (narrative scroll primitives).
-  - `components/layout/` — `AppShell.svelte`, `Footer.svelte`, `FloatingDock.svelte`, `RouteScene.svelte`.
-  - `components/ui/` — `Button`, `ButtonLink`, `Card`, `Badge`, `SealMark`, `ThemeSwitch`, `ArtifactCta`.
+  - `components/layout/` — `AppShell.svelte`, `Footer.svelte`, `FloatingDock.svelte`.
+  - `components/ui/` — `ThemeSwitch`, `ArtifactCta`. (The coral diamond is a CSS primitive,
+    `.c-seal` in `components.css`, not a component.)
   - `data/` — `navigation.ts` (primary nav + footer), `products.ts`, `sitemap.ts` (URL × lastmod).
   - `styles/` — `tokens.css` (palette, type, spacing, motion), `scene.css` (per-route fog), `layout.css`
     (`.l-*` utilities), `components.css` (`.c-*` primitives), `world-layer.css` (Tai Chi underlay + hero scene).
@@ -144,7 +146,7 @@ Chromium is not installed (`pnpm exec playwright install chromium`).
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **memenow-site** (232 symbols, 271 relationships, 4 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **memenow-site** (263 symbols, 302 relationships, 4 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 

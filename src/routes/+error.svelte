@@ -3,6 +3,9 @@
 	import EditorialHero from '$lib/components/home/EditorialHero.svelte';
 	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
 
+	// `status` must be the HTTP status from `page`, not the deprecated global
+	// `window.status` (an empty string) that an undeclared `status` would resolve to.
+	const status = $derived(page.status);
 	const isNotFound = $derived(page.status === 404);
 	const title = $derived(isNotFound ? 'This path leads nowhere.' : 'A break in the signal.');
 	// Always render a pre-defined user-facing copy. `page.error?.message` is set
@@ -31,6 +34,6 @@
 
 <section class="c-chapter">
 	<div class="c-chapter__inner c-chapter__inner--center">
-		<ArtifactCta href="/" palette="celestial" size="lg">Back to home</ArtifactCta>
+		<ArtifactCta href="/" palette="celestial" size="lg">Return home</ArtifactCta>
 	</div>
 </section>

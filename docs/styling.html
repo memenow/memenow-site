@@ -43,12 +43,10 @@
 
 			<h2>Stylesheet hierarchy</h2>
 			<p>
-				<code>src/routes/layout.css</code> is the only file Tailwind sees. It imports the framework,
-				declares the v4 plugins, and pulls the rest of the stylesheets:
+				<code>src/routes/layout.css</code> is the only file Tailwind sees. It imports the framework
+				and pulls the rest of the stylesheets:
 			</p>
 			<pre><code>@import 'tailwindcss';
-@plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
 
 @import '../lib/styles/tokens.css';
 @import '../lib/styles/scene.css';
@@ -109,7 +107,7 @@
 					</tr>
 					<tr>
 						<td><code>--text-muted</code></td>
-						<td><code>#8a9690</code></td>
+						<td><code>#62716a</code></td>
 						<td><code>#8a9690</code></td>
 						<td>Captions, eyebrows</td>
 					</tr>
@@ -207,7 +205,7 @@
 						<td>
 							Component primitives. Every Svelte component in <code>lib/components/</code> that has
 							visual style maps to a single <code>.c-*</code> root with optional
-							<code>--variant</code> modifiers (<code>.c-button--primary</code>,
+							<code>--variant</code> modifiers (<code>.c-artifact-cta--ritual</code>,
 							<code>.c-chapter--align-split</code>, …). Variants and elements use BEM modifiers,
 							never extra classes from another namespace.
 						</td>
@@ -250,7 +248,7 @@
 				The world-layer overlay reads <code>--scene-fog-active</code>, so swapping the family
 				attribute during navigation is enough to retint the underlay without redrawing the DOM. Hero
 				scrims (<code>--scene-scrim-soft</code>, <code>--scene-scrim-strong</code>) live in the same
-				file and are consumed by <code>RouteScene</code> and <code>EditorialHero</code>.
+				file and are consumed by <code>EditorialHero</code>.
 			</p>
 
 			<h2>Theming</h2>
@@ -272,7 +270,7 @@
 			<h2>Tailwind v4 specifics</h2>
 			<ul>
 				<li>
-					<strong>No config file.</strong> Plugins are declared with
+					<strong>No config file.</strong> Tailwind plugins, when needed, are declared with
 					<code>@plugin '...'</code> inside <code>src/routes/layout.css</code>. Adding a Tailwind
 					plugin means adding the devDependency and the <code>@plugin</code> line.
 				</li>

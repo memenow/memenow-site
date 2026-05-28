@@ -164,15 +164,6 @@
 							<code>footerSections</code> from <code>lib/data/navigation.ts</code>.
 						</td>
 					</tr>
-					<tr>
-						<td><code>RouteScene</code></td>
-						<td><code>lib/components/layout/RouteScene.svelte</code></td>
-						<td>
-							Generic hero scene primitive used outside the home / product routes when a page wants
-							a full-viewport image with scrim. Currently unused by site routes; kept available for
-							future legal / company variants.
-						</td>
-					</tr>
 				</tbody>
 			</table>
 
@@ -187,57 +178,12 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><code>Button</code></td>
-						<td><code>lib/components/ui/Button.svelte</code></td>
-						<td>
-							Native <code>&lt;button&gt;</code> with the <code>.c-button</code> primitive.
-							<code>variant</code>: <code>primary</code> | <code>secondary</code> |
-							<code>ghost</code> | <code>link</code> | <code>on-scrim</code>. <code>size</code>:
-							<code>sm</code> | <code>md</code> | <code>lg</code>.
-						</td>
-					</tr>
-					<tr>
-						<td><code>ButtonLink</code></td>
-						<td><code>lib/components/ui/ButtonLink.svelte</code></td>
-						<td>
-							Same visual API as <code>Button</code> but renders as <code>&lt;a&gt;</code>. Use this
-							for navigation; do not give <code>Button</code> an <code>onclick</code> that calls
-							<code>window.location</code>.
-						</td>
-					</tr>
-					<tr>
 						<td><code>ArtifactCta</code></td>
 						<td><code>lib/components/ui/ArtifactCta.svelte</code></td>
 						<td>
 							The studio's signature call-to-action. Coral pink diamond suffix, magnetic hover.
 							<code>palette</code> picks the surface treatment (<code>celestial</code> outline /
 							<code>ritual</code> filled). Drops the magnet under reduced motion.
-						</td>
-					</tr>
-					<tr>
-						<td><code>Card</code></td>
-						<td><code>lib/components/ui/Card.svelte</code></td>
-						<td>
-							Either a <code>&lt;div&gt;</code> or, when <code>href</code> is supplied, an
-							<code>&lt;a&gt;</code>. <code>variant</code>: <code>outlined</code> |
-							<code>elevated</code>. <code>element</code> tints the left border green or pink. Used
-							for the Quant disclaimer card on <code>/products/quant</code>.
-						</td>
-					</tr>
-					<tr>
-						<td><code>Badge</code></td>
-						<td><code>lib/components/ui/Badge.svelte</code></td>
-						<td>
-							Inline overline badge. <code>tone</code>: <code>green</code> | <code>pink</code> |
-							<code>default</code>.
-						</td>
-					</tr>
-					<tr>
-						<td><code>SealMark</code></td>
-						<td><code>lib/components/ui/SealMark.svelte</code></td>
-						<td>
-							The coral-pink diamond ornament rendered as a CSS mask. The <em>only</em> visual
-							ornament in the system — never substitute custom SVG or emoji.
 						</td>
 					</tr>
 					<tr>
@@ -262,9 +208,9 @@
 			</p>
 			<pre><code>import { cn } from '$lib/utils/cn';
 
-&lt;button class={cn('c-button', `c-button--${variant}`, size !== 'md' &amp;&amp; `c-button--${size}`, className)}&gt;
+&lt;a class={cn('c-artifact-cta', palette === 'ritual' &amp;&amp; 'c-artifact-cta--ritual', size !== 'md' &amp;&amp; `c-artifact-cta--${size}`, className)}&gt;
     {@render children()}
-&lt;/button&gt;</code></pre>
+&lt;/a&gt;</code></pre>
 
 			<h2>Snippets &amp; children</h2>
 			<p>

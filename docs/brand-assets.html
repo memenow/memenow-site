@@ -145,16 +145,17 @@
 			<h2>The signature ornament</h2>
 			<p>
 				The coral pink diamond is the only ornament in the system. It is rendered as a CSS mask (no
-				extra image asset) by <code>SealMark.svelte</code> and as a pseudo-element on chapter
-				numbers in <code>components.css</code>. Do not substitute SVG, emoji, or Unicode glyphs.
+				extra image asset) via the <code>.c-seal</code> class and pseudo-elements on chapter numbers
+				in <code>components.css</code>. Do not substitute SVG, emoji, or Unicode glyphs.
 			</p>
 
 			<h2>Open Graph imagery</h2>
 			<p>
-				<code>static/og/</code> holds the share images: <code>og-default.jpeg</code> wired into
-				<code>app.html</code>, plus per-product overrides for <code>og-yinyang.jpeg</code> and
-				<code>og-quant.jpeg</code> consumed by their respective <code>+page.svelte</code> heads.
-				These are hand-authored, not generated.
+				<code>static/og/</code> holds the share images. Each route sets its own
+				<code>og:image</code> in its <code>+page.svelte</code> head:
+				<code>og-home.jpeg</code> (home, products, and the legal pages),
+				<code>og-company.jpeg</code>, <code>og-quant.jpeg</code>, and <code>og-yinyang.jpeg</code>.
+				<code>app.html</code> sets no global fallback. These are hand-authored, not generated.
 			</p>
 
 			<div class="callout">
