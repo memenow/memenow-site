@@ -226,10 +226,10 @@ export const SITEMAP_ROUTES: ReadonlyArray&lt;readonly [path: string, lastmod: s
 
 			<h2>Error page — <code>+error.svelte</code></h2>
 			<p>
-				<code>src/routes/+error.svelte</code> renders both 404 and 500 responses. It reads
-				<code>page.status</code> and <code>page.error</code>, shows a generic, pre-defined message
-				(never the raw server error string, which can leak internals), carries
-				<code>&lt;meta name="robots" content="noindex"&gt;</code>, and offers a
+				<code>src/routes/+error.svelte</code> renders both 404 and 500 responses. It branches on
+				<code>page.status</code> (404 vs. everything else) and deliberately renders a generic,
+				pre-defined message instead of <code>page.error.message</code>, which can leak internals; it
+				carries <code>&lt;meta name="robots" content="noindex"&gt;</code> and offers a
 				<code>Return home</code> CTA. It reuses <code>EditorialHero</code> with no image so it sits
 				in the same continuous scene as every other route.
 			</p>
