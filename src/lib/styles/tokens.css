@@ -47,7 +47,7 @@
 	--status-warning: var(--accent-pink);
 	--status-info: var(--accent-green);
 
-	/* Type — single sans (Manrope variable) for everything; Inter as fallback */
+	/* Type — Manrope (variable) for display, Inter for body; system sans fallbacks. */
 	--font-display:
 		'Manrope Variable', 'Manrope', 'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
 	--font-body:

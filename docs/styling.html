@@ -211,13 +211,15 @@
 						</td>
 					</tr>
 					<tr>
-						<td><code>.world-layer</code> / <code>.c-route-scene</code></td>
+						<td><code>.world-layer</code> / <code>.world-layer__taichi</code></td>
 						<td><code>lib/styles/world-layer.css</code></td>
 						<td>
-							The fixed underlay (<code>.world-layer</code>) and the hero scene container
-							(<code>.c-route-scene</code>). The world layer reads
+							The fixed underlay that renders behind every route. <code>.world-layer</code> paints
+							the active fog and <code>.world-layer__taichi</code> the Tai Chi geometry. It reads
 							<code>--scene-fog-active</code> from <code>scene.css</code> so navigating between
-							routes shifts the fog without remounting anything.
+							routes shifts the fog without remounting anything. <code>.c-route-scene</code> and
+							<code>.world-layer__brush</code> are defined-but-unmounted scaffolding kept for a
+							future hero treatment.
 						</td>
 					</tr>
 					<tr>
@@ -270,9 +272,10 @@
 			<h2>Tailwind v4 specifics</h2>
 			<ul>
 				<li>
-					<strong>No config file.</strong> Tailwind plugins, when needed, are declared with
-					<code>@plugin '...'</code> inside <code>src/routes/layout.css</code>. Adding a Tailwind
-					plugin means adding the devDependency and the <code>@plugin</code> line.
+					<strong>No config file, no plugins.</strong> Configuration lives in
+					<code>src/routes/layout.css</code> — the <code>@import 'tailwindcss'</code> entrypoint and
+					the <code>dark</code> custom variant. No Tailwind plugins are registered today; if one is
+					ever needed, add the devDependency and a <code>@plugin '...'</code> line there.
 				</li>
 				<li>
 					<strong>Class lists are sorted by Prettier.</strong>

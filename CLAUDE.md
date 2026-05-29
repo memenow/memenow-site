@@ -76,10 +76,11 @@ Chromium is not installed (`pnpm exec playwright install chromium`).
 
 - `src/routes/` — SvelteKit file-based routing.
   - `layout.css` — Tailwind v4 entrypoint; imports `lib/styles/{tokens,scene,layout,components,world-layer}.css`.
-  - `+layout.svelte` — boots Lenis (smooth scroll) on mount and mirrors `data-route-family` on SPA navigations.
+  - `+layout.svelte` — boots Lenis (smooth scroll) on mount, drives the reading-progress hairline and the world layer's `--world-scroll` parallax, and mirrors `data-route-family` on SPA navigations.
   - `+page.svelte` — home (editorial hero + four chapters).
   - `products/`, `products/yinyang/`, `products/quant/`, `company/`, `privacy/`, `terms/`, `disclaimer/` — content routes.
   - `sitemap.xml/+server.ts` — prerendered sitemap; URL list lives in `lib/data/sitemap.ts`.
+  - `+error.svelte` — 404 / 500 fallback (`noindex`); reuses `EditorialHero` so errors stay in the continuous scene.
 - `src/hooks.server.ts` — SSR `Handle` that replaces the `data-route-family="pending"` placeholder in
   `app.html` with `legal` or `threshold` so per-route fog is correct on the first paint.
 - `src/app.html` — SvelteKit document shell. Keep:
@@ -92,14 +93,15 @@ Chromium is not installed (`pnpm exec playwright install chromium`).
 - `src/lib/` — code shared via the `$lib` alias.
   - `components/brand/` — `MemenowMark.svelte` (`<picture>` with avif/webp/png at @1x/@2x).
   - `components/home/` — `EditorialHero.svelte`, `Chapter.svelte` (narrative scroll primitives).
-  - `components/layout/` — `AppShell.svelte`, `Footer.svelte`, `FloatingDock.svelte`.
+  - `components/layout/` — `AppShell.svelte`, `WorldLayer.svelte` (persistent continuous-world underlay), `Footer.svelte`, `FloatingDock.svelte`.
   - `components/ui/` — `ThemeSwitch`, `ArtifactCta`. (The coral diamond is a CSS primitive,
     `.c-seal` in `components.css`, not a component.)
   - `data/` — `navigation.ts` (primary nav + footer), `products.ts`, `sitemap.ts` (URL × lastmod).
   - `styles/` — `tokens.css` (palette, type, spacing, motion), `scene.css` (per-route fog), `layout.css`
-    (`.l-*` utilities), `components.css` (`.c-*` primitives), `world-layer.css` (Tai Chi underlay + hero scene).
+    (`.l-*` utilities), `components.css` (`.c-*` primitives), `world-layer.css` (persistent Tai Chi underlay + per-route fog carrier).
   - `utils/` — `cn.ts` (plain `clsx` wrapper, no `tailwind-merge`), `motion.ts` (Lenis lifecycle +
     `reveal` / `magnetic` Svelte actions, all reduced-motion aware), `route-family.ts` (URL → `legal | threshold`).
+  - `types.ts` — shared `SceneImage` type for hero / chapter imagery.
 - `static/` — assets served verbatim. `.assetsignore` excludes `_worker.js` / `_routes.json` from the
   Cloudflare asset bundle.
   - `brand/` — multi-format / multi-density logo system + `site.webmanifest` + app icons.

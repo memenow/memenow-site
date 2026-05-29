@@ -88,10 +88,11 @@
 					<code>export let</code>.
 				</li>
 				<li>
-					<strong>Tailwind CSS v4 in CSS.</strong> Plugins are declared in
-					<code>src/routes/layout.css</code>; there is no <code>tailwind.config.{js,ts}</code>.
-					Class lists are sorted by <code>prettier-plugin-tailwindcss</code> — do not hand-order
-					them.
+					<strong>Tailwind CSS v4 in CSS.</strong> Configuration lives in
+					<code>src/routes/layout.css</code> (the <code>@import 'tailwindcss'</code> entrypoint and
+					the <code>dark</code> custom variant); there is no
+					<code>tailwind.config.{js,ts}</code> and no Tailwind plugins are registered. Class lists
+					are sorted by <code>prettier-plugin-tailwindcss</code> — do not hand-order them.
 				</li>
 				<li>
 					<strong>Components are <code>.c-*</code> primitives.</strong> The visual system is built

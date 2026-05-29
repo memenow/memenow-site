@@ -170,8 +170,9 @@
 					<strong><code>/products/quant</code></strong> — capability brief for the Quant Research
 					practice. Opens with a coral-pink disclaimer banner (<code>.c-disclaimer-banner</code>)
 					that re-states <em>this is not an offer</em> and links to <code>/disclaimer</code>;
-					followed by chapters for <em>Crypto perpetuals</em> and <em>A-shares</em>. Has its own OG
-					image (<code>/og/og-quant.jpeg</code>).
+					followed by a single chapter whose two-track ledger (<code>.c-stack-grid</code>) lays out
+					<em>Crypto perpetuals</em> and <em>A-shares</em>. Has its own OG image
+					(<code>/og/og-quant.jpeg</code>).
 				</li>
 			</ul>
 
@@ -213,14 +214,24 @@
 			</p>
 			<pre><code>// src/lib/data/sitemap.ts
 export const SITEMAP_ROUTES: ReadonlyArray&lt;readonly [path: string, lastmod: string]&gt; = [
-    ['/', '2026-05-06'],
-    ['/products', '2026-05-06'],
+    ['/', '2026-05-28'],
+    ['/products', '2026-05-28'],
     // …
 ];</code></pre>
 			<p>
 				The handler in <code>+server.ts</code> emits a one-hour <code>Cache-Control</code>. Tests in
 				<code>server.test.ts</code> verify the content type, the cache header, and that every URL
 				appears exactly once paired with its frozen lastmod.
+			</p>
+
+			<h2>Error page — <code>+error.svelte</code></h2>
+			<p>
+				<code>src/routes/+error.svelte</code> renders both 404 and 500 responses. It reads
+				<code>page.status</code> and <code>page.error</code>, shows a generic, pre-defined message
+				(never the raw server error string, which can leak internals), carries
+				<code>&lt;meta name="robots" content="noindex"&gt;</code>, and offers a
+				<code>Return home</code> CTA. It reuses <code>EditorialHero</code> with no image so it sits
+				in the same continuous scene as every other route.
 			</p>
 
 			<h2>Adding a new route</h2>

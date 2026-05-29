@@ -126,6 +126,25 @@ onMount(() =&gt; {
     {@render children()}
 &lt;/a&gt;</code></pre>
 
+			<h2>Scroll-driven world drift &amp; reading progress</h2>
+			<p>
+				The root layout (<code>src/routes/+layout.svelte</code>) runs a single
+				<code>requestAnimationFrame</code>-throttled scroll handler that reads
+				<code>document.documentElement.scrollTop</code> — so it works with Lenis or with the native
+				scroll that reduced-motion users get — and drives two things on the same tick:
+			</p>
+			<ul>
+				<li>
+					It writes the scroll fraction (0–1) to <code>--world-scroll</code> on
+					<code>&lt;html&gt;</code>. <code>world-layer.css</code> reads it to translate and scale
+					<code>.world-layer__taichi</code>, giving the persistent underlay a slow parallax drift.
+				</li>
+				<li>
+					It sets the width of the <code>.c-progress__bar</code> reading-progress hairline, which is
+					<code>aria-hidden</code> wayfinding rather than an announced status.
+				</li>
+			</ul>
+
 			<h2>Reduced motion</h2>
 			<p>
 				Every motion primitive checks <code>prefers-reduced-motion: reduce</code> and degrades
@@ -151,6 +170,10 @@ onMount(() =&gt; {
 				<li>
 					<code>components.css</code> nukes the reveal transforms and clip paths under the same
 					media query so anything we missed still ends up visible.
+				</li>
+				<li>
+					<code>world-layer.css</code> zeroes the <code>--world-scroll</code> parallax transform, so
+					the Tai Chi underlay holds still.
 				</li>
 			</ul>
 

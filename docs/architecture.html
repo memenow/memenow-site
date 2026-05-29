@@ -69,7 +69,7 @@
 						<td>Document shell</td>
 						<td>
 							Inline boot script picks up the saved theme, OG / Twitter / icon meta, manifest,
-							route-family placeholder.
+							route-family placeholder, and JSON-LD structured data (Organization + WebSite).
 						</td>
 						<td><code>src/app.html</code></td>
 					</tr>
@@ -82,10 +82,21 @@
 						<td><code>src/routes/+layout.svelte</code></td>
 					</tr>
 					<tr>
+						<td>Persistent world layer</td>
+						<td>
+							Fixed full-viewport underlay mounted once in <code>AppShell</code>: per-route fog
+							(read from <code>--scene-fog-active</code>) plus a faint Tai Chi geometry watermark.
+							The root layout drives its parallax drift through <code>--world-scroll</code>; reduced
+							motion zeroes it. Decorative and <code>aria-hidden</code>.
+						</td>
+						<td><code>src/lib/components/layout/WorldLayer.svelte</code></td>
+					</tr>
+					<tr>
 						<td>Routes</td>
 						<td>
 							One <code>+page.svelte</code> per public URL plus the prerendered
-							<code>/sitemap.xml</code>.
+							<code>/sitemap.xml</code>, plus a <code>+error.svelte</code> fallback that renders 404
+							/ 500 responses (both <code>noindex</code>).
 						</td>
 						<td><code>src/routes/**</code></td>
 					</tr>

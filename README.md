@@ -78,11 +78,12 @@ src/
     ├── components/
     │   ├── brand/          # MemenowMark (multi-format <picture>)
     │   ├── home/           # EditorialHero, Chapter — narrative scroll primitives
-    │   ├── layout/         # AppShell, Footer, FloatingDock
+    │   ├── layout/         # AppShell, WorldLayer, Footer, FloatingDock
     │   └── ui/             # ThemeSwitch, ArtifactCta
     ├── data/               # navigation.ts, products.ts, sitemap.ts (single source of truth)
     ├── styles/             # tokens.css, scene.css, layout.css, components.css, world-layer.css
-    └── utils/              # cn.ts (clsx wrapper), motion.ts (Lenis + reveal/magnetic), route-family.ts
+    ├── utils/              # cn.ts (clsx wrapper), motion.ts (Lenis + reveal/magnetic), route-family.ts
+    └── types.ts            # Shared types (SceneImage for hero/chapter imagery)
 static/
 ├── brand/                  # Logo system (multi-format @1x/@2x/@3x), site.webmanifest, app icons
 ├── images/                 # Hero and chapter imagery (avif/webp/png)

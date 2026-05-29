@@ -98,6 +98,13 @@
 				</tbody>
 			</table>
 
+			<p>
+				Both <code>EditorialHero</code> and <code>Chapter</code> take an optional
+				<code>image</code> of type <code>SceneImage</code> (from <code>$lib/types</code>), which
+				carries the AVIF / WebP / PNG sources plus intrinsic <code>w</code> / <code>h</code> so the
+				layout reserves box geometry and Cumulative Layout Shift stays at zero. On the inner routes
+				the hero is rendered without an image, floating over the world layer.
+			</p>
 			<h3>Chapter alignment recipes</h3>
 			<ul>
 				<li>
@@ -140,11 +147,21 @@
 				</thead>
 				<tbody>
 					<tr>
+						<td><code>WorldLayer</code></td>
+						<td><code>lib/components/layout/WorldLayer.svelte</code></td>
+						<td>
+							Persistent fixed underlay mounted once by <code>AppShell</code>: per-route fog plus a
+							faint Tai Chi geometry watermark, with reduced-motion-aware
+							<code>--world-scroll</code> drift. Decorative and <code>aria-hidden</code>.
+						</td>
+					</tr>
+					<tr>
 						<td><code>AppShell</code></td>
 						<td><code>lib/components/layout/AppShell.svelte</code></td>
 						<td>
-							Wraps every page: <code>&lt;main id="main"&gt;</code> + slotted children + optional
-							<code>Footer</code> + always-on <code>FloatingDock</code>.
+							Mounts the persistent <code>WorldLayer</code> underlay, a skip-link, the always-on
+							<code>FloatingDock</code>, <code>&lt;main id="main"&gt;</code> with the slotted page,
+							and an optional <code>Footer</code>.
 						</td>
 					</tr>
 					<tr>
@@ -160,7 +177,8 @@
 						<td><code>Footer</code></td>
 						<td><code>lib/components/layout/Footer.svelte</code></td>
 						<td>
-							Three-column footer (Memenow / Legal / GitHub) plus copyright row. Reads
+							A lead lockup column plus <code>Memenow</code> and <code>Legal</code> nav columns
+							(GitHub lives under Legal), then a copyright + investor-disclaimer row. Reads
 							<code>footerSections</code> from <code>lib/data/navigation.ts</code>.
 						</td>
 					</tr>
