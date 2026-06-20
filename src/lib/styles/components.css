@@ -149,7 +149,7 @@
 
 .c-editorial-hero__title {
 	font-family: var(--font-display);
-	font-weight: 400;
+	font-weight: var(--font-weight-regular);
 	font-size: var(--type-display-xl);
 	line-height: 0.95;
 	letter-spacing: -0.045em;
@@ -170,7 +170,7 @@
 
 .c-editorial-hero__lede {
 	font-family: var(--font-display);
-	font-size: clamp(1.0625rem, 1.6vw, 1.3125rem);
+	font-size: var(--type-lede);
 	line-height: var(--leading-relaxed);
 	color: var(--text-secondary);
 	max-width: 56ch;
@@ -272,7 +272,7 @@
 	letter-spacing: 0.18em;
 	text-transform: uppercase;
 	color: var(--text-muted);
-	font-weight: 500;
+	font-weight: var(--font-weight-medium);
 	display: inline-flex;
 	align-items: center;
 	gap: var(--spacing-2);
@@ -292,12 +292,12 @@
 
 .c-chapter__num-label {
 	color: var(--text-muted);
-	font-weight: 500;
+	font-weight: var(--font-weight-medium);
 }
 
 .c-chapter__title {
 	font-family: var(--font-display);
-	font-weight: 400;
+	font-weight: var(--font-weight-regular);
 	font-size: var(--type-heading-1);
 	line-height: 1;
 	letter-spacing: -0.045em;
@@ -309,7 +309,7 @@
 
 .c-chapter__lede {
 	font-family: var(--font-body);
-	font-size: clamp(1rem, 1.4vw, 1.25rem);
+	font-size: var(--type-lede);
 	line-height: 1.55;
 	color: var(--text-secondary);
 	margin: 0 auto;
@@ -320,6 +320,31 @@
 
 .c-chapter__lede + .c-chapter__lede {
 	margin-top: var(--spacing-4);
+}
+
+.c-chapter__prose {
+	font-family: var(--font-body);
+	font-size: var(--type-body);
+	line-height: var(--leading-relaxed);
+	color: var(--text-secondary);
+	max-width: 60ch;
+	margin: 0 auto;
+	text-wrap: pretty;
+	text-align: center;
+}
+
+.c-chapter__prose + .c-chapter__prose {
+	margin-top: var(--spacing-4);
+}
+
+.c-chapter--align-left .c-chapter__prose {
+	text-align: left;
+	margin-inline: 0;
+}
+
+.c-chapter--align-split .c-chapter__prose {
+	text-align: left;
+	margin-inline: 0;
 }
 
 .c-chapter__body {
@@ -483,13 +508,13 @@
 	letter-spacing: var(--ls-overline);
 	text-transform: uppercase;
 	color: var(--accent-pink);
-	font-weight: 600;
+	font-weight: var(--font-weight-semibold);
 }
 
 .c-stack-grid__title {
 	font-family: var(--font-display);
 	font-size: clamp(1.25rem, 1.8vw, 1.5rem);
-	font-weight: 500;
+	font-weight: var(--font-weight-medium);
 	line-height: 1.2;
 	margin: 0;
 	color: var(--text-primary);
@@ -580,7 +605,7 @@
 	/* Sits intentionally between --type-overline (0.6875rem) and --type-caption
 	   (0.75rem); dock labels are short and need just-readable density. */
 	font-size: 0.7rem;
-	font-weight: 500;
+	font-weight: var(--font-weight-medium);
 	letter-spacing: var(--ls-overline);
 	text-transform: uppercase;
 	color: var(--text-dock-muted);
@@ -714,7 +739,7 @@
 	padding: var(--spacing-3) var(--spacing-5);
 	font-family: var(--font-body);
 	font-size: var(--type-small);
-	font-weight: 500;
+	font-weight: var(--font-weight-medium);
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: var(--accent-green);
@@ -790,7 +815,7 @@
 	align-items: center;
 	gap: var(--spacing-3);
 	font-family: var(--font-mono);
-	font-weight: 500;
+	font-weight: var(--font-weight-medium);
 	font-size: var(--type-overline);
 	letter-spacing: var(--ls-overline);
 	text-transform: uppercase;
@@ -952,4 +977,348 @@
 	background: var(--accent-pink);
 	width: 0%;
 	transition: width var(--motion-duration-fast) linear;
+}
+
+/* ── Active (press) states ─────────────────────────────
+   Physical button feedback. ArtifactCta uses the `scale`
+   independent property so it composes with the JS-driven
+   magnetic `transform: translate(...)` rather than fighting
+   it (transform would overwrite the inline style). Dock
+   items and icon switches have no JS transform, so plain
+   `transform: scale()` is fine. */
+
+.c-artifact-cta:active {
+	scale: 0.97;
+}
+
+.c-dock__item:active,
+.c-dock__brand:active,
+.c-dock__menu:active,
+.c-icon-switch:active {
+	transform: scale(0.92);
+	transition-duration: 60ms;
+}
+
+/* ── Scroll-driven reveals (progressive enhancement) ───
+   In browsers that support animation-timeline: view(), the
+   IntersectionObserver-driven transitions above are replaced
+   by compositor-thread scroll-driven animations — zero JS,
+   zero INP. The JS reveal action still runs (it sets
+   data-revealed for non-supporting browsers), but its visual
+   effect is overridden here via `transition: none` and the
+   animation's fill-mode. Unsupported browsers fall through to
+   the JS-driven transitions unchanged. */
+
+@supports ((animation-timeline: view()) and (animation-range: 0% 100%)) {
+	.reveal-fade {
+		animation: reveal-fade-up var(--motion-duration-reveal) var(--motion-ease-reveal) both;
+		animation-timeline: view();
+		animation-range: entry 0% cover 30%;
+		transition: none;
+	}
+
+	.reveal-clip {
+		animation: reveal-clip-in var(--motion-duration-reveal-clip) var(--motion-ease-reveal-clip) both;
+		animation-timeline: view();
+		animation-range: entry 0% cover 30%;
+		transition: none;
+	}
+
+	.c-chapter__media img {
+		animation: reveal-zoom-in var(--motion-duration-reveal-clip) var(--motion-ease-reveal-clip) both;
+		animation-timeline: view();
+		animation-range: entry 0% cover 30%;
+		transition: none;
+	}
+
+	@keyframes reveal-fade-up {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes reveal-clip-in {
+		from {
+			clip-path: inset(0 0 100% 0);
+		}
+		to {
+			clip-path: inset(0);
+		}
+	}
+
+	@keyframes reveal-zoom-in {
+		from {
+			transform: scale(1.04);
+		}
+		to {
+			transform: scale(1);
+		}
+	}
+}
+
+/* ── Pullquote ──────────────────────────────────────── */
+
+.c-pullquote {
+	margin: 0;
+	padding: clamp(3rem, 6vh, 5rem) clamp(1.25rem, 4vw, 3rem);
+	max-width: var(--container-narrow);
+	margin-inline: auto;
+	text-align: center;
+}
+
+.c-pullquote__text {
+	font-family: var(--font-display);
+	font-size: var(--type-heading-2);
+	font-weight: var(--font-weight-regular);
+	line-height: var(--leading-snug);
+	letter-spacing: var(--ls-heading);
+	color: var(--text-primary);
+	margin: 0;
+	text-wrap: balance;
+}
+
+.c-pullquote__text::before {
+	content: '\201C';
+}
+
+.c-pullquote__text::after {
+	content: '\201D';
+}
+
+.c-pullquote__attr {
+	font-family: var(--font-body);
+	font-size: var(--type-small);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-muted);
+	margin-top: var(--spacing-6);
+}
+
+.c-pullquote__body {
+	margin-top: var(--spacing-6);
+	color: var(--text-secondary);
+	font-size: var(--type-body);
+	line-height: var(--leading-relaxed);
+	max-width: 60ch;
+	margin-inline: auto;
+}
+
+/* ── Stat card ──────────────────────────────────────── */
+
+.c-stat-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+	padding: var(--spacing-6) 0;
+	border-top: 1px solid var(--border-default);
+}
+
+.c-stat-card__value {
+	font-family: var(--font-display);
+	font-size: var(--type-display);
+	font-weight: var(--font-weight-regular);
+	line-height: 1;
+	letter-spacing: var(--ls-display);
+	color: var(--accent-green);
+}
+
+.c-stat-card__label {
+	font-family: var(--font-body);
+	font-size: var(--type-overline);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-muted);
+}
+
+.c-stat-card__desc {
+	font-size: var(--type-small);
+	line-height: var(--leading-relaxed);
+	color: var(--text-secondary);
+	margin: 0;
+	max-width: 40ch;
+}
+
+/* ── Timeline ───────────────────────────────────────── */
+
+.c-timeline {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-12);
+}
+
+.c-timeline__item {
+	display: grid;
+	grid-template-columns: minmax(0, 120px) minmax(0, 1fr);
+	gap: var(--spacing-6);
+	align-items: start;
+	border-top: 1px solid var(--border-default);
+	padding-top: var(--spacing-6);
+}
+
+.c-timeline__year {
+	font-family: var(--font-mono);
+	font-size: var(--type-caption);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--accent-pink);
+	padding-top: var(--spacing-1);
+}
+
+.c-timeline__title {
+	font-family: var(--font-display);
+	font-size: var(--type-heading-3);
+	font-weight: var(--font-weight-regular);
+	line-height: var(--leading-tight);
+	margin: 0 0 var(--spacing-2);
+	color: var(--text-primary);
+}
+
+.c-timeline__body {
+	font-size: var(--type-body);
+	line-height: var(--leading-relaxed);
+	color: var(--text-secondary);
+	margin: 0;
+	max-width: 56ch;
+}
+
+@media (max-width: 540px) {
+	.c-timeline__item {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-2);
+	}
+}
+
+/* ── Comparison table ───────────────────────────────── */
+
+.c-comparison {
+	overflow-x: auto;
+}
+
+.c-comparison__table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: var(--type-small);
+}
+
+.c-comparison__caption {
+	text-align: left;
+	font-size: var(--type-overline);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-muted);
+	padding-bottom: var(--spacing-4);
+}
+
+.c-comparison__th {
+	text-align: left;
+	font-family: var(--font-body);
+	font-size: var(--type-overline);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-muted);
+	font-weight: var(--font-weight-medium);
+	padding: var(--spacing-4);
+	border-bottom: 1px solid var(--border-strong);
+	white-space: nowrap;
+}
+
+.c-comparison__th--highlight {
+	color: var(--accent-green);
+}
+
+.c-comparison__feature {
+	text-align: left;
+	font-family: var(--font-display);
+	font-size: var(--type-body);
+	font-weight: var(--font-weight-regular);
+	color: var(--text-primary);
+	padding: var(--spacing-4);
+	border-bottom: 1px solid var(--border-default);
+}
+
+.c-comparison__td {
+	padding: var(--spacing-4);
+	color: var(--text-secondary);
+	border-bottom: 1px solid var(--border-default);
+	line-height: var(--leading-relaxed);
+}
+
+.c-comparison__td--highlight {
+	background: var(--accent-green-soft);
+}
+
+/* ── Image pair ─────────────────────────────────────── */
+
+.c-image-pair {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: var(--spacing-4);
+}
+
+.c-image-pair__item {
+	margin: 0;
+	overflow: hidden;
+	border-radius: var(--radius-md);
+	background: var(--surface-sunken);
+}
+
+.c-image-pair__item img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	aspect-ratio: 4 / 5;
+}
+
+.c-image-pair__caption {
+	font-size: var(--type-caption);
+	color: var(--text-muted);
+	padding: var(--spacing-2) var(--spacing-3);
+}
+
+@media (max-width: 540px) {
+	.c-image-pair {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ── Section break ──────────────────────────────────── */
+
+.c-section-break {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-4);
+	padding-block: var(--spacing-8);
+	max-width: var(--container-wide);
+	margin-inline: auto;
+	padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.c-section-break__line {
+	flex: 1;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--border-default) 30%,
+		var(--border-default) 70%,
+		transparent
+	);
+}
+
+.c-section-break__label {
+	font-family: var(--font-mono);
+	font-size: var(--type-overline);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-muted);
+	white-space: nowrap;
 }

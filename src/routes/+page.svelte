@@ -2,6 +2,7 @@
 	import EditorialHero from '$lib/components/home/EditorialHero.svelte';
 	import Chapter from '$lib/components/home/Chapter.svelte';
 	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
+	import Pullquote from '$lib/components/editorial/Pullquote.svelte';
 </script>
 
 <svelte:head>
@@ -46,7 +47,22 @@
 		Small models, audited methods, patient timelines. Each thing we ship has to keep earning its
 		place.
 	</p>
+	<p class="c-chapter__prose">
+		We started memenow in 2024 because the loudest AI companies were scaling up ambition and
+		shipping down patience. We wanted the opposite: a studio where the model is small enough to
+		understand, the method is clear enough to audit, and the timeline is long enough to be right.
+	</p>
+	<p class="c-chapter__prose">
+		Two products carry that posture today — Yinyang Agent for personal clarity, Quant Research for
+		market discipline. Neither pretends to be more than it is. Both are built to be returned to, not
+		just consumed.
+	</p>
 </Chapter>
+
+<Pullquote
+	quote="The most useful AI is the kind that sits beside you while you work — not the kind that performs."
+	attribution="memenow studio principle"
+/>
 
 <Chapter
 	id="yinyang"
@@ -66,6 +82,15 @@
 	<p class="c-chapter__lede">
 		Birth chart in, narrative reading out. Eight Pillars read the way a thoughtful teacher would —
 		slowly, sourced, re-readable on demand.
+	</p>
+	<p class="c-chapter__prose">
+		Yinyang Agent takes your birth time and place and writes a Bazi reading in plain language — not
+		a chart of symbols you have to decode, but a narrative you can sit with. Four Pillars, Five
+		Elements, the ten-year cycles and the yearly pulses, all rendered as prose.
+	</p>
+	<p class="c-chapter__prose">
+		The reading is saved. Weekly Flow updates what's moving. You return to it the way you return to
+		a letter from someone who knows you — not for a prediction, but for a perspective.
 	</p>
 
 	{#snippet cta()}
@@ -101,6 +126,16 @@
 		Two research tracks — crypto perpetuals and Mainland China A-shares — run as practice, not
 		performance. Capability brief, <strong>not an offer</strong>.
 	</p>
+	<p class="c-chapter__prose">
+		We build small models — the kind you can hold in your head and audit line by line. Funding-rate
+		structure in crypto, fundamental factors in A-shares: each track has a thesis, a regime filter,
+		and a stop. No black boxes, no promised alphas.
+	</p>
+	<p class="c-chapter__prose">
+		What we publish is a capability brief, not a track record. When and if a product is available,
+		it goes to qualified investors through compliant channels — and the assumptions behind it are
+		versioned, not hidden.
+	</p>
 
 	{#snippet cta()}
 		<ArtifactCta href="/products/quant" palette="ritual" size="lg">Read the brief</ArtifactCta>
@@ -111,6 +146,10 @@
 	<p class="c-chapter__lede">
 		Press, partnerships, and considered investor questions —
 		<a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>.
+	</p>
+	<p class="c-chapter__prose">
+		We read every message. We don't promise a fast reply, but we do promise a real one — from a
+		person, not an auto-responder.
 	</p>
 
 	{#snippet cta()}

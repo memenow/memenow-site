@@ -7,21 +7,33 @@
 
 :root {
 	--scene-fog-celestial:
-		radial-gradient(circle at 22% 22%, rgba(232, 240, 229, 0.55), transparent 45%),
-		radial-gradient(circle at 78% 26%, rgba(252, 232, 228, 0.35), transparent 50%),
-		radial-gradient(circle at 50% 90%, rgba(74, 124, 89, 0.08), transparent 55%);
+		radial-gradient(
+			circle at 22% 22%,
+			color-mix(in oklch, var(--surface-sunken) 55%, transparent),
+			transparent 45%
+		),
+		radial-gradient(
+			circle at 78% 26%,
+			color-mix(in oklch, var(--accent-pink-light) 35%, transparent),
+			transparent 50%
+		),
+		radial-gradient(
+			circle at 50% 90%,
+			color-mix(in oklch, var(--accent-green) 8%, transparent),
+			transparent 55%
+		);
 
 	--scene-fog-legal: linear-gradient(
 		180deg,
-		rgba(250, 249, 246, 0) 0%,
-		rgba(250, 249, 246, 0.5) 100%
+		transparent 0%,
+		color-mix(in oklch, var(--surface-base) 50%, transparent) 100%
 	);
 
 	--scene-scrim-soft: linear-gradient(
 		180deg,
-		rgba(44, 58, 48, 0) 0%,
-		rgba(44, 58, 48, 0.32) 70%,
-		rgba(44, 58, 48, 0.55) 100%
+		color-mix(in oklch, var(--surface-ink) 0%, transparent) 0%,
+		color-mix(in oklch, var(--surface-ink) 32%, transparent) 70%,
+		color-mix(in oklch, var(--surface-ink) 55%, transparent) 100%
 	);
 
 	--scene-scrim-strong: linear-gradient(
@@ -36,11 +48,27 @@
 
 [data-theme='dark'] {
 	--scene-fog-celestial:
-		radial-gradient(circle at 22% 22%, rgba(136, 184, 149, 0.18), transparent 45%),
-		radial-gradient(circle at 78% 26%, rgba(240, 169, 158, 0.14), transparent 50%),
-		radial-gradient(circle at 50% 90%, rgba(74, 124, 89, 0.1), transparent 55%);
+		radial-gradient(
+			circle at 22% 22%,
+			color-mix(in oklch, var(--accent-green) 18%, transparent),
+			transparent 45%
+		),
+		radial-gradient(
+			circle at 78% 26%,
+			color-mix(in oklch, var(--accent-pink) 14%, transparent),
+			transparent 50%
+		),
+		radial-gradient(
+			circle at 50% 90%,
+			color-mix(in oklch, var(--accent-green) 10%, transparent),
+			transparent 55%
+		);
 
-	--scene-fog-legal: linear-gradient(180deg, rgba(26, 32, 28, 0) 0%, rgba(26, 32, 28, 0.5) 100%);
+	--scene-fog-legal: linear-gradient(
+		180deg,
+		transparent 0%,
+		color-mix(in oklch, var(--surface-base) 50%, transparent) 100%
+	);
 }
 
 [data-route-family='legal'] {

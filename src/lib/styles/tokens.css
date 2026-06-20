@@ -47,11 +47,12 @@
 	--brand-coral: var(--accent-pink);
 	--brand-coral-soft: var(--accent-pink-soft);
 
-	/* Status — minimal aliases on the two-tone palette */
+	/* Status — success/error stay on the brand palette; warning and info
+	   get distinct hues so error ≠ warning and success ≠ info. */
 	--status-success: var(--accent-green);
 	--status-error: var(--accent-pink);
-	--status-warning: var(--accent-pink);
-	--status-info: var(--accent-green);
+	--status-warning: oklch(72% 0.12 70);
+	--status-info: oklch(58% 0.06 230);
 
 	/* Type — Newsreader (variable, opsz) for display, Inter (variable, opsz) for
 	   body. A serif display face over a sans body gives a clear editorial
@@ -59,6 +60,11 @@
 	--font-display: 'Newsreader Variable', 'Newsreader', Georgia, 'Times New Roman', serif;
 	--font-body: 'Inter Variable', 'Inter', -apple-system, 'Segoe UI', Roboto, system-ui, sans-serif;
 	--font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+	/* Font weights — tokenized so a weight change is one edit, not a grep */
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
 
 	--type-display-xl: clamp(3.75rem, 13vw, 10rem);
 	--type-display: clamp(3rem, 9vw, 7.5rem);
@@ -69,6 +75,18 @@
 	--type-small: 0.875rem;
 	--type-caption: 0.75rem;
 	--type-overline: 0.6875rem;
+
+	/* Lede — shared between editorial hero and chapter introductions.
+	   Previously two divergent inline clamp() values; now one token. */
+	--type-lede: clamp(1rem, 1.4vw, 1.25rem);
+
+	/* Variable-font axes — Newsreader and Inter both ship wght (and Inter
+	   ships wdth). Tokenizing the axis values lets us tune the brand voice
+	   in one place and enables scroll-linked kinetic typography. */
+	--type-wght-display: 400;
+	--type-wght-heading: 500;
+	--type-wght-body: 400;
+	--type-wdth-display: 100;
 
 	--leading-tight: 1.1;
 	--leading-snug: 1.25;
@@ -116,6 +134,12 @@
 	--motion-duration-slow: 400ms;
 	--motion-ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
 	--motion-ease-out: cubic-bezier(0, 0, 0.25, 1);
+	/* Enter curve — elements accelerating into view (exit/leave) */
+	--motion-ease-in: cubic-bezier(0.4, 0, 1, 1);
+	/* Interactive curve — hover, focus, toggle (symmetric, no overshoot) */
+	--motion-ease-interactive: cubic-bezier(0.4, 0, 0.2, 1);
+	/* Spring curve — slight overshoot for press/selection feedback */
+	--motion-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
 	/* Reveal — scroll-triggered word / fade / clip animations share one
 	   exit-cubic; the clip variant used for image masks runs a touch slower
@@ -183,10 +207,12 @@
 	--accent-pink-light: oklch(85.03% 0.0641 30.47);
 	--accent-pink-soft: oklch(79.97% 0.0859 28.92 / 0.18);
 
-	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-	--shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
-	--shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
-	--shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.65);
+	/* Warm-black shadows — tinted with the ink hue instead of neutral black
+	   so dark-theme shadows stay in the brand's warm-green family. */
+	--shadow-sm: 0 1px 2px oklch(16.88% 0.0063 156.48 / 0.4);
+	--shadow-md: 0 8px 24px oklch(16.88% 0.0063 156.48 / 0.45);
+	--shadow-lg: 0 16px 40px oklch(16.88% 0.0063 156.48 / 0.55);
+	--shadow-xl: 0 24px 64px oklch(16.88% 0.0063 156.48 / 0.65);
 }
 
 /* Wide-gamut brand accents. On Display-P3 screens the sage and coral push past
@@ -287,6 +313,7 @@ a:hover {
 		animation-iteration-count: 1 !important;
 		transition-duration: 0.01ms !important;
 		scroll-behavior: auto !important;
+		animation-timeline: auto !important;
 	}
 }
 
@@ -298,4 +325,5 @@ a:hover {
 	animation-iteration-count: 1 !important;
 	transition-duration: 0.01ms !important;
 	scroll-behavior: auto !important;
+	animation-timeline: auto !important;
 }

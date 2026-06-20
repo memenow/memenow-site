@@ -2,6 +2,7 @@
 	import EditorialHero from '$lib/components/home/EditorialHero.svelte';
 	import Chapter from '$lib/components/home/Chapter.svelte';
 	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
+	import Pullquote from '$lib/components/editorial/Pullquote.svelte';
 </script>
 
 <svelte:head>
@@ -43,12 +44,33 @@
 		Long-form reading from your birth time and place. Four pillars, five elements — written as
 		narrative, not a dashboard. Saved, with Weekly Flow updating what moves.
 	</p>
+	<p class="c-chapter__prose">
+		Your birth time and place become a chart; the chart becomes a story. Yinyang Agent reads the
+		Eight Pillars the way a practiced reader would — identifying the patterns, tracing the
+		relationships, and writing it all down in language you don't need a glossary to follow.
+	</p>
+	<p class="c-chapter__prose">
+		The full reading is saved to your account. You can return to it a month later, a year later, and
+		find the same words waiting — not a re-rolled horoscope, but a considered document. Weekly Flow
+		adds a shorter note about what's currently active, so the reading stays alive without losing its
+		original shape.
+	</p>
 </Chapter>
+
+<Pullquote
+	quote="Done with patience, Bazi becomes a partner — a way to ask a question and read the answer in your own time."
+	attribution="Why Yinyang Agent is slow on purpose"
+/>
 
 <Chapter id="slow" number="02" label="The discipline" headless title="Why slow on purpose.">
 	<p class="c-chapter__lede">
 		Done quickly, Bazi becomes horoscope soup. Done with patience, it becomes a partner — a way to
 		ask a question and read the answer in your own time.
+	</p>
+	<p class="c-chapter__prose">
+		Every Yinyang reading is generated, then held for review before it reaches you. Not because the
+		model is unreliable, but because a reading worth keeping is worth a second look. The extra time
+		is measured in minutes, not days — but it is there, on purpose.
 	</p>
 
 	{#snippet cta()}

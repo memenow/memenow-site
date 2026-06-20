@@ -2,6 +2,7 @@
 	import EditorialHero from '$lib/components/home/EditorialHero.svelte';
 	import Chapter from '$lib/components/home/Chapter.svelte';
 	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
+	import Timeline from '$lib/components/editorial/Timeline.svelte';
 </script>
 
 <svelte:head>
@@ -46,6 +47,11 @@
 		Founded 2024 in Lewes, Delaware. A small distributed team across the United States and Greater
 		China.
 	</p>
+	<p class="c-chapter__prose">
+		Lewes is where the paperwork lives. The people are spread across time zones — some in the United
+		States, some in Greater China — connected by a shared preference for quiet work over loud
+		announcements.
+	</p>
 </Chapter>
 
 <Chapter id="how" number="02" label="The work" align="left" title="How we work.">
@@ -53,12 +59,45 @@
 		Pick a question worth asking; make it quietly answerable. Small over flashy, audit-friendly over
 		opaque, patient over performative.
 	</p>
+	<p class="c-chapter__prose">
+		We choose problems where the AI can be a partner rather than a performer — where the output is
+		something you revisit, not something you scroll past. A Bazi reading you save. A research brief
+		you can audit. Each product earns its place by being useful a month after the first click.
+	</p>
+	<p class="c-chapter__prose">
+		When we don't know something, we say so. When a model stops working, we stop it. When a timeline
+		needs to be longer, we extend it. None of this is heroic — it's just the discipline that makes
+		the work worth trusting.
+	</p>
+	<Timeline
+		items={[
+			{
+				year: '2024',
+				title: 'Studio founded',
+				body: 'memenow incorporated in Lewes, Delaware. First principles written down before first line of code.'
+			},
+			{
+				year: '2024',
+				title: 'Yinyang Agent',
+				body: 'First product shipped — Bazi readings as narrative, saved to your account, with Weekly Flow updates.'
+			},
+			{
+				year: '2025',
+				title: 'Quant Research',
+				body: 'Two research tracks — crypto perpetuals and A-shares — published as a capability brief, not an offer.'
+			}
+		]}
+	/>
 </Chapter>
 
 <Chapter id="contact" number="03" label="Contact" align="split" title="Get in touch.">
 	<p class="c-chapter__lede">
 		Press, partnerships, and considered investor questions —
 		<a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>.
+	</p>
+	<p class="c-chapter__prose">
+		We read every message. We don't promise a fast reply, but we do promise a real one — from a
+		person, not an auto-responder.
 	</p>
 
 	{#snippet cta()}

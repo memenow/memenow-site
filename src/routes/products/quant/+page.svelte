@@ -1,6 +1,7 @@
 <script lang="ts">
 	import EditorialHero from '$lib/components/home/EditorialHero.svelte';
 	import Chapter from '$lib/components/home/Chapter.svelte';
+	import ComparisonTable from '$lib/components/editorial/ComparisonTable.svelte';
 </script>
 
 <svelte:head>
@@ -52,6 +53,10 @@
 	align="left"
 	title="Two tracks, one discipline."
 >
+	<p class="c-chapter__lede">
+		Crypto perpetuals and Mainland China A-shares — different markets, same posture: small models,
+		versioned assumptions, stops that actually stop.
+	</p>
 	<div class="c-stack-grid">
 		<div class="c-stack-grid__item">
 			<span class="c-stack-grid__num">Crypto perpetuals</span>
@@ -70,4 +75,39 @@
 			</p>
 		</div>
 	</div>
+</Chapter>
+
+<Chapter
+	id="method"
+	number="02"
+	label="The method"
+	align="left"
+	title="Audit-friendly over opaque."
+>
+	<p class="c-chapter__lede">
+		Every signal has a source. Every assumption has a version. When a regime stops holding, we say
+		so — and we stop.
+	</p>
+	<ComparisonTable
+		caption="How the two tracks compare"
+		columns={[
+			{ key: 'crypto', label: 'Crypto Perpetuals' },
+			{ key: 'ashares', label: 'A-Shares', highlight: true }
+		]}
+		rows={[
+			{ feature: 'Market hours', crypto: '24 / 7', ashares: 'Beijing session' },
+			{
+				feature: 'Primary signal',
+				crypto: 'Funding-rate structure',
+				ashares: 'Fundamental factors'
+			},
+			{ feature: 'Data source', crypto: 'Exchange API', ashares: 'Public disclosures' },
+			{ feature: 'Risk gate', crypto: 'Drawdown stop', ashares: 'Regime filter' },
+			{
+				feature: 'Posture',
+				crypto: 'Practice, not performance',
+				ashares: 'Practice, not performance'
+			}
+		]}
+	/>
 </Chapter>
