@@ -1199,6 +1199,13 @@
 /* ── Comparison table ───────────────────────────────── */
 
 .c-comparison {
+	/* Stretch to the chapter width so overflow-x can scroll. Inside an
+	   align-left/-split chapter the body is a flex column with
+	   align-items: flex-start, which would otherwise shrink-wrap this
+	   wrapper to the table's max-content width and let the nowrap columns
+	   overflow into .c-chapter's overflow-x: clip instead of scrolling. */
+	width: 100%;
+	max-width: 100%;
 	overflow-x: auto;
 }
 
