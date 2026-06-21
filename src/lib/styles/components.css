@@ -797,45 +797,6 @@
 	font-size: var(--type-body);
 }
 
-/* ── Disclaimer banner — legal / regulatory pivot block ── */
-
-.c-disclaimer-banner {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-3);
-	padding: var(--spacing-6);
-	border: 1px solid var(--border-strong);
-	border-left: 3px solid var(--accent-pink);
-	border-radius: var(--radius-md);
-	background: var(--surface-raised);
-}
-
-.c-disclaimer-banner__title {
-	display: inline-flex;
-	align-items: center;
-	gap: var(--spacing-3);
-	font-family: var(--font-mono);
-	font-weight: var(--font-weight-medium);
-	font-size: var(--type-overline);
-	letter-spacing: var(--ls-overline);
-	text-transform: uppercase;
-	color: var(--accent-pink);
-	margin: 0;
-}
-
-.c-disclaimer-banner__body {
-	color: var(--text-secondary);
-	font-size: var(--type-small);
-	line-height: var(--leading-relaxed);
-	max-width: 76ch;
-	text-wrap: pretty;
-	margin: 0;
-}
-
-.c-disclaimer-banner__body a {
-	color: inherit;
-}
-
 /* ── Coral pink diamond mark — the only ornament ──────── */
 
 .c-seal {

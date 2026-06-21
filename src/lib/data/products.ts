@@ -1,7 +1,7 @@
 export type ProductElement = 'green' | 'pink';
 
 export interface Product {
-	slug: 'yinyang' | 'quant';
+	slug: 'yinyang';
 	name: string;
 	tagline: string;
 	description: string;
@@ -23,16 +23,6 @@ export const products: Product[] = [
 			external: true
 		},
 		element: 'green',
-		available: true
-	},
-	{
-		slug: 'quant',
-		name: 'Quant Research',
-		tagline: 'Small models, repeatable edges.',
-		description:
-			'Two research tracks — crypto perpetuals and Mainland China A-shares — run as discipline, not as marketing.',
-		cta: { label: 'Read the brief', href: '/products/quant' },
-		element: 'pink',
 		available: true
 	}
 ];

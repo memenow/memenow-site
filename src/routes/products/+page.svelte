@@ -2,16 +2,18 @@
 	import EditorialHero from '$lib/components/home/EditorialHero.svelte';
 	import Chapter from '$lib/components/home/Chapter.svelte';
 	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
-	import SectionBreak from '$lib/components/editorial/SectionBreak.svelte';
 </script>
 
 <svelte:head>
 	<title>Products — memenow</title>
-	<meta name="description" content="memenow's products: Yinyang Agent and Quant Research." />
+	<meta
+		name="description"
+		content="memenow's products. The first is Yinyang Agent — a Bazi reading you can return to."
+	/>
 	<meta property="og:title" content="Products — memenow" />
 	<meta
 		property="og:description"
-		content="Two products, one studio: a Bazi agent that reads with you, and a quant practice held to the same patience."
+		content="One studio, one live product so far: Yinyang Agent, a Bazi reading you can audit and return to."
 	/>
 	<meta property="og:image" content="/og/og-home.jpeg" />
 	<meta name="twitter:image" content="/og/og-home.jpeg" />
@@ -20,8 +22,8 @@
 <EditorialHero
 	eyebrowLeft="Products"
 	eyebrowRight="Updated 2026"
-	title="One reading. One discipline."
-	lede="Two products, one studio. A Bazi agent that reads with you, and a quant practice held to the same patience."
+	title="What we've shipped."
+	lede="One studio, one live product so far — held to a standard the next will share. This one is Yinyang."
 	cue="Scroll · 01 Yinyang Agent"
 />
 
@@ -41,7 +43,10 @@
 		h: 941
 	}}
 >
-	<p class="c-chapter__lede">AI-powered Eight-Pillars analysis. Read once, revisit forever.</p>
+	<p class="c-chapter__lede">
+		AI-powered Eight Pillars analysis. Birth time in, a long-form reading out — sourced, saved, and
+		yours to revisit.
+	</p>
 
 	{#snippet cta()}
 		<ArtifactCta
@@ -51,34 +56,7 @@
 			rel="noopener noreferrer"
 			target="_blank"
 		>
-			Visit yinyang.memenow.xyz
+			Open Yinyang
 		</ArtifactCta>
-	{/snippet}
-</Chapter>
-
-<SectionBreak label="One studio" />
-
-<Chapter
-	id="quant"
-	number="02"
-	label="Quant Research"
-	align="split"
-	title="Small models, repeatable edges."
-	image={{
-		avif: '/images/products-quant.avif',
-		webp: '/images/products-quant.webp',
-		png: '/images/products-quant.png',
-		alt: '',
-		w: 1672,
-		h: 941
-	}}
->
-	<p class="c-chapter__lede">
-		Crypto perpetuals and Mainland China A-shares, run as discipline. Capability brief, not an
-		offer.
-	</p>
-
-	{#snippet cta()}
-		<ArtifactCta href="/products/quant" palette="ritual" size="lg">Read the brief</ArtifactCta>
 	{/snippet}
 </Chapter>

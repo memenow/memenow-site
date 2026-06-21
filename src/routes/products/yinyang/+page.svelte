@@ -59,8 +59,8 @@
 </Chapter>
 
 <Pullquote
-	quote="Done with patience, Bazi becomes a partner — a way to ask a question and read the answer in your own time."
-	attribution="Why Yinyang Agent is slow on purpose"
+	quote="A reading worth keeping is worth a second look — so every one gets one."
+	attribution="Why Yinyang Agent takes its time"
 />
 
 <ImagePair
@@ -84,7 +84,7 @@
 	rightCaption="Yang — the active"
 />
 
-<Chapter id="slow" number="02" label="The discipline" headless title="Why slow on purpose.">
+<Chapter id="slow" number="02" label="The discipline" headless title="Why it takes its time.">
 	<p class="c-chapter__lede">
 		Done quickly, Bazi becomes horoscope soup. Done with patience, it becomes a partner — a way to
 		ask a question and read the answer in your own time.
@@ -92,7 +92,7 @@
 	<p class="c-chapter__prose">
 		Every Yinyang reading is generated, then held for review before it reaches you. Not because the
 		model is unreliable, but because a reading worth keeping is worth a second look. The extra time
-		is measured in minutes, not days — but it is there, on purpose.
+		is measured in minutes, not days, and it is deliberate.
 	</p>
 
 	{#snippet cta()}

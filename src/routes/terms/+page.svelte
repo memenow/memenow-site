@@ -38,8 +38,7 @@
 <Chapter id="offer" number="03" label="No offer" title="Nothing here is a financial offer.">
 	<p class="c-chapter__lede">
 		Nothing on this site is an offer to sell, a solicitation to buy, or a recommendation regarding
-		any security, fund interest, or financial instrument. See our
-		<a href="/disclaimer">disclaimer</a>.
+		any security, fund interest, or financial instrument.
 	</p>
 </Chapter>
 

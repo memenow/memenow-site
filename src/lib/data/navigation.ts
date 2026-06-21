@@ -8,7 +8,7 @@ export interface NavLink {
 	/**
 	 * Extra path prefixes that should also mark this link as the current page.
 	 * Useful when one nav entry represents a group of routes (e.g. "Legal"
-	 * covers /privacy, /terms, /disclaimer).
+	 * covers /privacy, /terms).
 	 */
 	match?: string[];
 }
@@ -20,8 +20,8 @@ export const primaryNav: NavLink[] = [
 	{ label: 'Company', href: '/company' },
 	{
 		label: 'Legal',
-		href: '/disclaimer',
-		match: ['/privacy', '/terms', '/disclaimer']
+		href: '/terms',
+		match: ['/privacy', '/terms']
 	}
 ];
 
@@ -43,7 +43,6 @@ export const footerSections: FooterSection[] = [
 		links: [
 			{ label: 'Privacy', href: '/privacy' },
 			{ label: 'Terms', href: '/terms' },
-			{ label: 'Disclaimer', href: '/disclaimer' },
 			{ label: 'GitHub', href: 'https://github.com/memenow', external: true }
 		]
 	}

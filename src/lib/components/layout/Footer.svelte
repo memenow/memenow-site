@@ -28,7 +28,6 @@
 		</div>
 		<div class="c-footer__legal">
 			<span>© {year} memenow</span>
-			<a href="/disclaimer">Investor disclaimer</a>
 		</div>
 	</div>
 </footer>

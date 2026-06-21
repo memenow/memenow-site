@@ -8,7 +8,6 @@ describe('resolveRouteFamily', () => {
 
 	it('classifies legal subpaths as legal', () => {
 		expect(resolveRouteFamily('/terms')).toBe('legal');
-		expect(resolveRouteFamily('/disclaimer')).toBe('legal');
 		expect(resolveRouteFamily('/privacy/cookies')).toBe('legal');
 	});
 

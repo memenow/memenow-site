@@ -10,12 +10,12 @@
 	<title>Company — memenow</title>
 	<meta
 		name="description"
-		content="memenow is a small studio in Lewes, Delaware, founded in 2024, building AI agents that think alongside us."
+		content="memenow is a small studio in Lewes, Delaware, founded in 2024, building AI you can audit and return to."
 	/>
 	<meta property="og:title" content="Company — memenow" />
 	<meta
 		property="og:description"
-		content="A small studio in Lewes, Delaware. Founded 2024. AI agents that think alongside us."
+		content="A small studio in Lewes, Delaware. Founded 2024. AI you can audit and return to."
 	/>
 	<meta property="og:image" content="/og/og-company.jpeg" />
 	<meta name="twitter:image" content="/og/og-company.jpeg" />
@@ -24,8 +24,8 @@
 <EditorialHero
 	eyebrowLeft="Company · Lewes, Delaware"
 	eyebrowRight="Est. 2024"
-	title="A small studio, on purpose."
-	lede="The most useful AI is the kind that sits beside you while you work — not the kind that performs."
+	title="A small studio."
+	lede="Founded 2024 in Lewes, Delaware. We build AI you can audit and return to, and we ship slowly because the work is meant to last."
 	cue="Scroll · 01 The studio"
 />
 
@@ -56,9 +56,9 @@
 	<div class="c-stat-grid">
 		<StatCard value="2024" label="Founded" description="Incorporated in Lewes, Delaware." />
 		<StatCard
-			value="2"
-			label="Products"
-			description="Yinyang Agent and Quant Research, both shipped."
+			value="1"
+			label="Live product"
+			description="Yinyang Agent — a Bazi reading you can return to."
 		/>
 		<StatCard
 			value="US · CN"
@@ -70,13 +70,12 @@
 
 <Chapter id="how" number="02" label="The work" align="left" title="How we work.">
 	<p class="c-chapter__lede">
-		Pick a question worth asking; make it quietly answerable. Small over flashy, audit-friendly over
-		opaque, patient over performative.
+		Pick a question worth asking, then make it quietly answerable — small, auditable, and patient.
 	</p>
 	<p class="c-chapter__prose">
-		We choose problems where the AI can be a partner rather than a performer — where the output is
-		something you revisit, not something you scroll past. A Bazi reading you save. A research brief
-		you can audit. Each product earns its place by being useful a month after the first click.
+		We choose problems where AI can be a genuine partner — where the output is something you keep
+		and revisit, not something you scroll past. A Bazi reading you save and reread. Each product
+		earns its place by being useful a month after the first click, not just the first minute.
 	</p>
 	<p class="c-chapter__prose">
 		When we don't know something, we say so. When a model stops working, we stop it. When a timeline
@@ -88,17 +87,12 @@
 			{
 				year: '2024',
 				title: 'Studio founded',
-				body: 'memenow incorporated in Lewes, Delaware. First principles written down before first line of code.'
+				body: 'memenow incorporated in Lewes, Delaware. First principles written down before the first line of code.'
 			},
 			{
 				year: '2024',
 				title: 'Yinyang Agent',
 				body: 'First product shipped — Bazi readings as narrative, saved to your account, with Weekly Flow updates.'
-			},
-			{
-				year: '2025',
-				title: 'Quant Research',
-				body: 'Two research tracks — crypto perpetuals and A-shares — published as a capability brief, not an offer.'
 			}
 		]}
 	/>
@@ -110,8 +104,7 @@
 		<a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>.
 	</p>
 	<p class="c-chapter__prose">
-		We read every message. We don't promise a fast reply, but we do promise a real one — from a
-		person, not an auto-responder.
+		We read every message and answer it ourselves — no auto-responders, no form letters.
 	</p>
 
 	{#snippet cta()}
