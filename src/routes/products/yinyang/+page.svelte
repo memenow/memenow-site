@@ -3,6 +3,7 @@
 	import Chapter from '$lib/components/home/Chapter.svelte';
 	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
 	import Pullquote from '$lib/components/editorial/Pullquote.svelte';
+	import ImagePair from '$lib/components/editorial/ImagePair.svelte';
 </script>
 
 <svelte:head>
@@ -60,6 +61,27 @@
 <Pullquote
 	quote="Done with patience, Bazi becomes a partner — a way to ask a question and read the answer in your own time."
 	attribution="Why Yinyang Agent is slow on purpose"
+/>
+
+<ImagePair
+	left={{
+		avif: '/images/yinyang-yin.avif',
+		webp: '/images/yinyang-yin.webp',
+		png: '/images/yinyang-yin.png',
+		alt: 'A line-drawn crescent moon above soft sage-green hills, evoking yin.',
+		w: 710,
+		h: 888
+	}}
+	right={{
+		avif: '/images/yinyang-yang.avif',
+		webp: '/images/yinyang-yang.webp',
+		png: '/images/yinyang-yang.png',
+		alt: 'A line-drawn rising sun above soft coral hills, evoking yang.',
+		w: 710,
+		h: 888
+	}}
+	leftCaption="Yin — the receptive"
+	rightCaption="Yang — the active"
 />
 
 <Chapter id="slow" number="02" label="The discipline" headless title="Why slow on purpose.">

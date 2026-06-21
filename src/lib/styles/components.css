@@ -1143,6 +1143,15 @@
 	max-width: 40ch;
 }
 
+/* ── Stat grid ──────────────────────────────────────── */
+
+.c-stat-grid {
+	display: grid;
+	width: 100%;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+	gap: clamp(1.5rem, 4vw, 3rem);
+}
+
 /* ── Timeline ───────────────────────────────────────── */
 
 .c-timeline {
@@ -1268,6 +1277,9 @@
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: var(--spacing-4);
+	max-width: var(--container-narrow);
+	margin-inline: auto;
+	padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
 
 .c-image-pair__item {

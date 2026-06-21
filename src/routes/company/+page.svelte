@@ -3,6 +3,7 @@
 	import Chapter from '$lib/components/home/Chapter.svelte';
 	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
 	import Timeline from '$lib/components/editorial/Timeline.svelte';
+	import StatCard from '$lib/components/editorial/StatCard.svelte';
 </script>
 
 <svelte:head>
@@ -52,6 +53,19 @@
 		States, some in Greater China — connected by a shared preference for quiet work over loud
 		announcements.
 	</p>
+	<div class="c-stat-grid">
+		<StatCard value="2024" label="Founded" description="Incorporated in Lewes, Delaware." />
+		<StatCard
+			value="2"
+			label="Products"
+			description="Yinyang Agent and Quant Research, both shipped."
+		/>
+		<StatCard
+			value="US · CN"
+			label="Distributed"
+			description="A small team across the United States and Greater China."
+		/>
+	</div>
 </Chapter>
 
 <Chapter id="how" number="02" label="The work" align="left" title="How we work.">

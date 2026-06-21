@@ -2,6 +2,7 @@
 	import EditorialHero from '$lib/components/home/EditorialHero.svelte';
 	import Chapter from '$lib/components/home/Chapter.svelte';
 	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
+	import SectionBreak from '$lib/components/editorial/SectionBreak.svelte';
 </script>
 
 <svelte:head>
@@ -54,6 +55,8 @@
 		</ArtifactCta>
 	{/snippet}
 </Chapter>
+
+<SectionBreak label="One studio" />
 
 <Chapter
 	id="quant"
