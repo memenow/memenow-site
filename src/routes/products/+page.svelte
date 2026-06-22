@@ -31,17 +31,8 @@
 	id="yinyang"
 	number="01"
 	label="Yinyang Agent"
-	banner
 	align="left"
 	title="A Bazi reading you can return to."
-	image={{
-		avif: '/images/products-yinyang.avif',
-		webp: '/images/products-yinyang.webp',
-		png: '/images/products-yinyang.png',
-		alt: '',
-		w: 1672,
-		h: 941
-	}}
 >
 	<p class="c-chapter__lede">
 		AI-powered Eight Pillars analysis. Birth time in, a long-form reading out — sourced, saved, and

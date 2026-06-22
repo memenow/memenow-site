@@ -26,14 +26,6 @@
 	title="Make AI your partner."
 	lede="A partner you can audit and return to — AI that shows its work and is still there when you come back. The first is Yinyang, a Bazi reading you can actually reread."
 	cue="Scroll · 01 The studio"
-	image={{
-		avif: '/images/home-hero.avif',
-		webp: '/images/home-hero.webp',
-		png: '/images/home-hero.png',
-		alt: '',
-		w: 1672,
-		h: 941
-	}}
 />
 
 <Chapter
@@ -68,16 +60,8 @@
 	id="yinyang"
 	number="02"
 	label="Yinyang Agent"
-	align="split"
+	align="left"
 	title="A Bazi reading you can return to."
-	image={{
-		avif: '/images/products-yinyang.avif',
-		webp: '/images/products-yinyang.webp',
-		png: '/images/products-yinyang.png',
-		alt: '',
-		w: 1672,
-		h: 941
-	}}
 >
 	<p class="c-chapter__lede">
 		Your birth time in; a long-form Eight Pillars reading out — written like a thoughtful teacher,

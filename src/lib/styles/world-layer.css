@@ -1,15 +1,14 @@
 /**
- * World layer — Tai Chi geometry overlay + brushstroke edges.
+ * World layer — the persistent ink-wash atmosphere behind every route.
  *
- * The world layer is a fixed underlay that sits behind every route. It
- * provides ambient texture (fog gradients + subtle Tai Chi geometry) so the
- * full site reads as one continuous narrative world rather than a stack of
- * independent pages.
+ * A fixed underlay (z-index:-1) that sits behind all content so the full site
+ * reads as one continuous shan-shui world: a static painted fallback, the WebGL
+ * parallax canvas (when available), and a faint film grain for printed tooth.
  */
 
-/* Register --world-scroll as a typed custom property so the parallax transform
-   interpolates smoothly instead of snapping per scroll tick. The root layout
-   writes it on <html> (0–1); it inherits down to .world-layer__taichi. */
+/* Register --world-scroll as a typed custom property (0–1) so it interpolates
+   smoothly. The root layout writes it on <html>; WorldScene reads it to drive
+   the canvas parallax (reduced motion pins it at rest). */
 @property --world-scroll {
 	syntax: '<number>';
 	inherits: true;
@@ -26,47 +25,37 @@
 	transition: opacity var(--motion-duration-slow) var(--motion-ease-standard);
 }
 
-.world-layer__taichi {
+/* Static painted fallback — the full ink-wash master (the same image the WebGL
+   base plane renders). Shown during SSR, before the canvas chunk loads, and on
+   browsers without WebGL. The canvas, when present, covers it. */
+.world-layer__static {
 	position: absolute;
 	inset: 0;
-	display: grid;
-	place-items: center;
-	opacity: 0.06;
-	mix-blend-mode: multiply;
-	color: var(--text-primary);
-	/* Scroll-driven parallax drift; the root layout writes --world-scroll (0–1).
-	   Reduced motion zeroes the transform in the media query below. */
-	transform: translate3d(0, calc(var(--world-scroll, 0) * -4vh), 0)
-		scale(calc(1 + var(--world-scroll, 0) * 0.05));
+	background-image: image-set(
+		url('/world/world-base.avif') type('image/avif'),
+		url('/world/world-base.webp') type('image/webp')
+	);
+	background-size: cover;
+	background-position: center;
 }
 
-.world-layer__taichi svg {
-	width: min(82vmin, 880px);
-	height: auto;
+/* WebGL ink-wash world — a client-only Threlte canvas layered over the static
+   fallback and under the grain. Threlte sizes the <canvas> to this box via a
+   ResizeObserver. */
+.world-layer__canvas {
+	position: absolute;
+	inset: 0;
 }
 
-/* Reduced motion: zero the parallax drift. Mirrors the OS query and the in-page
-   toggle attribute (see tokens.css for the dual-trigger rationale). */
-@media (prefers-reduced-motion: reduce) {
-	:root:not([data-motion]) .world-layer__taichi {
-		transform: none;
-	}
+.world-layer__canvas :global(canvas) {
+	display: block;
 }
 
-:root[data-motion='reduced'] .world-layer__taichi {
-	transform: none;
-}
-
-[data-theme='dark'] .world-layer__taichi {
-	opacity: 0.1;
-	mix-blend-mode: screen;
-}
-
-/* Film grain — a faint, static monochrome tooth tiled across the world layer
-   so large flat surfaces read as printed paper rather than flat pixels. It
-   lives inside the z-index:-1 underlay and never sits over foreground text, so
-   it cannot affect reading contrast. Hidden when the user reduces transparency
-   or under forced colors, where a clean surface matters more than texture. */
+/* Film grain — a faint, static monochrome tooth tiled across the world layer so
+   large flat surfaces read as printed paper rather than flat pixels. It lives
+   inside the z-index:-1 underlay and never sits over foreground text, so it
+   cannot affect reading contrast. Hidden when the user reduces transparency or
+   under forced colors, where a clean surface matters more than texture. */
 .world-layer__grain {
 	position: absolute;
 	inset: 0;

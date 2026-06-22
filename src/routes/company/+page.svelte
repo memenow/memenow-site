@@ -29,21 +29,7 @@
 	cue="Scroll · 01 The studio"
 />
 
-<Chapter
-	id="studio"
-	number="01"
-	label="The studio"
-	headless
-	title="Where we are."
-	image={{
-		avif: '/images/company.avif',
-		webp: '/images/company.webp',
-		png: '/images/company.png',
-		alt: '',
-		w: 1672,
-		h: 941
-	}}
->
+<Chapter id="studio" number="01" label="The studio" headless title="Where we are.">
 	<p class="c-chapter__lede">
 		Founded 2024 in Lewes, Delaware. A small distributed team across the United States and Greater
 		China.

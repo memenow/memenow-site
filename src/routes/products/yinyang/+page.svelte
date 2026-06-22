@@ -3,7 +3,6 @@
 	import Chapter from '$lib/components/home/Chapter.svelte';
 	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
 	import Pullquote from '$lib/components/editorial/Pullquote.svelte';
-	import ImagePair from '$lib/components/editorial/ImagePair.svelte';
 </script>
 
 <svelte:head>
@@ -32,14 +31,6 @@
 	label="The reading"
 	align="left"
 	title="Read once, revisit forever."
-	image={{
-		avif: '/images/products-yinyang.avif',
-		webp: '/images/products-yinyang.webp',
-		png: '/images/products-yinyang.png',
-		alt: '',
-		w: 1672,
-		h: 941
-	}}
 >
 	<p class="c-chapter__lede">
 		Long-form reading from your birth time and place. Four pillars, five elements — written as
@@ -61,27 +52,6 @@
 <Pullquote
 	quote="A reading worth keeping is worth a second look — so every one gets one."
 	attribution="Why Yinyang Agent takes its time"
-/>
-
-<ImagePair
-	left={{
-		avif: '/images/yinyang-yin.avif',
-		webp: '/images/yinyang-yin.webp',
-		png: '/images/yinyang-yin.png',
-		alt: 'A line-drawn crescent moon above soft sage-green hills, evoking yin.',
-		w: 710,
-		h: 888
-	}}
-	right={{
-		avif: '/images/yinyang-yang.avif',
-		webp: '/images/yinyang-yang.webp',
-		png: '/images/yinyang-yang.png',
-		alt: 'A line-drawn rising sun above soft coral hills, evoking yang.',
-		w: 710,
-		h: 888
-	}}
-	leftCaption="Yin — the receptive"
-	rightCaption="Yang — the active"
 />
 
 <Chapter id="slow" number="02" label="The discipline" headless title="Why it takes its time.">

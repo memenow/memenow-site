@@ -46,8 +46,9 @@
 				/>
 			</picture>
 		</div>
-		<div class="c-editorial-hero__scrim" aria-hidden="true"></div>
 	{/if}
+
+	<div class="c-editorial-hero__scrim" aria-hidden="true"></div>
 
 	<div class="c-editorial-hero__top reveal-fade" use:reveal>
 		<span>{eyebrowLeft}</span>
