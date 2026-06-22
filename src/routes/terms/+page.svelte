@@ -15,7 +15,7 @@
 
 <EditorialHero
 	eyebrowLeft="Legal · Terms"
-	eyebrowRight="Updated 2026-05-06"
+	eyebrowRight="Updated 2026-06-21"
 	title="Plain terms, short."
 	lede="The conditions under which we publish memenow.xyz."
 	cue="Scroll · Read the terms"
