@@ -106,20 +106,20 @@
 	   so the cue / lede copy clears WCAG AA over busy hero photography. */
 	background: linear-gradient(
 		180deg,
-		rgba(250, 249, 246, 0.78) 0%,
-		rgba(250, 249, 246, 0.6) 38%,
-		rgba(250, 249, 246, 0.72) 78%,
-		rgba(250, 249, 246, 0.92) 100%
+		rgba(242, 245, 249, 0.78) 0%,
+		rgba(242, 245, 249, 0.6) 38%,
+		rgba(242, 245, 249, 0.72) 78%,
+		rgba(242, 245, 249, 0.92) 100%
 	);
 }
 
 [data-theme='dark'] .c-editorial-hero__scrim {
 	background: linear-gradient(
 		180deg,
-		rgba(26, 32, 28, 0.7) 0%,
-		rgba(26, 32, 28, 0.55) 38%,
-		rgba(26, 32, 28, 0.7) 78%,
-		rgba(26, 32, 28, 0.9) 100%
+		rgba(14, 21, 35, 0.7) 0%,
+		rgba(14, 21, 35, 0.55) 38%,
+		rgba(14, 21, 35, 0.7) 78%,
+		rgba(14, 21, 35, 0.9) 100%
 	);
 }
 
@@ -283,7 +283,7 @@
 	display: inline-block;
 	width: 7px;
 	height: 7px;
-	background: var(--accent-pink);
+	background: var(--accent);
 	-webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><polygon points='5,0 10,5 5,10 0,5'/></svg>")
 		no-repeat center / contain;
 	mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><polygon points='5,0 10,5 5,10 0,5'/></svg>")
@@ -507,7 +507,7 @@
 	font-size: var(--type-caption);
 	letter-spacing: var(--ls-overline);
 	text-transform: uppercase;
-	color: var(--accent-pink);
+	color: var(--accent);
 	font-weight: var(--font-weight-semibold);
 }
 
@@ -640,7 +640,7 @@
 .c-dock__item[aria-current='page'],
 .c-dock__item[data-active='true'] {
 	background: var(--surface-dock-active);
-	color: var(--accent-pink);
+	color: var(--accent-on-dark);
 }
 
 .c-dock__menu {
@@ -734,7 +734,7 @@
 	display: inline-flex;
 	align-items: center;
 	gap: var(--spacing-3);
-	border: 1px solid var(--accent-green);
+	border: 1px solid var(--text-primary);
 	border-radius: 2px;
 	padding: var(--spacing-3) var(--spacing-5);
 	font-family: var(--font-body);
@@ -742,7 +742,7 @@
 	font-weight: var(--font-weight-medium);
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
-	color: var(--accent-green);
+	color: var(--text-primary);
 	background: var(--surface-base);
 	text-decoration: none;
 	cursor: pointer;
@@ -753,22 +753,24 @@
 		border-color var(--motion-duration-base) var(--motion-ease-standard);
 }
 
+/* The warm accent spark — a gold (light) / moon (dark) diamond on the ink
+   outline. On a filled state it inverts with the label so it stays legible. */
 .c-artifact-cta::after {
 	content: '';
 	width: 5px;
 	height: 5px;
-	background: var(--accent-pink);
+	background: var(--accent);
 	display: inline-block;
 }
 
 .c-artifact-cta:hover {
-	background: var(--accent-green);
+	background: var(--text-primary);
 	color: var(--text-inverse);
-	border-color: var(--accent-green);
+	border-color: var(--text-primary);
 }
 
 .c-artifact-cta:hover::after {
-	background: var(--accent-pink-light);
+	background: var(--text-inverse);
 }
 
 .c-artifact-cta:focus-visible {
@@ -777,14 +779,22 @@
 }
 
 .c-artifact-cta--ritual {
-	background: var(--accent-green);
+	background: var(--text-primary);
 	color: var(--text-inverse);
-	border-color: var(--accent-green);
+	border-color: var(--text-primary);
+}
+
+.c-artifact-cta--ritual::after {
+	background: var(--text-inverse);
 }
 
 .c-artifact-cta--ritual:hover {
 	background: var(--surface-base);
-	color: var(--accent-green);
+	color: var(--text-primary);
+}
+
+.c-artifact-cta--ritual:hover::after {
+	background: var(--accent);
 }
 
 .c-artifact-cta--sm {
@@ -797,13 +807,13 @@
 	font-size: var(--type-body);
 }
 
-/* ── Coral pink diamond mark — the only ornament ──────── */
+/* ── Warm accent diamond — the one ornament ──────────── */
 
 .c-seal {
 	display: inline-block;
 	width: 7px;
 	height: 7px;
-	background: var(--accent-pink);
+	background: var(--accent);
 	flex: 0 0 auto;
 	-webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><polygon points='5,0 10,5 5,10 0,5'/></svg>")
 		no-repeat center / contain;
@@ -849,7 +859,7 @@
 
 .c-icon-switch:hover {
 	background: var(--surface-sunken);
-	border-color: var(--accent-green);
+	border-color: var(--border-strong);
 }
 
 .c-icon-switch:focus-visible {
@@ -886,7 +896,7 @@
 .c-footer__col a:hover {
 	color: var(--text-primary);
 	text-decoration: underline;
-	text-decoration-color: var(--accent-green);
+	text-decoration-color: var(--accent);
 }
 
 .c-footer__title {
@@ -935,7 +945,7 @@
 
 .c-progress__bar {
 	height: 100%;
-	background: var(--accent-pink);
+	background: var(--accent);
 	width: 0%;
 	transition: width var(--motion-duration-fast) linear;
 }
@@ -1085,7 +1095,7 @@
 	font-weight: var(--font-weight-regular);
 	line-height: 1;
 	letter-spacing: var(--ls-display);
-	color: var(--accent-green);
+	color: var(--accent);
 }
 
 .c-stat-card__label {
@@ -1138,7 +1148,7 @@
 	font-size: var(--type-caption);
 	letter-spacing: var(--ls-overline);
 	text-transform: uppercase;
-	color: var(--accent-pink);
+	color: var(--accent);
 	padding-top: var(--spacing-1);
 }
 
@@ -1208,7 +1218,7 @@
 }
 
 .c-comparison__th--highlight {
-	color: var(--accent-green);
+	color: var(--accent);
 }
 
 .c-comparison__feature {
@@ -1229,7 +1239,7 @@
 }
 
 .c-comparison__td--highlight {
-	background: var(--accent-green-soft);
+	background: var(--accent-soft);
 }
 
 /* ── Image pair ─────────────────────────────────────── */

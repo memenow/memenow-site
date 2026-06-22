@@ -8,18 +8,18 @@
 :root {
 	--scene-fog-celestial:
 		radial-gradient(
-			circle at 22% 22%,
-			color-mix(in oklch, var(--surface-sunken) 55%, transparent),
+			circle at 22% 18%,
+			color-mix(in oklch, var(--surface-sunken) 60%, transparent),
 			transparent 45%
 		),
 		radial-gradient(
-			circle at 78% 26%,
-			color-mix(in oklch, var(--accent-pink-light) 35%, transparent),
+			circle at 78% 24%,
+			color-mix(in oklch, var(--accent) 12%, transparent),
 			transparent 50%
 		),
 		radial-gradient(
-			circle at 50% 90%,
-			color-mix(in oklch, var(--accent-green) 8%, transparent),
+			circle at 50% 92%,
+			color-mix(in oklch, var(--surface-ink) 6%, transparent),
 			transparent 55%
 		);
 
@@ -49,18 +49,18 @@
 [data-theme='dark'] {
 	--scene-fog-celestial:
 		radial-gradient(
-			circle at 22% 22%,
-			color-mix(in oklch, var(--accent-green) 18%, transparent),
+			circle at 22% 18%,
+			color-mix(in oklch, var(--surface-raised) 35%, transparent),
 			transparent 45%
 		),
 		radial-gradient(
-			circle at 78% 26%,
-			color-mix(in oklch, var(--accent-pink) 14%, transparent),
+			circle at 78% 24%,
+			color-mix(in oklch, var(--accent) 12%, transparent),
 			transparent 50%
 		),
 		radial-gradient(
-			circle at 50% 90%,
-			color-mix(in oklch, var(--accent-green) 10%, transparent),
+			circle at 50% 92%,
+			color-mix(in oklch, var(--surface-sunken) 45%, transparent),
 			transparent 55%
 		);
 

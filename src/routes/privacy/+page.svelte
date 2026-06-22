@@ -51,7 +51,7 @@
 	.prose-code {
 		font-family: var(--font-mono);
 		font-size: 0.9em;
-		background: var(--accent-green-soft);
+		background: var(--accent-soft);
 		padding: 0.05em 0.4em;
 		border-radius: var(--radius-sm);
 	}

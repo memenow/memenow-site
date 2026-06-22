@@ -1,58 +1,54 @@
 /**
- * memenow design tokens.
+ * memenow design tokens — indigo nocturne.
  *
- * Two-tone palette: sage green (primary) + coral pink (highlight, identical
- * to the logo) + warm white. Components must consume tokens, never literals.
+ * Near-monochrome ink palette with a single warm accent: deep ink indigo
+ * (#1B2A4A) carries text and structure; a warm "moon" note is the one accent —
+ * a deepened moon-gold on light surfaces, the bright moon (#E8E2D0) on dark.
+ * Mist (#DCE3EC) is the paper fog between them. Components must consume tokens,
+ * never literals.
  *
  * Palette colors are authored in OKLCH (perceptually uniform — even lightness
  * steps and predictable color-mix); decorative shadows and the dock's
- * achromatic white/black films stay rgba(), where OKLCH adds no benefit. Every
- * OKLCH value round-trips to the original sRGB byte, so contrast is unchanged.
+ * achromatic white films stay rgba(). Every text x surface pairing is audited
+ * against WCAG 2.2 (AA 4.5:1 text / 3:1 large + non-text) in both themes.
  */
 
 :root {
-	/* Surface — warm white */
-	--surface-base: oklch(98.2% 0.0041 91.45);
-	--surface-raised: oklch(100% 0 0);
-	--surface-sunken: oklch(95.85% 0.0057 128.53);
-	--surface-ink: oklch(33.25% 0.0255 153.78);
-	--surface-overlay: oklch(33.25% 0.0255 153.78 / 0.55);
+	/* Surface — paper mist */
+	--surface-base: oklch(97% 0.006 255);
+	--surface-raised: oklch(99.2% 0.004 255);
+	--surface-sunken: oklch(91.3% 0.0144 254.6); /* mist #DCE3EC */
+	--surface-ink: oklch(28.9% 0.0622 263.9); /* ink #1B2A4A */
+	--surface-overlay: oklch(28.9% 0.0622 263.9 / 0.55);
 
-	/* Text — deep green ink */
-	--text-primary: oklch(33.25% 0.0255 153.78);
-	--text-secondary: oklch(47.56% 0.0333 151.26);
-	/* Muted grey is darkened relative to the dark theme's so small label text
-	   clears WCAG AA on light surfaces (measured 4.88:1 on --surface-base); the
-	   dark theme keeps its lighter grey, which already passes (5.40:1). */
-	--text-muted: oklch(53.39% 0.021 165.79);
+	/* Text — ink indigo (text-primary 13:1 on base) */
+	--text-primary: oklch(28.9% 0.0622 263.9);
+	--text-secondary: oklch(42% 0.045 262); /* 7.8:1 on base */
+	/* Muted clears AA for small labels on both base (5.4:1) and the sunken mist
+	   surface (4.5:1); captions can sit on either. */
+	--text-muted: oklch(50.5% 0.03 258);
 	--text-inverse: oklch(100% 0 0);
 
-	/* Border — warm hairlines */
-	--border-default: oklch(90.4% 0.01 87.48);
-	--border-strong: oklch(84.11% 0.0139 134.91);
-	--border-focus: oklch(54.06% 0.0773 152.71);
+	/* Border — cool hairlines */
+	--border-default: oklch(89% 0.012 255);
+	--border-strong: oklch(80% 0.018 255);
+	--border-focus: oklch(51% 0.092 79); /* accent — focus ring, 5.3:1 on base */
 
-	/* Brand — sage green (primary) */
-	--accent-green: oklch(54.06% 0.0773 152.71);
-	--accent-green-light: oklch(64.99% 0.071 152.2);
-	--accent-green-soft: oklch(54.06% 0.0773 152.71 / 0.12);
+	/* Accent — the single warm note. Light: deep moon-gold (5.3:1 as text on
+	   base). Soft is a faint wash for tints; strong is the hover/emphasis cut. */
+	--accent: oklch(51% 0.092 79);
+	--accent-strong: oklch(45.5% 0.094 76);
+	--accent-soft: oklch(51% 0.092 79 / 0.13);
+	/* Fixed bright moon for permanently-dark surfaces (the dock pill), where the
+	   light theme's deep gold would be too dark to read. */
+	--accent-on-dark: oklch(91.3% 0.0249 91.6);
 
-	/* Brand — coral pink (highlight, replaces vermilion seal) */
-	--accent-pink: oklch(70.34% 0.107 28.69);
-	--accent-pink-light: oklch(76.07% 0.096 29.09);
-	--accent-pink-soft: oklch(70.34% 0.107 28.69 / 0.14);
-
-	/* Brand coral alias — same value as accent-pink, used by logo and
-	   adjacent signature elements only. */
-	--brand-coral: var(--accent-pink);
-	--brand-coral-soft: var(--accent-pink-soft);
-
-	/* Status — success/error stay on the brand palette; warning and info
-	   get distinct hues so error ≠ warning and success ≠ info. */
-	--status-success: var(--accent-green);
-	--status-error: var(--accent-pink);
+	/* Status — decoupled from the brand accent so error != accent and the four
+	   states stay distinct. Rarely used; kept for form / system messaging. */
+	--status-success: oklch(60% 0.13 150);
+	--status-error: oklch(58% 0.18 27);
 	--status-warning: oklch(72% 0.12 70);
-	--status-info: oklch(58% 0.06 230);
+	--status-info: oklch(58% 0.09 250);
 
 	/* Type — Newsreader (variable, opsz) for display, Inter (variable, opsz) for
 	   body. A serif display face over a sans body gives a clear editorial
@@ -66,19 +62,20 @@
 	--font-weight-medium: 500;
 	--font-weight-semibold: 600;
 
-	--type-display-xl: clamp(3.75rem, 13vw, 10rem);
-	--type-display: clamp(3rem, 9vw, 7.5rem);
-	--type-heading-1: clamp(2.5rem, 6vw, 4.75rem);
-	--type-heading-2: clamp(1.875rem, 4vw, 2.75rem);
-	--type-heading-3: clamp(1.25rem, 2vw, 1.625rem);
+	/* Type scale — a wide, dramatic editorial ramp. Display sizes run large and
+	   tightly tracked; body holds a comfortable measure. */
+	--type-display-xl: clamp(4rem, 14vw, 11.5rem);
+	--type-display: clamp(3.25rem, 10vw, 8.5rem);
+	--type-heading-1: clamp(2.75rem, 6.5vw, 5.5rem);
+	--type-heading-2: clamp(2rem, 4.2vw, 3.25rem);
+	--type-heading-3: clamp(1.3125rem, 2.1vw, 1.75rem);
 	--type-body: clamp(0.9375rem, 1.05vw, 1.0625rem);
 	--type-small: 0.875rem;
 	--type-caption: 0.75rem;
 	--type-overline: 0.6875rem;
 
-	/* Lede — shared between editorial hero and chapter introductions.
-	   Previously two divergent inline clamp() values; now one token. */
-	--type-lede: clamp(1rem, 1.4vw, 1.25rem);
+	/* Lede — shared between editorial hero and chapter introductions. */
+	--type-lede: clamp(1.0625rem, 1.5vw, 1.375rem);
 
 	/* Variable-font axes — Newsreader and Inter both ship wght (and Inter
 	   ships wdth). Tokenizing the axis values lets us tune the brand voice
@@ -88,12 +85,12 @@
 	--type-wght-body: 400;
 	--type-wdth-display: 100;
 
-	--leading-tight: 1.1;
+	--leading-tight: 1.05;
 	--leading-snug: 1.25;
 	--leading-normal: 1.6;
 	--leading-relaxed: 1.7;
 
-	--ls-display: -0.04em;
+	--ls-display: -0.045em;
 	--ls-heading: -0.02em;
 	--ls-body: 0;
 	--ls-overline: 0.16em;
@@ -122,11 +119,11 @@
 	--radius-lg: 12px;
 	--radius-pill: 9999px;
 
-	/* Shadow — warm grey, restrained */
-	--shadow-sm: 0 1px 2px rgba(44, 58, 48, 0.06);
-	--shadow-md: 0 8px 24px rgba(44, 58, 48, 0.08);
-	--shadow-lg: 0 16px 40px rgba(44, 58, 48, 0.12);
-	--shadow-xl: 0 24px 64px rgba(44, 58, 48, 0.16);
+	/* Shadow — cool indigo, restrained */
+	--shadow-sm: 0 1px 2px rgba(27, 42, 74, 0.06);
+	--shadow-md: 0 8px 24px rgba(27, 42, 74, 0.08);
+	--shadow-lg: 0 16px 40px rgba(27, 42, 74, 0.12);
+	--shadow-xl: 0 24px 64px rgba(27, 42, 74, 0.16);
 
 	/* Motion */
 	--motion-duration-fast: 150ms;
@@ -165,8 +162,8 @@
 	--z-modal: 400;
 	--z-toast: 500;
 
-	/* Floating dock — glassmorphic dark pill, kept stable across light/dark
-	   themes (the dock is intentionally one finish). */
+	/* Floating dock — glassmorphic indigo-black pill, kept stable across
+	   light/dark themes (the dock is intentionally one finish). */
 	--surface-dock: color-mix(in oklch, var(--surface-ink) 92%, transparent);
 	--surface-dock-hover: rgba(255, 255, 255, 0.08);
 	--surface-dock-active: rgba(255, 255, 255, 0.1);
@@ -176,63 +173,57 @@
 	--text-dock-hover: #ffffff;
 	--border-dock: rgba(255, 255, 255, 0.07);
 	--border-dock-divider: rgba(255, 255, 255, 0.08);
-	--shadow-dock: 0 16px 40px rgba(0, 0, 0, 0.18), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+	--shadow-dock: 0 16px 40px rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
 
 	/* Misc */
 	--nav-height: 64px;
 }
 
-/* Dark theme */
+/* Dark theme — deep indigo ground, mist text, the bright moon as accent. */
 [data-theme='dark'] {
-	--surface-base: oklch(23.59% 0.0116 156.22);
-	--surface-raised: oklch(27.67% 0.0123 160.47);
-	--surface-sunken: oklch(20.36% 0.0085 153.15);
-	--surface-ink: oklch(16.88% 0.0063 156.48);
+	--surface-base: oklch(19.5% 0.03 264);
+	--surface-raised: oklch(28.9% 0.0622 263.9); /* ink */
+	--surface-sunken: oklch(15.5% 0.026 264);
+	--surface-ink: oklch(28.9% 0.0622 263.9);
 	--surface-overlay: oklch(0% 0 0 / 0.65);
 
-	--text-primary: oklch(93.64% 0.0074 132.42);
-	--text-secondary: oklch(82.61% 0.0117 141.26);
-	--text-muted: oklch(66.16% 0.0163 164.48);
-	--text-inverse: oklch(98.2% 0.0041 91.45);
+	--text-primary: oklch(92% 0.015 250); /* 14.5:1 on base */
+	--text-secondary: oklch(80% 0.02 252); /* 9.8:1 */
+	--text-muted: oklch(68% 0.022 255); /* 6.4:1 */
+	--text-inverse: oklch(28.9% 0.0622 263.9); /* ink — on a moon fill */
 
-	--border-default: oklch(36.76% 0.0177 154.92);
-	--border-strong: oklch(47.68% 0.0177 164.13);
-	--border-focus: oklch(73.87% 0.0717 152.81);
+	--border-default: oklch(36% 0.02 260);
+	--border-strong: oklch(48% 0.02 260);
+	--border-focus: oklch(91.3% 0.0249 91.6); /* moon */
 
-	--accent-green: oklch(73.87% 0.0717 152.81);
-	--accent-green-light: oklch(79.53% 0.0609 151.63);
-	--accent-green-soft: oklch(73.87% 0.0717 152.81 / 0.18);
+	--accent: oklch(91.3% 0.0249 91.6); /* bright moon, 14:1 on base */
+	--accent-strong: oklch(90% 0.045 85);
+	--accent-soft: oklch(91.3% 0.0249 91.6 / 0.16);
+	--accent-on-dark: oklch(91.3% 0.0249 91.6);
 
-	--accent-pink: oklch(79.97% 0.0859 28.92);
-	--accent-pink-light: oklch(85.03% 0.0641 30.47);
-	--accent-pink-soft: oklch(79.97% 0.0859 28.92 / 0.18);
-
-	/* Warm-black shadows — tinted with the ink hue instead of neutral black
-	   so dark-theme shadows stay in the brand's warm-green family. */
-	--shadow-sm: 0 1px 2px oklch(16.88% 0.0063 156.48 / 0.4);
-	--shadow-md: 0 8px 24px oklch(16.88% 0.0063 156.48 / 0.45);
-	--shadow-lg: 0 16px 40px oklch(16.88% 0.0063 156.48 / 0.55);
-	--shadow-xl: 0 24px 64px oklch(16.88% 0.0063 156.48 / 0.65);
+	/* Cool-black shadows — tinted with the deepest ink so dark-theme shadows
+	   stay in the indigo family rather than going neutral black. */
+	--shadow-sm: 0 1px 2px rgba(7, 12, 23, 0.4);
+	--shadow-md: 0 8px 24px rgba(7, 12, 23, 0.45);
+	--shadow-lg: 0 16px 40px rgba(7, 12, 23, 0.55);
+	--shadow-xl: 0 24px 64px rgba(7, 12, 23, 0.65);
 }
 
-/* Wide-gamut brand accents. On Display-P3 screens the sage and coral push past
-   the sRGB chroma ceiling for a richer brand presence. Each value keeps the
-   exact lightness and hue of its sRGB fallback above, so every contrast ratio
-   is preserved — only chroma grows where the display can render it. The sRGB
-   oklch() declarations above remain the universal fallback for non-P3 engines. */
+/* Wide-gamut accent. On Display-P3 screens the warm accent pushes past the
+   sRGB chroma ceiling for a richer moon. Each value keeps the exact lightness
+   and hue of its sRGB fallback above, so every contrast ratio is preserved —
+   only chroma grows where the display can render it. */
 @media (color-gamut: p3) {
 	:root {
-		--accent-green: oklch(54.1% 0.0912 152.7);
-		--accent-green-light: oklch(65% 0.0838 152.2);
-		--accent-pink: oklch(70.3% 0.1262 28.7);
-		--accent-pink-light: oklch(76.1% 0.1133 29.1);
+		--accent: oklch(51% 0.11 79);
+		--accent-strong: oklch(45.5% 0.113 76);
+		--border-focus: oklch(51% 0.11 79);
 	}
 
 	[data-theme='dark'] {
-		--accent-green: oklch(73.9% 0.0846 152.8);
-		--accent-green-light: oklch(79.5% 0.0718 151.6);
-		--accent-pink: oklch(80% 0.1014 28.9);
-		--accent-pink-light: oklch(85% 0.0756 30.5);
+		--accent: oklch(91.3% 0.035 91.6);
+		--accent-strong: oklch(90% 0.06 85);
+		--border-focus: oklch(91.3% 0.035 91.6);
 	}
 }
 
@@ -259,7 +250,7 @@ html {
 body {
 	margin: 0;
 	min-height: 100dvh;
-	/* Transparent so the fixed .world-layer (per-route fog + Tai Chi geometry)
+	/* Transparent so the fixed .world-layer (per-route fog + ink-wash geometry)
 	   behind it stays visible; the opaque base color now lives on <html>. */
 	background: transparent;
 	color: var(--text-primary);
@@ -274,6 +265,7 @@ a {
 	text-decoration-color: var(--border-strong);
 	text-underline-offset: 0.18em;
 	text-decoration-thickness: 1px;
+	transition: text-decoration-color var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 /* Suppress iOS Safari's translucent grey tap flash on every interactive
@@ -282,8 +274,10 @@ a {
 	-webkit-tap-highlight-color: transparent;
 }
 
+/* Links resolve toward the warm accent on hover — the one warm note doubling as
+   the interaction cue. */
 a:hover {
-	text-decoration-color: var(--text-primary);
+	text-decoration-color: var(--accent);
 }
 
 :focus-visible {
