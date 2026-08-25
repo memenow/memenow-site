@@ -17,12 +17,12 @@ describe('ThemeSwitch', () => {
 
 	it('mirrors the document theme on mount', async () => {
 		document.documentElement.setAttribute('data-theme', 'dark');
-		const screen = render(ThemeSwitch);
+		const screen = await render(ThemeSwitch);
 		await expect.element(screen.getByLabelText('Switch to light theme')).toBeInTheDocument();
 	});
 
 	it('toggles to dark on click and persists to localStorage', async () => {
-		const screen = render(ThemeSwitch);
+		const screen = await render(ThemeSwitch);
 		const button = screen.getByLabelText('Switch to dark theme');
 		await button.click();
 		expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
@@ -31,7 +31,7 @@ describe('ThemeSwitch', () => {
 	});
 
 	it('toggles back to light on a second click', async () => {
-		const screen = render(ThemeSwitch);
+		const screen = await render(ThemeSwitch);
 		await screen.getByLabelText('Switch to dark theme').click();
 		await screen.getByLabelText('Switch to light theme').click();
 		expect(document.documentElement.getAttribute('data-theme')).toBe('light');
@@ -45,7 +45,7 @@ describe('ThemeSwitch', () => {
 			throw new DOMException('Quota exceeded', 'QuotaExceededError');
 		});
 		try {
-			const screen = render(ThemeSwitch);
+			const screen = await render(ThemeSwitch);
 			await screen.getByLabelText('Switch to dark theme').click();
 			expect(setItem).toHaveBeenCalledWith(STORAGE_KEY, 'dark');
 			expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
