@@ -28,12 +28,12 @@ describe('MotionSwitch', () => {
 
 	it('mirrors the document motion state on mount', async () => {
 		document.documentElement.setAttribute('data-motion', 'reduced');
-		const screen = render(MotionSwitch);
+		const screen = await render(MotionSwitch);
 		await expect.element(screen.getByLabelText('Allow motion')).toBeInTheDocument();
 	});
 
 	it('reduces motion on click, persists the choice, and stops Lenis', async () => {
-		const screen = render(MotionSwitch);
+		const screen = await render(MotionSwitch);
 		await screen.getByLabelText('Reduce motion').click();
 		expect(document.documentElement.getAttribute('data-motion')).toBe('reduced');
 		expect(localStorage.getItem(STORAGE_KEY)).toBe('reduced');
@@ -42,7 +42,7 @@ describe('MotionSwitch', () => {
 	});
 
 	it('re-allows motion on a second click and restarts Lenis', async () => {
-		const screen = render(MotionSwitch);
+		const screen = await render(MotionSwitch);
 		await screen.getByLabelText('Reduce motion').click();
 		await screen.getByLabelText('Allow motion').click();
 		expect(document.documentElement.getAttribute('data-motion')).toBe('full');
@@ -57,7 +57,7 @@ describe('MotionSwitch', () => {
 			throw new DOMException('Quota exceeded', 'QuotaExceededError');
 		});
 		try {
-			const screen = render(MotionSwitch);
+			const screen = await render(MotionSwitch);
 			await screen.getByLabelText('Reduce motion').click();
 			expect(setItem).toHaveBeenCalledWith(STORAGE_KEY, 'reduced');
 			expect(document.documentElement.getAttribute('data-motion')).toBe('reduced');
