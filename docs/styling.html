@@ -34,10 +34,10 @@
 				<div class="eyebrow">Engineering</div>
 				<h1>Styling &amp; tokens</h1>
 				<p class="lede">
-					A two-tone palette (sage green + coral pink + warm white), one display family (Newsreader)
-					and one body family (Inter), and a strict
-					<code>.c-*</code> / <code>.l-*</code> namespacing convention. Every value comes from a CSS
-					custom property — never a literal.
+					The Indigo Nocturne palette (mist paper, indigo ink, and moon-gold), one display family
+					(Newsreader) and one body family (Inter) with per-script CJK stacks, and a strict
+					<code>.c-*</code> / <code>.l-*</code> namespacing convention aligned with
+					<code>DESIGN.md</code> (<code>mmn-scroll-v1</code>).
 				</p>
 			</header>
 
@@ -51,13 +51,19 @@
 @import '../lib/styles/tokens.css';
 @import '../lib/styles/scene.css';
 @import '../lib/styles/layout.css';
+@import '../lib/styles/chrome.css';
 @import '../lib/styles/components.css';
+@import '../lib/styles/editorial.css';
 @import '../lib/styles/world-layer.css';
 
 @custom-variant dark (&amp;:where([data-theme='dark'], [data-theme='dark'] *));</code></pre>
 			<p>
 				The order matters. Tokens load first, then scene fog (so it can read tokens), then layout
-				utilities, then component primitives, then the world-layer overlay. The
+				utilities, then global chrome primitives (<code>chrome.css</code>: masthead, floating dock,
+				CTAs, switches, footer, progress bar), then narrative scroll primitives
+				(<code>components.css</code>: hero, chapters, stack grids), then editorial and product
+				display primitives (<code>editorial.css</code>: showcase, legal reading aids, stats,
+				timeline, comparison table, tier grid, platform grid), then the world-layer overlay. The
 				<code>dark</code> custom variant lets Tailwind utilities respond to
 				<code>data-theme="dark"</code> without relying on the OS-level
 				<code>prefers-color-scheme</code>.
@@ -77,73 +83,58 @@
 				<tbody>
 					<tr>
 						<td><code>--surface-base</code></td>
-						<td><code>#faf9f6</code></td>
-						<td><code>#1a201c</code></td>
-						<td>Page background</td>
+						<td><code>#f2f5f9</code></td>
+						<td><code>#0e1523</code></td>
+						<td>Page canvas (mist paper / night indigo)</td>
 					</tr>
 					<tr>
 						<td><code>--surface-raised</code></td>
-						<td><code>#ffffff</code></td>
-						<td><code>#232a26</code></td>
-						<td>Cards, dialogs</td>
+						<td><code>#fbfdff</code></td>
+						<td><code>#1b2a4a</code></td>
+						<td>Paper panels, tier cards, controls</td>
 					</tr>
 					<tr>
 						<td><code>--surface-sunken</code></td>
-						<td><code>#f0f2ee</code></td>
-						<td><code>#141815</code></td>
-						<td>Inputs, hover wells</td>
+						<td><code>#dce3ec</code></td>
+						<td><code>#070c17</code></td>
+						<td>Recessed wells, hover surfaces</td>
 					</tr>
 					<tr>
 						<td><code>--text-primary</code></td>
-						<td><code>#2c3a30</code></td>
-						<td><code>#e8ebe6</code></td>
-						<td>Headings, primary copy</td>
+						<td><code>#1b2a4a</code></td>
+						<td><code>#dde6ee</code></td>
+						<td>Headings, primary copy, ink fills</td>
 					</tr>
 					<tr>
 						<td><code>--text-secondary</code></td>
-						<td><code>#4f6253</code></td>
-						<td><code>#c2c8c1</code></td>
-						<td>Body, ledes</td>
+						<td><code>#394865</code></td>
+						<td><code>#b9c5d3</code></td>
+						<td>Body prose, ledes</td>
 					</tr>
 					<tr>
 						<td><code>--text-muted</code></td>
-						<td><code>#62716a</code></td>
-						<td><code>#8a9690</code></td>
-						<td>Captions, eyebrows</td>
+						<td><code>#5a6576</code></td>
+						<td><code>#8f99a6</code></td>
+						<td>Captions, eyebrows, disclaimers</td>
 					</tr>
 					<tr>
-						<td><code>--accent-green</code></td>
-						<td><code>#4a7c59</code></td>
-						<td><code>#88b895</code></td>
-						<td>Brand primary, focus ring</td>
-					</tr>
-					<tr>
-						<td><code>--accent-pink</code></td>
-						<td><code>#da8579</code></td>
-						<td><code>#f0a99e</code></td>
-						<td>Brand highlight, seal mark, the only ornament</td>
+						<td><code>--accent</code></td>
+						<td><code>#825f1e</code></td>
+						<td><code>#e8e2d0</code></td>
+						<td>Moon-gold / moonlight scarce emphasis, focus ring</td>
 					</tr>
 				</tbody>
 			</table>
 			<p>
-				<code>--brand-coral</code> is an alias of <code>--accent-pink</code> reserved for the logo's
-				adjacent signature elements; do not introduce a third coral token.
-			</p>
-			<p>
 				All palette values are authored in <strong>OKLCH</strong> (a perceptually uniform color
-				space that gives even lightness steps and predictable color-mix). The sRGB hex values
-				visible in the table above are approximations for reference; the source of truth is the
-				<code>oklch()</code> literal in <code>tokens.css</code>. Every contrast ratio has been
-				verified against the OKLCH values.
+				space that gives even lightness steps and predictable contrast). The hex values in the table
+				above mirror <code>DESIGN.md</code> for reference; the source of truth is
+				<code>tokens.css</code>.
 			</p>
 			<p>
-				On <strong>Display-P3</strong> screens, a wide-gamut accent layer pushes
-				<code>--accent-green</code> and <code>--accent-pink</code> (and their
-				<code>-light</code> variants) past the sRGB chroma ceiling for a richer brand presence. The
-				overrides are declared in a <code>@media (color-gamut: p3)</code> block in
-				<code>tokens.css</code>; they keep the exact lightness and hue of the sRGB fallback, so
-				every contrast ratio is preserved — only chroma grows. Non-P3 engines never see the
-				override.
+				On <strong>Display-P3</strong> screens, a wide-gamut override in
+				<code>@media (color-gamut: p3)</code> deepens accent chroma while preserving exact lightness
+				and contrast ratios. Non-P3 engines fall back seamlessly to the sRGB OKLCH values.
 			</p>
 
 			<h3>Type</h3>
@@ -220,31 +211,40 @@
 					</tr>
 					<tr>
 						<td><code>.c-*</code></td>
-						<td><code>lib/styles/components.css</code></td>
 						<td>
-							Component primitives. Every Svelte component in <code>lib/components/</code> that has
-							visual style maps to a single <code>.c-*</code> root with optional
-							<code>--variant</code> modifiers (<code>.c-artifact-cta--ritual</code>,
-							<code>.c-chapter--align-split</code>, …). Variants and elements use BEM modifiers,
-							never extra classes from another namespace.
+							<code>lib/styles/chrome.css</code>, <code>components.css</code> &amp;
+							<code>editorial.css</code>
+						</td>
+						<td>
+							Component primitives split by responsibility: global chrome (<code>.c-masthead</code>,
+							<code>.c-dock</code>, <code>.c-artifact-cta</code>, <code>.c-icon-switch</code>,
+							<code>.c-footer</code>, <code>.c-footer__sponsors</code>,
+							<code>.c-footer__locales</code>, <code>.c-progress</code>) lives in
+							<code>chrome.css</code>; narrative scroll sections (<code>.c-editorial-hero</code>,
+							<code>.c-chapter</code>, <code>.c-stack-grid</code>) live in
+							<code>components.css</code>; editorial and structured product displays
+							(<code>.c-showcase</code>, <code>.c-legal-summary</code>, <code>.c-stat-card</code>,
+							<code>.c-timeline</code>, <code>.c-comparison</code>, <code>.c-tier-grid</code>,
+							<code>.c-platform-grid</code>) live in <code>editorial.css</code>. Variants use BEM
+							modifiers (<code>.c-artifact-cta--filled</code>, <code>.c-chapter--align-split</code>,
+							<code>.c-platform-grid--stack</code>).
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<code>.world-layer</code> / <code>.world-layer__taichi</code> /
-							<code>.world-layer__grain</code>
+							<code>.world-layer</code> / <code>.world-layer__static</code> /
+							<code>.world-layer__canvas</code> / <code>.world-layer__grain</code>
 						</td>
 						<td><code>lib/styles/world-layer.css</code></td>
 						<td>
 							The fixed underlay that renders behind every route. <code>.world-layer</code> paints
-							the active fog, <code>.world-layer__taichi</code> the Tai Chi geometry with
-							scroll-driven parallax drift, and <code>.world-layer__grain</code> a faint static film
-							grain (inline SVG <code>feTurbulence</code>) tiled over the underlay for texture. The
-							grain is hidden under <code>prefers-reduced-transparency: reduce</code> and
-							<code>forced-colors: active</code>. The layer reads
-							<code>--scene-fog-active</code> from <code>scene.css</code> so navigating between
-							routes shifts the fog without remounting anything. Also declares the cross-page View
-							Transition styles (<code>::view-transition-old/new(root)</code> crossfade).
+							the active fog, <code>.world-layer__static</code> supplies the SSR / no-WebGL painted
+							base layer, <code>.world-layer__canvas</code> hosts the three-plane Threlte parallax
+							scene, and <code>.world-layer__grain</code> overlays a faint static film grain (inline
+							SVG <code>feTurbulence</code>). The grain is hidden under
+							<code>prefers-reduced-transparency: reduce</code> and
+							<code>forced-colors: active</code>. Also declares the cross-page View Transition
+							styles (<code>::view-transition-old/new(root)</code> crossfade).
 						</td>
 					</tr>
 					<tr>
@@ -314,9 +314,9 @@
 
 			<div class="callout callout--warn">
 				<strong>No raw color literals</strong>
-				If you find yourself writing <code>color: #4a7c59</code> in a component, it should probably
-				be <code>color: var(--accent-green)</code>. The token is what survives a future palette
-				tweak.
+				If you find yourself writing <code>color: #825f1e</code> in a component, it should be
+				<code>color: var(--accent)</code>. Semantic tokens keep light mode, night mode, and
+				Display-P3 overrides in lockstep.
 			</div>
 
 			<h2>Tailwind v4 specifics</h2>

@@ -157,8 +157,9 @@ onMount(() =&gt; {
 			<ul>
 				<li>
 					It writes the scroll fraction (0–1) to <code>--world-scroll</code> on
-					<code>&lt;html&gt;</code>. <code>world-layer.css</code> reads it to translate and scale
-					<code>.world-layer__taichi</code>, giving the persistent underlay a slow parallax drift.
+					<code>&lt;html&gt;</code>. <code>WorldScene.svelte</code> reads it on scroll, resize, and
+					live <code>data-motion</code> mutations (via <code>MutationObserver</code>) to parallax
+					the three ink-wash planes on demand.
 				</li>
 				<li>
 					It sets the width of the <code>.c-progress__bar</code> reading-progress hairline, which is
@@ -215,8 +216,10 @@ onMount(() =&gt; {
 					triggers so anything not caught by the JS gate still ends up visible.
 				</li>
 				<li>
-					<code>world-layer.css</code> zeroes the <code>--world-scroll</code> parallax transform, so
-					the Tai Chi underlay holds still.
+					<code>WorldScene.svelte</code> pins its scroll offset to <code>0</code> immediately when
+					reduced motion is active (including stationary mid-page flips of
+					<code>MotionSwitch</code>), and <code>world-layer.css</code> zeroes
+					<code>--world-scroll</code> so the underlay holds still.
 				</li>
 				<li>
 					Cross-page View Transitions are skipped entirely — <code>onNavigate</code> in

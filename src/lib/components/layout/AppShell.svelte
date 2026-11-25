@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import Footer from './Footer.svelte';
 	import FloatingDock from './FloatingDock.svelte';
+	import Masthead from './Masthead.svelte';
 	import WorldLayer from './WorldLayer.svelte';
 	import { useMessages } from '$lib/i18n';
 
@@ -14,6 +15,7 @@
 
 <a class="l-skip-link" href="#main">{common.skipToContent}</a>
 
+<Masthead />
 <FloatingDock />
 
 <main id="main" class="page-main" tabindex="-1">

@@ -126,11 +126,11 @@ def write_site_manifest() -> None:
     manifest = {
         'name': 'memenow',
         'short_name': 'memenow',
-        'description': 'Make AI your partner.',
+        'description': 'memenow — Independent AI studio crafting YinYang Agent.',
         'start_url': '/',
         'display': 'standalone',
-        'background_color': '#F7F7EE',
-        'theme_color': '#F7F7EE',
+        'background_color': '#F2F5F9',
+        'theme_color': '#F2F5F9',
         'icons': [
             {
                 'src': '/brand/app-icon-180.png',

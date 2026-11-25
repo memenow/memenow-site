@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { reveal } from '$lib/utils/motion';
+	import { useMessages } from '$lib/i18n';
+	import ScrollCue from '$lib/components/ui/ScrollCue.svelte';
 	import type { SceneImage } from '$lib/types';
 
 	let {
@@ -8,22 +10,25 @@
 		eyebrowRight,
 		title,
 		lede,
-		cue,
+		scrollTarget,
 		image,
 		cta,
 		id = 'editorial-hero'
 	}: {
-		eyebrowLeft: string;
-		eyebrowRight: string;
+		eyebrowLeft?: string;
+		eyebrowRight?: string;
 		title: string;
-		lede: string;
-		cue: string;
+		lede?: string;
+		/** Optional in-page anchor (e.g. `#approach`) that enables the silent visual ScrollCue. */
+		scrollTarget?: string;
 		image?: SceneImage;
 		cta?: Snippet;
 		/** DOM id base; the section becomes `${id}` and the title `${id}-title`. */
 		id?: string;
 	} = $props();
 
+	const messages = useMessages();
+	const scrollLabel = $derived(messages().common.scrollToContent);
 	const titleId = $derived(`${id}-title`);
 </script>
 
@@ -53,10 +58,12 @@
 
 	<div class="c-editorial-hero__scrim" aria-hidden="true"></div>
 
-	<div class="c-editorial-hero__top reveal-fade" use:reveal>
-		<span>{eyebrowLeft}</span>
-		<span>{eyebrowRight}</span>
-	</div>
+	{#if eyebrowLeft || eyebrowRight}
+		<div class="c-editorial-hero__top reveal-fade" use:reveal>
+			{#if eyebrowLeft}<span>{eyebrowLeft}</span>{/if}
+			{#if eyebrowRight}<span>{eyebrowRight}</span>{/if}
+		</div>
+	{/if}
 
 	<div class="c-editorial-hero__bottom">
 		<h1
@@ -66,12 +73,18 @@
 		>
 			{title}
 		</h1>
-		<p class="c-editorial-hero__lede reveal-fade" use:reveal>{lede}</p>
+		{#if lede}
+			<p class="c-editorial-hero__lede reveal-fade" use:reveal>{lede}</p>
+		{/if}
 		{#if cta}
 			<div class="c-editorial-hero__cta reveal-fade" use:reveal>
 				{@render cta()}
 			</div>
 		{/if}
-		<span class="c-editorial-hero__cue reveal-fade" use:reveal>{cue}</span>
+		{#if scrollTarget}
+			<div class="c-editorial-hero__scroll reveal-fade" use:reveal>
+				<ScrollCue href={scrollTarget} label={scrollLabel} />
+			</div>
+		{/if}
 	</div>
 </section>

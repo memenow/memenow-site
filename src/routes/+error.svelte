@@ -27,10 +27,8 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<EditorialHero {eyebrowLeft} {eyebrowRight} {title} {lede} cue={t.cueHome} />
-
-<section class="c-chapter">
-	<div class="c-chapter__inner c-chapter__inner--center">
-		<ArtifactCta href={homeHref} palette="celestial" size="lg">{t.returnHome}</ArtifactCta>
-	</div>
-</section>
+<EditorialHero {eyebrowLeft} {eyebrowRight} {title} {lede}>
+	{#snippet cta()}
+		<ArtifactCta href={homeHref} variant="outline" size="lg">{t.returnHome}</ArtifactCta>
+	{/snippet}
+</EditorialHero>

@@ -98,6 +98,16 @@
 		};
 
 		measure();
+		// Observe runtime `data-motion` flips (MotionSwitch) and OS reduced-motion
+		// changes so a stationary toggle snaps WebGL parallax to 0 immediately.
+		const motionObserver = new MutationObserver(() => onScroll());
+		motionObserver.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ['data-motion']
+		});
+		const reducedMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+		reducedMedia.addEventListener('change', onScroll);
+
 		window.addEventListener('scroll', onScroll, { passive: true });
 		window.addEventListener('resize', onScroll, { passive: true });
 		document.addEventListener('visibilitychange', onVisibility);
@@ -105,6 +115,8 @@
 		canvas.addEventListener('webglcontextrestored', onRestored, false);
 
 		return () => {
+			motionObserver.disconnect();
+			reducedMedia.removeEventListener('change', onScroll);
 			window.removeEventListener('scroll', onScroll);
 			window.removeEventListener('resize', onScroll);
 			document.removeEventListener('visibilitychange', onVisibility);

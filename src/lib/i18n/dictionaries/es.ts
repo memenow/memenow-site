@@ -1,406 +1,459 @@
-/** Spanish dictionary. Structure is enforced by `MessageSchema`. */
-
 import type { MessageSchema } from './zh';
+
+/**
+ * Spanish dictionary — short, concrete, zero-filler copy matching `zh.ts`.
+ */
 
 export const es: MessageSchema = {
 	common: {
 		brand: 'memenow',
 		home: 'Inicio',
 		products: 'Productos',
-		company: 'Nosotros',
+		company: 'Empresa',
+		contact: 'Contacto',
 		legal: 'Legal',
 		privacy: 'Privacidad',
 		terms: 'Términos',
-		skipToContent: 'Saltar al contenido principal',
+		skipToContent: 'Ir al contenido',
+		scrollToContent: 'Desplazar abajo',
 		navAriaLabel: 'Navegación principal',
 		brandHomeAriaLabel: 'Inicio de memenow',
-		rightsReserved: '© {year} memenow · Todos los derechos reservados',
+		mastheadCta: 'Abrir YinYang Agent',
+		footerTagline: 'Un compañero de IA que te conoce',
+		sponsorsLabel: 'Patrocinadores',
+		studioRegion: 'Delaware, EE. UU.',
+		rightsReserved: '© {year} memenow LLC · Todos los derechos reservados',
 		theme: {
-			switchToDark: 'Cambiar al tema oscuro',
-			switchToLight: 'Cambiar al tema claro'
+			switchToDark: 'Cambiar a tema oscuro',
+			switchToLight: 'Cambiar a tema claro'
 		},
 		motion: {
-			reduce: 'Reducir animaciones',
-			allow: 'Permitir animaciones'
+			reduce: 'Reducir movimiento',
+			allow: 'Permitir movimiento'
 		},
 		language: {
-			menuLabel: 'Cambiar idioma',
+			menuLabel: 'Idioma',
 			footerTitle: 'Idioma'
+		}
+	},
+	catalog: {
+		freeLabel: 'Gratis',
+		perMonthSuffix: '/mes',
+		disclaimer: 'El importe final aparece al pagar.',
+		tiers: {
+			dailyDecree: {
+				badge: 'Gratis diario',
+				title: 'Decreto diario',
+				summary: 'Nota según los pilares del día.',
+				features: ['Sin cuenta', 'Fuera del cupo mensual'],
+				cta: 'Ver decreto'
+			},
+			monthlyFree: {
+				badge: 'Gratis',
+				title: 'Gratis mensual',
+				summary: '2 lecturas base al mes.',
+				features: [
+					'Cuatro Pilares en lenguaje claro',
+					'Contraste con el pasado',
+					'Guardado en cuenta'
+				],
+				cta: 'Ver mi carta'
+			},
+			basicCredits: {
+				badge: 'Recarga',
+				title: 'Créditos básicos',
+				summary: 'Suma 2 lecturas base.',
+				features: ['Sin caducidad, acumulables', 'Se usan tras el cupo mensual'],
+				cta: 'Ver créditos'
+			},
+			fullReport: {
+				badge: 'Pago único',
+				title: 'Informe completo',
+				summary: 'Desbloqueo permanente por carta.',
+				features: [
+					'Amor, Carrera, Salud y Familia',
+					'Ciclos de 10 años, previsión y base',
+					'Tarjeta compartible'
+				],
+				cta: 'Desbloquear informe'
+			},
+			monthlyMember: {
+				badge: 'Mensual',
+				title: 'Membresía mensual',
+				summary: 'Ciclos y diálogo continuo.',
+				features: [
+					'Ciclos diarios, semanales, mensuales y anuales',
+					'Diálogo + actualizaciones temáticas',
+					'5 Informes completos por ciclo'
+				],
+				cta: 'Ver membresía'
+			}
+		},
+		platforms: {
+			web: {
+				statusLabel: 'Activo · 7 idiomas',
+				title: 'Web',
+				body: 'yinyang.memenow.xyz — directo en navegador.'
+			},
+			ios: {
+				statusLabel: 'En desarrollo',
+				title: 'App iPhone',
+				body: 'App nativa iOS con consulta diaria y avisos.'
+			},
+			mcp: {
+				statusLabel: 'Previsto',
+				title: 'Enlaces IA',
+				body: 'Conecta tu carta a tus herramientas de IA.'
+			}
 		}
 	},
 	home: {
 		meta: {
-			title: 'memenow — Conoce tu ritmo. Elige con claridad.',
-			description:
-				'memenow es un estudio independiente de IA que crea herramientas cuidadas para la reflexión personal y el ritmo de la vida. Nuestro producto estrella, Yinyang Agent, convierte el BaZi clásico de los Cuatro Pilares en una prosa cálida y sensata a la que puedes volver en cada etapa de tu vida.',
-			ogTitle: 'memenow — Conoce tu ritmo. Elige con claridad.',
-			ogDescription:
-				'Un estudio independiente de IA dedicado al autoconocimiento y al ritmo de la vida. Primer lanzamiento: Yinyang Agent, con lecturas BaZi de los Cuatro Pilares, Ciclos de tiempo y conversación.'
+			title: 'memenow — Un compañero de IA que te conoce',
+			description: 'memenow LLC crea productos de IA personal, empezando por YinYang Agent.',
+			ogTitle: 'memenow — Un compañero de IA que te conoce',
+			ogDescription: 'YinYang Agent: carta solar, Informe completo, Ciclos de tiempo y diálogo.'
 		},
 		hero: {
-			eyebrowLeft: 'MEMENOW · AUTOCONOCIMIENTO Y RITMO VITAL',
-			eyebrowRight: 'PRODUCTO ESTRELLA · YINYANG AGENT',
-			title: 'Conoce tu ritmo. Elige con claridad.',
-			lede: 'En una encrucijada vital no necesitas tópicos vagos sobre la suerte, sino un espejo sereno y honesto. Nuestro producto estrella, Yinyang Agent, traduce los Cuatro Pilares clásicos del BaZi a una prosa cálida y fácil de leer que te ayuda a entender tu naturaleza y a moverte entre las estaciones cambiantes de la vida.',
-			primaryCta: 'Prueba Yinyang Agent gratis',
-			secondaryCta: 'Conoce el producto',
-			cue: 'Desplázate · 01 Producto estrella'
+			title: 'Un compañero de IA que te conoce',
+			primaryCta: 'Conocer YinYang Agent',
+			secondaryCta: 'Abrir app'
 		},
-		yinyang: {
-			number: '01',
-			label: 'Yinyang Agent',
-			title: 'Una lectura personal escrita para acompañarte',
-			lede: 'Empieza con tu fecha, hora y zona horaria de nacimiento; no necesitas saber nada de astrología. Recibe un retrato de tus Cuatro Pilares, razonado a fondo, escrito en una prosa clara y actual, y guardado para siempre en tu cuenta privada.',
-			p1: 'Yinyang Agent calibra tu carta natal según los términos solares astronómicos y combina el equilibrio elemental de ZiPing con la dinámica estructural de MangPai. En lugar de soltarte un muro de símbolos esotéricos, entrelaza tu Maestro del Día, los hitos de años pasados y orientación sobre amor, carrera, salud y familia en un único relato coherente.',
-			p2: 'Tu lectura natal ancla el gran arco de quién eres. A medida que la vida avanza, los Ciclos de tiempo señalan ventanas favorables y de precaución en días, semanas, meses y años, y la conversación te permite volver cuando quieras con una decisión real en mente.',
+		approach: {
+			title: 'Principios',
+			beliefs: [
+				{
+					num: '01',
+					title: 'Memoria continua',
+					body: 'Mantiene el contexto entre sesiones.'
+				},
+				{
+					num: '02',
+					title: 'Mostrar la base',
+					body: 'Razonamiento junto a cada respuesta.'
+				},
+				{
+					num: '03',
+					title: 'Tus datos',
+					body: 'Espacio privado. Exporta o borra cuando quieras.'
+				}
+			]
+		},
+		flagship: {
+			title: 'YinYang Agent',
+			kicker: 'Cuatro Pilares · Ciclos de tiempo · Diálogo',
+			meta: 'yinyang.memenow.xyz · 7 idiomas',
 			pillars: [
 				{
-					num: '01 · Retrato natal',
-					title: 'Entiende tu forma de ser innata',
-					body: 'Sin glosarios. Lee un relato matizado y en lenguaje sencillo sobre tu temperamento, tus fortalezas naturales y cómo se desarrollaron los años decisivos de tu pasado.'
+					num: '01',
+					title: 'Carta solar',
+					body: 'Lugar de nacimiento y términos solares, verificada con el pasado.'
 				},
 				{
-					num: '02 · Cuatro ámbitos de vida',
-					title: 'Claridad en amor, carrera, salud y familia',
-					body: 'Ve más allá de las puntuaciones elementales abstractas hacia una reflexión práctica sobre las relaciones, las ambiciones y los hábitos diarios que dan forma a tu vida.'
+					num: '02',
+					title: 'Informe completo',
+					body: 'Amor, Carrera, Salud, Familia + ciclos de 10 años.'
 				},
 				{
-					num: '03 · Ciclos de tiempo',
-					title: 'Avanza al ritmo de días, semanas, meses y años',
-					body: 'Sabe cuándo impulsarte y cuándo descansar. Observa cómo los ciclos actuales interactúan con tu carta natal para marcar el ritmo de tu próximo paso.'
+					num: '03',
+					title: 'Ciclos de tiempo',
+					body: 'Seguimiento diario, semanal, mensual y anual.'
 				},
 				{
-					num: '04 · Conversación',
-					title: 'Una conversación que recuerda quién eres',
-					body: 'Nunca empiezas de cero. Vuelve cuando surja una nueva pregunta o encrucijada y háblalo en una conversación basada en tu carta.'
+					num: '04',
+					title: 'Diálogo con carta',
+					body: 'Preguntas sobre cartas guardadas + actualizaciones.'
 				}
 			],
-			cta: 'Ver mi carta gratis',
-			detailLink: 'Descubre cómo funciona Yinyang Agent'
+			cta: 'Ver mi carta',
+			detailLink: 'Detalles'
 		},
-		pullquote: {
-			quote: 'Leer la marea no es rendirse a las olas: es sostener el timón con serena convicción.',
-			attribution: 'Filosofía del estudio memenow'
-		},
-		studio: {
-			number: '02',
-			label: 'Nuestra filosofía',
-			title: 'Oficio sereno para las preguntas que te acompañan',
-			lede: 'Sin bombo, sin horóscopos vacíos y sin atajos apresurados: solo trabajo cuidado, hecho para perdurar.',
-			p1: 'Fundamos memenow en 2024 a partir de una observación sencilla: mientras gran parte del mundo de la IA competía por crear chatbots más ruidosos y rápidos, muy pocos construían espacios para comprenderse a uno mismo con calma. Cuando alguien lleva a la IA una pregunta vital genuina, merece un razonamiento transparente y calidez humana.',
-			p2: 'Por eso trabajamos como un pequeño taller artesanal. Yinyang Agent marca la pauta de todo lo que creamos: no medimos el éxito por unos primeros treinta segundos deslumbrantes, sino por si sigues encontrando consuelo y claridad cuando vuelves un mes —o un año— después.'
-		},
-		contact: {
-			number: '03',
-			label: 'Contacto',
-			title: 'Empecemos a conversar',
-			lede: 'Para comentarios sobre el producto, consultas de prensa o colaboraciones con sentido, escribe a ',
-			ledeEnd: '.',
-			p1: 'Cada mensaje lo lee y responde personalmente alguien de nuestro equipo. Puede que tardemos un poco en contestar con calma, pero siempre te responderá una persona real, nunca una plantilla automática.',
-			cta: 'Escribe a hello@memenow.xyz'
+		access: {
+			title: 'Acceso',
+			items: [
+				{
+					num: 'Gratis',
+					title: 'Cupo diario y mensual',
+					body: 'Decreto sin registro; 2 lecturas base/mes con cuenta.'
+				},
+				{
+					num: 'Pago',
+					title: 'Por carta o mensual',
+					body: 'Créditos $3.99 · Informe $5.99 · Membresía $9.99/mes.'
+				},
+				{
+					num: 'Plataformas',
+					title: 'Web activa',
+					body: '7 idiomas en línea; app iPhone y enlaces IA en marcha.'
+				}
+			],
+			cta: 'Planes y precios',
+			detailLink: 'Detalles de YinYang Agent'
 		}
 	},
 	products: {
 		meta: {
-			title: 'Productos — memenow',
-			description:
-				'Creaciones de memenow. Empieza con nuestro producto estrella, Yinyang Agent: mensajes diarios gratuitos y carta BaZi básica, síntesis completa de dos escuelas, Ciclos de tiempo y conversación.',
-			ogTitle: 'Productos — memenow',
-			ogDescription:
-				'Creado para la reflexión personal y las decisiones cotidianas. Descubre Yinyang Agent: lecturas BaZi de los Cuatro Pilares, Ciclos de tiempo y conversaciones que conocen tu carta.'
+			title: 'Productos y planes — memenow',
+			description: 'Planes y precios públicos de YinYang Agent.',
+			ogTitle: 'Productos y planes — memenow',
+			ogDescription: 'Decreto diario, Gratis mensual, Créditos, Informe completo y Membresía.'
 		},
 		hero: {
-			eyebrowLeft: 'MEMENOW · PRODUCTOS',
-			eyebrowRight: 'YA DISPONIBLE',
-			title: 'Creado para la reflexión y las decisiones cotidianas',
-			lede: 'No hacemos herramientas de usar y tirar. Creamos compañeros serenos y duraderos para conocerte mejor. Nuestro producto estrella, Yinyang Agent, ya está disponible, empezando por la carta gratuita y las reflexiones diarias.',
-			cue: 'Desplázate · 01 Yinyang Agent'
+			title: 'Productos y planes',
+			primaryCta: 'Ver mi carta',
+			secondaryCta: 'Detalles'
 		},
 		yinyang: {
-			number: '01',
-			label: 'Yinyang Agent',
-			title: 'Entiende tu patrón. Avanza a tu propio ritmo.',
-			lede: 'Descubre el momento de tu nacimiento a través de los Cuatro Pilares del BaZi. Tanto si sientes curiosidad por tu equilibrio elemental por primera vez como si estás sopesando un gran cambio vital, puedes profundizar paso a paso.',
-			steps: [
-				{
-					num: 'Paso 01 · Comienzo gratuito',
-					title: 'Carta básica y mensaje diario',
-					body: 'Introduce tu fecha, hora y zona horaria de nacimiento para ver al instante tus Cuatro Pilares, el equilibrio de tus Cinco Elementos y reflexiones diarias gratuitas sobre el momento.'
-				},
-				{
-					num: 'Paso 02 · Retrato profundo',
-					title: 'Lectura completa de dos escuelas',
-					body: 'Desbloquea tu informe completo y extenso: validaciones de años pasados, arcos de los ciclos de diez años (DaYun), capítulos dedicados al amor, la carrera, la salud y la familia, y una tarjeta retrato para compartir.'
-				},
-				{
-					num: 'Paso 03 · Ritmo vivo',
-					title: 'Ciclos de tiempo y conversación',
-					body: 'Consulta tus ventanas del día, la semana, el mes y el año a medida que cambian las estaciones, o abre una conversación para hablar de decisiones reales con tu carta como contexto.'
-				},
-				{
-					num: 'Paso 04 · Método abierto',
-					title: 'Biblioteca BaZi integrada y razonamiento claro',
-					body: 'Cada idea muestra la base clásica que la sustenta, junto a una Biblioteca BaZi accesible para que descubras cada concepto a tu ritmo.'
-				}
-			],
-			cta: 'Prueba Yinyang Agent gratis',
-			detailLink: 'Lee la historia completa del producto'
+			title: 'YinYang Agent',
+			status: 'Activo · 7 idiomas',
+			summary: 'Cuatro Pilares, ciclos de tiempo y diálogo.',
+			tags: ['Hora solar', 'Informe completo', 'Ciclos de tiempo', 'Diálogo'],
+			primaryCta: 'Abrir app',
+			detailLink: 'Método'
+		},
+		plans: {
+			title: 'Planes y precios',
+			cta: 'Ir a precios',
+			libraryLink: 'Biblioteca BaZi'
 		}
 	},
 	productYinyang: {
 		meta: {
-			title: 'Yinyang Agent — BaZi de los Cuatro Pilares y compañía para tu ritmo vital · memenow',
-			description:
-				'Yinyang Agent convierte el BaZi clásico de los Cuatro Pilares en una prosa clara y actual. Incluye carta calculada por términos solares, síntesis de las escuelas ZiPing y MangPai, Ciclos de tiempo y conversación.',
-			ogTitle: 'Yinyang Agent — Lee el patrón del momento en que naciste',
-			ogDescription:
-				'Empieza gratis con tu carta BaZi básica y mensajes diarios. Profundiza con lecturas extensas, Ciclos de tiempo a varias escalas y conversaciones que conocen tu carta.'
+			title: 'YinYang Agent — memenow',
+			description: 'Carta solar, lectura dual, ciclos y diálogo.',
+			ogTitle: 'YinYang Agent — Entre quietud y paso, hay momento',
+			ogDescription: 'Carta solar, Informe completo, ciclos y diálogo.'
 		},
 		hero: {
-			eyebrowLeft: 'PRODUCTO · YINYANG AGENT',
-			eyebrowRight: 'EMPIEZA GRATIS',
-			title: 'La sabiduría ancestral de los Cuatro Pilares, en una prosa clara y actual',
-			lede: 'El BaZi no es un veredicto fatalista sobre tu futuro, sino una lente probada por el tiempo para observarte. Yinyang Agent reúne la carta calculada por términos solares, la síntesis clásica de dos escuelas, los Ciclos de tiempo y la conversación para que vivas el presente con serena claridad.',
-			primaryCta: 'Ver mi carta gratis',
-			cue: 'Desplázate · 01 Experiencia y ritmo'
+			title: 'Entre quietud y paso, hay momento',
+			lede: 'Carta solar, lectura dual Ziping y Mangpai, ciclos y diálogo.',
+			primaryCta: 'Ver mi carta',
+			secondaryCta: 'Planes y precios'
 		},
 		reading: {
-			number: '01',
-			label: 'Experiencia y ritmo',
-			title: 'Del primer reconocimiento a una perspectiva para cada día',
-			lede: 'Empieza sin esfuerzo con un mensaje diario gratuito o dos lecturas gratuitas de carta básica al mes. Tu carta de los Cuatro Pilares y el resumen narrativo aparecen lado a lado: claros a primera vista y ricos cuando quieras profundizar.',
-			p1: 'Cuando desbloqueas el informe completo, el sistema calibra tu carta según tu zona horaria de nacimiento y los términos solares astronómicos, y despliega validaciones concretas de años pasados, los ciclos de diez años (DaYun) y capítulos prácticos sobre amor, carrera, salud y familia. También puedes consultar cualquier concepto en la Biblioteca BaZi integrada o guardar una tarjeta retrato personalizada de tu carta.',
-			p2: 'Cada lectura queda guardada en tu cuenta como una referencia personal duradera. Con el paso del tiempo, los Ciclos de tiempo señalan tus ventanas del día, la semana, el mes y el año, mientras que la conversación y los canales dedicados a distintos ámbitos de la vida te permiten volver con nuevas preguntas cada vez que surja una decisión.',
+			title: 'Funciones',
 			highlights: [
 				{
-					num: '01 · Sin muro de jerga',
-					title: 'Carta y relato, lado a lado',
-					body: 'Los complejos troncos, ramas y dinámicas elementales se traducen en una prosa cálida y actual que cualquiera puede leer desde el primer día.'
+					num: '01',
+					title: 'Carta y lectura',
+					body: 'Pilares y Diez Dioses junto a texto claro.'
 				},
 				{
-					num: '02 · Anclada en tu pasado',
-					title: 'Validada con años que realmente viviste',
-					body: 'Al repasar años decisivos de tu pasado antes de mirar hacia delante, tu lectura ancla los ciclos futuros en la realidad vivida y no en conjeturas genéricas.'
+					num: '02',
+					title: 'Informe en 4 capítulos',
+					body: 'Amor, Carrera, Salud, Familia + ciclos y tarjeta.'
 				},
 				{
-					num: '03 · Tiempo a varias escalas',
-					title: 'Ventanas del día, la semana, el mes y el año',
-					body: 'Conecta tu estructura natal de largo plazo con el ritmo de hoy, de esta semana o de este año, para saber cuándo avanzar y cuándo recargar energías.'
+					num: '03',
+					title: 'Ciclos de tiempo',
+					body: 'Seguimiento diario a anual en cinco áreas.'
 				},
 				{
-					num: '04 · Conversación con contexto',
-					title: 'Una conversación que conoce tu carta',
-					body: 'Lleva tus preguntas sobre relaciones, tus dilemas profesionales o tus inquietudes a una conversación privada que ya entiende tu patrón natal.'
+					num: '04',
+					title: 'Diálogo y biblioteca',
+					body: 'Consulta sobre cartas guardadas + Biblioteca BaZi.'
 				}
 			]
 		},
-		pullquote: {
-			quote:
-				'Una buena lectura nunca elige por ti. Despeja la niebla para que escuches lo que ya sabes.',
-			attribution: 'Principio de diseño de Yinyang Agent'
-		},
-		discipline: {
-			number: '02',
-			label: 'Oficio y método',
-			title: 'Por qué una lectura tarda unos minutos en elaborarse',
-			lede: 'Los horóscopos instantáneos están hechos para leerse por encima y olvidarse. Escribir un documento personal que valga la pena conservar exige una síntesis deliberada y verificaciones cruzadas.',
-			p1: 'Cuando envías tus datos de nacimiento, Yinyang Agent primero fija tu carta según los términos solares astronómicos y luego la analiza en paralelo desde dos escuelas clásicas complementarias: ZiPing (equilibrio elemental y clima estacional) y MangPai (impulso estructural y obra vital). Antes de finalizar tu informe, una revisión específica contrasta cada afirmación y cada límite entre años con los datos de tu carta y elimina el relleno vago. Esos pocos minutos de calma son los que hacen que cada párrafo se sostenga.',
+		method: {
+			title: 'Método',
+			lede: 'Términos solares → análisis Ziping y Mangpai → contraste pasado.',
 			comparison: {
-				caption: 'Yinyang Agent frente a los horóscopos genéricos con IA',
-				genericLabel: 'Horóscopos con IA / chatbots genéricos',
-				yinyangLabel: 'Yinyang Agent',
+				caption: 'YinYang Agent vs. IA genérica',
+				genericLabel: 'Chat de IA genérico',
+				yinyangLabel: 'YinYang Agent',
 				rows: [
 					{
-						feature: 'Base de la carta',
-						generic:
-							'A menudo ignora la zona horaria de nacimiento y los términos solares, y calcula mal los Cuatro Pilares',
-						yinyang:
-							'Calibrada con la zona horaria IANA exacta de nacimiento y los términos solares astronómicos'
+						feature: 'Carta',
+						generic: 'Omite hora solar y cambio de término',
+						yinyang: 'Hora solar local + términos astronómicos'
 					},
 					{
-						feature: 'Profundidad',
-						generic: 'Frases de efecto Barnum en un solo prompt que suenan igual para todos',
-						yinyang: 'Síntesis de las escuelas ZiPing + MangPai adaptada a tu estructura concreta'
+						feature: 'Análisis',
+						generic: 'Texto genérico en una pasada',
+						yinyang: 'Equilibrio Ziping + estructura Mangpai'
 					},
 					{
-						feature: 'Coherencia',
-						generic: 'Se contradice de una pregunta a otra con afirmaciones sin verificar',
-						yinyang:
-							'Contrastada con los datos de la carta y anclada en validaciones de años pasados'
+						feature: 'Base',
+						generic: 'Conclusiones sin fuente',
+						yinyang: 'Traza completa + Biblioteca BaZi'
+					},
+					{
+						feature: 'Calibración',
+						generic: 'Se contradice al reformular',
+						yinyang: 'Contrasta primero años clave pasados'
 					},
 					{
 						feature: 'Continuidad',
-						generic: 'Un chat puntual que desaparece al cerrar la pestaña',
-						yinyang: 'Referencia natal guardada, junto a Ciclos de tiempo en vivo y conversación'
+						generic: 'Se reinicia al cerrar',
+						yinyang: 'Cartas guardadas enlazadas a ciclos y chat'
 					}
 				]
-			},
-			cta: 'Empieza tu lectura en yinyang.memenow.xyz'
+			}
+		},
+		platforms: {
+			title: 'Plataformas',
+			plansCta: 'Planes y precios',
+			libraryLink: 'Biblioteca BaZi'
 		}
 	},
 	company: {
 		meta: {
-			title: 'Nosotros — memenow',
-			description:
-				'Fundado en 2024, memenow es un estudio independiente de IA con presencia en Estados Unidos y la Gran China, que une la filosofía oriental clásica con una IA moderna y transparente.',
-			ogTitle: 'Nosotros — memenow',
-			ogDescription:
-				'Un estudio independiente fundado en 2024. Unimos la sabiduría cultural oriental y un oficio de ingeniería sereno para crear una IA a la que valga la pena volver.'
+			title: 'Empresa — memenow',
+			description: 'memenow LLC, fundada en 2024 en Delaware, crea productos de IA personal.',
+			ogTitle: 'Sobre memenow',
+			ogDescription: 'Empresa independiente de IA personal memenow LLC, creadores de YinYang Agent.'
 		},
 		hero: {
-			eyebrowLeft: 'NOSOTROS · ESTUDIO MEMENOW',
-			eyebrowRight: 'DESDE 2024',
-			title: 'Un estudio independiente construido sobre un oficio sereno',
-			lede: 'Fundado en 2024 entre Estados Unidos y la Gran China. Unimos la sabiduría cultural clásica y una IA moderna y transparente, y lanzamos con cuidado para que cada creación perdure.',
-			cue: 'Desplázate · 01 Quiénes somos'
+			title: 'Sobre memenow',
+			lede: 'Productos independientes de IA personal.'
 		},
 		studio: {
-			number: '01',
-			label: 'Quiénes somos',
-			title: 'Entre husos horarios, unidos por la mesura y el cuidado',
-			lede: 'Constituida en Delaware, con un pequeño equipo que trabaja entre Estados Unidos y la Gran China.',
-			p1: 'Nuestro equipo reúne a ingenieros de sistemas de IA y a estudiosos veteranos de la filosofía y las humanidades orientales. Compartimos el rechazo al bombo ruidoso y al crecimiento basado en patrones oscuros, y preferimos trabajar en silencio hasta que la tecnología compleja resulte cálida, sensata y realmente útil en el día a día.',
+			title: 'memenow LLC',
 			stats: {
 				foundedYear: '2024',
-				foundedLabel: 'Fundación del estudio',
-				foundedDesc:
-					'Nacido del principio de un razonamiento honesto y un acompañamiento duradero.',
-				productCount: '1',
-				productLabel: 'Producto estrella',
-				productDesc:
-					'Yinyang Agent: lecturas de los Cuatro Pilares, Ciclos de tiempo y conversación.',
-				teamRegion: 'US · CN',
-				teamLabel: 'Equipo intercultural',
-				teamDesc: 'Unimos el rigor de la IA moderna con la perspectiva oriental clásica.'
+				foundedLabel: 'Fundación',
+				foundedDesc: 'Estudio independiente.',
+				jurisdictionValue: 'Delaware',
+				jurisdictionLabel: 'Registro',
+				jurisdictionDesc: 'LLC en EE. UU.',
+				localeCount: '7',
+				localeLabel: 'Idiomas',
+				localeDesc: 'ZH, ZH-TW, EN, JA, KO, ES, FR.'
 			}
 		},
-		work: {
-			number: '02',
-			label: 'Cómo trabajamos',
-			title: 'Cómo damos forma a cada lanzamiento',
-			lede: 'Elegir una pregunta humana que importe y responderla con claridad, mesura y paciencia.',
-			p1: 'Solo creamos donde la IA puede ser una verdadera compañía a largo plazo: donde lo que lees merece guardarse, releerse y volver a cuestionarse a medida que cambia la vida. Yinyang Agent es nuestra primera respuesta a ese desafío. Nunca usamos ganchos basados en el miedo ni urgencias artificiales, porque el trabajo que respeta a quien lo lee se gana la confianza de forma natural.',
-			p2: 'Cuando el razonamiento clásico ofrece una señal clara, mostramos cómo llegamos a ella. Cuando la vida sigue abierta, dejamos espacio para tus propias decisiones. Cuando un modelo o una función necesita más cuidado, nos tomamos el tiempo de hacerlo bien.',
-			timeline: [
+		principles: {
+			title: 'Estándares',
+			items: [
 				{
-					year: '2024',
-					title: 'Fundación del estudio',
-					body: 'Nace memenow con un propósito claro: nada de adivinación basada en el miedo ni de novedades de IA de usar y tirar; solo trabajo sólido al que se pueda volver.'
+					num: '01',
+					title: 'Texto directo',
+					body: 'Claro y sin tecnicismos.'
 				},
 				{
-					year: '2024–2026',
-					title: 'Yinyang Agent: lanzamiento y evolución',
-					body: 'Nuestro producto estrella se lanza y crece con la carta calculada por términos solares, la síntesis de las escuelas ZiPing y MangPai, la verificación del informe completo, los Ciclos de tiempo a varias escalas y la conversación.'
+					num: '02',
+					title: 'Sin caja negra',
+					body: 'Razonamiento visible en cada respuesta.'
+				},
+				{
+					num: '03',
+					title: 'Sin distracciones',
+					body: 'Sin ventanas emergentes; tema claro y oscuro.'
+				},
+				{
+					num: '04',
+					title: 'Sin rastreo',
+					body: 'Sin analítica aquí; exporta o borra datos en la app.'
 				}
 			]
 		},
-		contact: {
-			number: '03',
-			label: 'Contacto',
-			title: 'Nos encantará saber de ti',
-			lede: 'Para prensa, colaboraciones o comentarios con sentido, escribe a ',
-			ledeEnd: '.',
-			p1: 'Leemos cada mensaje y respondemos nosotros mismos: sin colas de tickets, sin respuestas automáticas y sin cartas prefabricadas.',
-			cta: 'Escribe a hello@memenow.xyz'
+		work: {
+			title: 'Trayectoria',
+			thanks: 'Créditos patrocinados por Anthropic y Cloudflare.',
+			timeline: [
+				{
+					year: '2024',
+					title: 'Fundación de memenow LLC',
+					body: 'Constituida en Delaware; inicio en IA personal.'
+				},
+				{
+					year: '2025',
+					title: 'Lanzamiento de YinYang Agent',
+					body: 'Web activa con carta solar y lectura dual.'
+				},
+				{
+					year: '2026',
+					title: '7 idiomas y nuevas plataformas',
+					body: '7 idiomas y planes públicos; app iPhone y enlaces IA en marcha.'
+				}
+			]
 		}
 	},
 	privacy: {
 		meta: {
-			title: 'Política de privacidad — memenow',
+			title: 'Privacidad — memenow',
 			description: 'Aviso de privacidad de memenow.xyz.'
 		},
 		hero: {
-			eyebrowLeft: 'LEGAL · PRIVACIDAD',
-			eyebrowRight: 'ACTUALIZADO 2026-10-15',
-			title: 'Tu privacidad, en palabras sencillas',
-			lede: 'memenow.xyz no recopila casi nada en este sitio web. Aquí te explicamos con claridad qué se queda por completo en tu navegador y qué metadatos mínimos mantienen el sitio en funcionamiento.',
-			cue: 'Desplázate · Aviso de privacidad'
+			updated: 'ACTUALIZADO 2026-11-24',
+			title: 'Política de privacidad',
+			lede: 'Sin anuncios ni analítica: solo preferencias locales.'
 		},
+		summaryTitle: 'Resumen',
+		summaryPoints: [
+			'Sin anuncios ni scripts de rastreo.',
+			'Tema y movimiento quedan solo en tu navegador.',
+			'Escribe a privacy@memenow.xyz para exportar o borrar datos.'
+		],
 		scope: {
-			number: '01',
-			label: 'Alcance',
-			title: 'Qué cubre este aviso',
-			body: 'Este aviso se aplica a las páginas públicas de <strong>memenow.xyz</strong>. Cada producto (como Yinyang Agent) ofrece su propio aviso de privacidad y sus propios controles de datos en sus respectivas plataformas.'
+			title: 'Alcance',
+			body: 'Aplica a <strong>memenow.xyz</strong> de <strong>memenow LLC</strong>. YinYang Agent tiene su propia política y control de datos.'
 		},
 		data: {
-			number: '02',
-			label: 'Tratamiento de datos',
-			title: 'Qué recopilamos y qué se queda en tu navegador',
-			p1: 'No usamos analítica de terceros ni rastreadores publicitarios en este sitio. Tus preferencias de tema y de animación (las claves locales del navegador <code class="prose-code">memenow.theme</code> y <code class="prose-code">memenow.motion</code>) se quedan en tu navegador y nunca se nos transmiten. Tu preferencia de idioma (<code class="prose-code">memenow.locale</code>) se guarda en una cookie propia y se usa únicamente para mostrarte las páginas en el idioma que elegiste.',
-			p2: 'Nuestro proveedor de infraestructura, Cloudflare, registra metadatos estándar de las solicitudes (dirección IP, agente de usuario, marca de tiempo y ruta) por motivos de seguridad y fiabilidad. Nunca vinculamos esos registros operativos con ninguna identidad personal.'
+			title: 'Preferencias y registros',
+			p1: 'Sin analítica ni anuncios. Tema y movimiento (<code class="prose-code">memenow.theme</code>, <code class="prose-code">memenow.motion</code>) quedan en almacenamiento local; idioma (<code class="prose-code">memenow.locale</code>) usa una cookie propia solo para mantener el idioma.',
+			p2: 'Cloudflare registra metadatos estándar (IP, navegador, hora, ruta) solo por seguridad, sin vincular identidad.'
 		},
 		email: {
-			number: '03',
-			label: 'Correo y contacto',
-			title: 'Cuando nos escribes',
-			body: 'Si escribes a <a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>, tu mensaje y tu dirección se usan solo para responderte. Nunca vendemos ni compartimos tu correspondencia con terceros.'
+			title: 'Solicitudes',
+			body: 'Privacidad o datos: <a href="mailto:privacy@memenow.xyz">privacy@memenow.xyz</a>. Consultas generales: <a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>. Solo para responder.'
 		}
 	},
 	terms: {
 		meta: {
-			title: 'Términos de uso — memenow',
+			title: 'Términos — memenow',
 			description: 'Términos de uso de memenow.xyz.'
 		},
 		hero: {
-			eyebrowLeft: 'LEGAL · TÉRMINOS',
-			eyebrowRight: 'ACTUALIZADO 2026-10-15',
-			title: 'Términos claros y directos',
-			lede: 'Los términos que rigen tu uso de memenow.xyz, escritos en lenguaje sencillo.',
-			cue: 'Desplázate · Términos de uso'
+			updated: 'ACTUALIZADO 2026-11-24',
+			title: 'Términos de uso',
+			lede: 'Alcance, referencia cultural y derechos sobre tus lecturas.'
 		},
+		summaryTitle: 'Resumen',
+		summaryPoints: [
+			'Contenido cultural de reflexión; no sustituye asesoría médica, legal ni financiera.',
+			'Tus lecturas son tuyas para guardar y compartir sin fines comerciales.',
+			'Contacto: hello@memenow.xyz o support@memenow.xyz.'
+		],
 		scope: {
-			number: '01',
-			label: 'Alcance',
-			title: 'Qué cubren estos términos',
-			body: 'Estos términos rigen las páginas públicas de <strong>memenow.xyz</strong>. Al acceder a este sitio o usarlo, reconoces y aceptas estos términos. Cada producto (como Yinyang Agent) publica sus propios términos específicos en sus respectivas plataformas.'
+			title: 'Alcance',
+			body: 'Aplica a <strong>memenow.xyz</strong> de <strong>memenow LLC</strong>. YinYang Agent dispone de términos y reembolsos propios.'
 		},
 		disclaimer: {
-			number: '02',
-			label: 'Aviso cultural y sobre IA',
-			title: 'Reflexión cultural y contenido generado por IA',
-			p1: 'El contenido sobre BaZi, los Cuatro Pilares y los Cinco Elementos que ofrecen los productos de memenow (incluido Yinyang Agent) se basa en la filosofía y el patrimonio cultural chinos clásicos. Se ofrece únicamente para la reflexión personal y la exploración cultural, y <strong>no constituye ni puede sustituir el asesoramiento profesional médico, psicológico, jurídico o financiero</strong>.',
-			p2: 'Las lecturas se generan con modelos de IA como interpretaciones narrativas; no ofrecemos ninguna garantía, expresa ni implícita, de certeza predictiva. Tu carta es una lente para la reflexión: cada decisión en el mundo real sigue dependiendo de tu propio criterio y es tu responsabilidad.'
+			title: 'Referencia cultural e IA',
+			p1: 'Cuatro Pilares y Cinco Elementos son referencia cultural para reflexión personal y <strong>no sustituyen asesoría médica, psicológica, legal ni financiera</strong>.',
+			p2: 'Combinan datos de carta y redacción asistida por IA, sin promesas futuras; tus decisiones dependen solo de ti.'
 		},
 		warranty: {
-			number: '03',
-			label: 'Base del servicio',
-			title: 'Se ofrece tal cual',
-			body: 'Este sitio se ofrece “tal cual”. Aunque nos importan mucho la exactitud y la disponibilidad, no ofrecemos garantías sobre su idoneidad para un fin concreto, su integridad ni su disponibilidad ininterrumpida.'
+			title: 'Tal cual',
+			body: 'Ofrecido «tal cual», sin garantías adicionales expresas ni implícitas.'
 		},
 		offer: {
-			number: '04',
-			label: 'Sin oferta financiera',
-			title: 'Nada aquí es una solicitud financiera',
-			body: 'Nada de lo que aparece en este sitio constituye una oferta de venta, una solicitud de compra ni una recomendación sobre ningún valor, participación en fondos o instrumento financiero.'
+			title: 'No es oferta financiera',
+			body: 'Nada aquí constituye oferta de valores ni asesoría de inversión.'
 		},
 		ip: {
-			number: '05',
-			label: 'Propiedad intelectual',
-			title: 'Marcas, diseño del sitio y tus lecturas personales',
-			p1: '“memenow” y la marca memenow son marcas comerciales de memenow; las demás marcas pertenecen a sus respectivos titulares. Textos y diseño visual del sitio © memenow.',
-			p2: 'Las lecturas personales que generas en productos como Yinyang Agent siguen siendo tuyas para leerlas de forma permanente, conservarlas en privado y compartirlas con fines no comerciales.'
+			title: 'Derechos',
+			p1: 'Las marcas y diseño «memenow» y «YinYang Agent» pertenecen a memenow LLC.',
+			p2: 'Tus lecturas e Informes completos son tuyos para leer, guardar y compartir sin fines comerciales.'
 		},
 		law: {
-			number: '06',
-			label: 'Ley aplicable',
-			title: 'Ley aplicable y actualizaciones',
-			p1: 'Estos términos se rigen por las leyes del Estado de Delaware, Estados Unidos, sin tener en cuenta sus principios sobre conflictos de leyes.',
-			p2: 'Podemos actualizar estos términos a medida que evoluciona nuestro estudio; la fecha de “Actualizado” en el encabezado refleja la revisión más reciente. Las preguntas siempre son bienvenidas en <a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>.'
+			title: 'Ley aplicable',
+			p1: 'Regido por la ley de Delaware, sin normas de conflicto.',
+			p2: 'Legal: <a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>. Producto o pagos: <a href="mailto:support@memenow.xyz">support@memenow.xyz</a>.'
 		}
 	},
 	error: {
 		meta: {
 			title: '{status} · memenow'
 		},
-		notFoundTitle: 'Esta página se ha perdido de vista',
-		serverErrorTitle: 'Una breve interferencia en la señal',
-		notFoundLede:
-			'Puede que la página que buscabas se haya movido, haya cambiado de nombre o nunca haya existido. Te llevamos de vuelta a terreno conocido.',
-		serverErrorLede: 'Algo salió mal por nuestra parte. Espera un momento y vuelve a intentarlo.',
+		notFoundTitle: 'Página no encontrada',
+		serverErrorTitle: 'No disponible',
+		notFoundLede: 'No existe o se ha movido.',
+		serverErrorLede: 'Error temporal. Inténtalo en unos momentos.',
 		returnHome: 'Volver al inicio',
 		statusLabel: 'Estado · {status}',
-		notFoundLabel: 'Página no encontrada',
-		errorLabel: 'Error del servicio',
-		cueHome: 'Volver · Inicio'
+		notFoundLabel: 'No encontrada',
+		errorLabel: 'No disponible'
 	}
 };

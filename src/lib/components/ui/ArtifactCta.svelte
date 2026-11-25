@@ -1,14 +1,10 @@
 <!--
 @component
 ArtifactCta is the project's single narrative-pivot CTA primitive. It is an
-anchor (`<a>`) with the diamond seal mark (`::after`), a magnetic hover
-action, and two palettes — `celestial` (outlined, accent green) for outbound
-references and `ritual` (filled, accent green) for in-flow conversions.
-
-Use it for every page-level call-to-action. The project intentionally has no
-`Card` component; if you need a non-interactive container, use a `<section>`
-with chapter / layout primitives (`.c-chapter__inner`, `.l-stack`, etc.) and
-let `ArtifactCta` be the only branded "click here" surface.
+anchor (`<a>`) with a warm accent diamond mark (`::after`), a magnetic hover
+action, and two variants aligned with `DESIGN.md` — `outline` (`action-primary`,
+hairline ink on paper) and `filled` (`action-secondary`, filled ink inverting on
+hover).
 -->
 <script lang="ts">
 	import type { Snippet } from 'svelte';
@@ -16,12 +12,12 @@ let `ArtifactCta` be the only branded "click here" surface.
 	import { cn } from '$lib/utils/cn';
 	import { magnetic } from '$lib/utils/motion';
 
-	type Palette = 'celestial' | 'ritual';
+	type Variant = 'outline' | 'filled';
 	type Size = 'sm' | 'md' | 'lg';
 
 	let {
 		href,
-		palette = 'celestial',
+		variant = 'outline',
 		size = 'md',
 		magnet = true,
 		class: className,
@@ -29,7 +25,7 @@ let `ArtifactCta` be the only branded "click here" surface.
 		...rest
 	}: {
 		href: string;
-		palette?: Palette;
+		variant?: Variant;
 		size?: Size;
 		magnet?: boolean;
 		class?: string;
@@ -42,7 +38,7 @@ let `ArtifactCta` be the only branded "click here" surface.
 	use:magnetic={magnet ? 0.22 : 0}
 	class={cn(
 		'c-artifact-cta',
-		palette === 'ritual' && 'c-artifact-cta--ritual',
+		variant === 'filled' && 'c-artifact-cta--filled',
 		size !== 'md' && `c-artifact-cta--${size}`,
 		className
 	)}

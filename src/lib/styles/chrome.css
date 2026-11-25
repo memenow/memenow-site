@@ -1,0 +1,694 @@
+/* ========================================================
+   memenow global chrome & interactive controls (.c-*)
+   Consumes tokens from tokens.css. Owns sitewide Masthead,
+   FloatingDock, ArtifactCta, IconSwitch, Footer (including
+   supporters strip), ProgressBar, and press feedback.
+   ======================================================== */
+
+/* ── Top editorial masthead (quiet, non-sticky) ─────── */
+
+.c-masthead {
+	position: absolute;
+	inset-block-start: 0;
+	inset-inline: 0;
+	z-index: 2;
+}
+
+.c-masthead__inner {
+	width: 100%;
+	max-width: var(--container-wide);
+	margin-inline: auto;
+	padding: var(--spacing-4) clamp(1.25rem, 4vw, 3rem);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-4);
+}
+
+.c-masthead__brand {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	text-decoration: none;
+}
+
+.c-masthead__brand:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 4px;
+}
+
+.c-masthead__action {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding-inline: var(--spacing-3);
+	border: 1px solid var(--border-default);
+	border-radius: 2px;
+	background: color-mix(in oklch, var(--surface-raised) 76%, transparent);
+	font-family: var(--font-body);
+	font-size: var(--type-caption);
+	font-weight: var(--font-weight-medium);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-primary);
+	text-decoration: none;
+	white-space: nowrap;
+	transition:
+		background var(--motion-duration-fast) var(--motion-ease-standard),
+		border-color var(--motion-duration-fast) var(--motion-ease-standard),
+		color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.c-masthead__action:hover {
+	background: var(--text-primary);
+	border-color: var(--text-primary);
+	color: var(--text-inverse);
+}
+
+.c-masthead__action:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 3px;
+}
+
+/* ── Floating dock (fluid.glass-style dark pill) ─────── */
+
+.c-dock {
+	position: fixed;
+	left: 50%;
+	/* Honor iPhone home-indicator / notch by adding the bottom safe-area
+	   inset before the visual gap; works with viewport-fit=cover. */
+	bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(1rem, 3vh, 1.75rem));
+	transform: translateX(-50%);
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	padding: var(--spacing-1) var(--spacing-2);
+	border-radius: var(--radius-pill);
+	background: var(--surface-dock);
+	backdrop-filter: blur(16px) saturate(140%);
+	-webkit-backdrop-filter: blur(16px) saturate(140%);
+	border: 1px solid var(--border-dock);
+	box-shadow: var(--shadow-dock);
+	z-index: var(--z-sticky);
+	color: var(--text-dock);
+}
+
+.c-dock__brand {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	padding: var(--spacing-1);
+	border-radius: var(--radius-pill);
+	color: inherit;
+	text-decoration: none;
+	transition: background var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+/* Hit-area extenders — keep dock chips visually compact while guaranteeing
+   ≥44×44 (iOS HIG) / 48dp (MD) interactive targets. */
+.c-dock__brand::before {
+	content: '';
+	position: absolute;
+	inset: calc(-1 * var(--spacing-2));
+}
+
+.c-dock__brand:hover {
+	background: var(--surface-dock-hover);
+}
+
+.c-dock__brand img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: block;
+}
+
+.c-dock__divider {
+	width: 1px;
+	align-self: stretch;
+	background: var(--border-dock-divider);
+	margin: var(--spacing-1) var(--spacing-0-5);
+}
+
+.c-dock__item {
+	position: relative;
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+	font-weight: var(--font-weight-medium);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-dock-muted);
+	padding: var(--spacing-2) 0.95rem;
+	border-radius: var(--radius-pill);
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	text-decoration: none;
+	white-space: nowrap;
+	transition:
+		color var(--motion-duration-fast) var(--motion-ease-standard),
+		background var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.c-dock__item::before {
+	content: '';
+	position: absolute;
+	inset-block: calc(-1 * var(--spacing-2));
+	inset-inline: -0.125rem;
+}
+
+.c-dock__item:hover {
+	color: var(--text-dock-hover);
+	background: var(--surface-dock-item-hover);
+}
+
+.c-dock__item[aria-current='page'],
+.c-dock__item[data-active='true'] {
+	background: var(--surface-dock-active);
+	color: var(--accent-on-dark);
+}
+
+@media (max-width: 540px) {
+	.c-dock {
+		gap: 0;
+		padding: var(--spacing-1);
+		max-width: calc(100vw - 1rem);
+	}
+
+	.c-dock__brand {
+		width: 1.75rem;
+		height: 1.75rem;
+	}
+
+	.c-dock__item {
+		padding: var(--spacing-2) 0.45rem;
+		font-size: 0.625rem;
+		letter-spacing: 0.06em;
+	}
+
+	.c-dock__divider {
+		margin: var(--spacing-0-5) 0.05rem;
+	}
+
+	.c-dock .c-icon-switch {
+		width: 1.75rem;
+		height: 1.75rem;
+	}
+}
+
+@media (prefers-reduced-transparency: reduce) {
+	.c-dock {
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+		background: var(--surface-ink);
+	}
+}
+
+@media (prefers-contrast: more) {
+	.c-dock {
+		border-color: var(--text-dock);
+	}
+
+	.c-dock__divider {
+		background: var(--text-dock-muted);
+	}
+}
+
+@media (forced-colors: active) {
+	.c-dock {
+		background: Canvas;
+		border: 1px solid CanvasText;
+	}
+}
+
+/* ── ArtifactCta — narrative pivot ───────────────────── */
+
+.c-artifact-cta {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	border: 1px solid var(--text-primary);
+	border-radius: 2px;
+	padding: var(--spacing-3) var(--spacing-5);
+	font-family: var(--font-body);
+	font-size: var(--type-small);
+	font-weight: var(--font-weight-medium);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-primary);
+	background: var(--surface-base);
+	text-decoration: none;
+	cursor: pointer;
+	user-select: none;
+	transition:
+		background var(--motion-duration-base) var(--motion-ease-standard),
+		color var(--motion-duration-base) var(--motion-ease-standard),
+		border-color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.c-artifact-cta::after {
+	content: '';
+	width: 5px;
+	height: 5px;
+	background: var(--accent);
+	display: inline-block;
+}
+
+.c-artifact-cta:hover {
+	background: var(--text-primary);
+	color: var(--text-inverse);
+	border-color: var(--text-primary);
+}
+
+.c-artifact-cta:hover::after {
+	background: var(--text-inverse);
+}
+
+.c-artifact-cta:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 3px;
+}
+
+.c-artifact-cta--filled {
+	background: var(--text-primary);
+	color: var(--text-inverse);
+	border-color: var(--text-primary);
+}
+
+.c-artifact-cta--filled::after {
+	background: var(--text-inverse);
+}
+
+.c-artifact-cta--filled:hover {
+	background: var(--surface-base);
+	color: var(--text-primary);
+}
+
+.c-artifact-cta--filled:hover::after {
+	background: var(--accent);
+}
+
+.c-artifact-cta--sm {
+	padding: var(--spacing-2) var(--spacing-4);
+	font-size: var(--type-caption);
+}
+
+.c-artifact-cta--lg {
+	padding: var(--spacing-4) var(--spacing-8);
+	font-size: var(--type-body);
+}
+
+/* ── Icon switch (shared dock toggle: theme + motion) ── */
+
+.c-icon-switch {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid var(--border-default);
+	border-radius: var(--radius-sm);
+	background: var(--surface-raised);
+	color: var(--text-primary);
+	cursor: pointer;
+	transition:
+		background var(--motion-duration-fast) var(--motion-ease-standard),
+		border-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.c-icon-switch::before {
+	content: '';
+	position: absolute;
+	inset: calc(-1 * var(--spacing-2));
+}
+
+.c-icon-switch:hover {
+	background: var(--surface-sunken);
+	border-color: var(--border-strong);
+}
+
+.c-icon-switch:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 2px;
+}
+
+/* ── Footer & supporters acknowledgment ─────────────── */
+
+.c-footer {
+	border-top: 1px solid var(--border-default);
+	/* Ground the footer in a soft paper-mist / night-indigo veil so links,
+	   emails, supporter acknowledgments, and legal copy hold WCAG AA contrast
+	   over the lower world-layer pine silhouettes and nocturnal moonlight. */
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--surface-base) 86%, transparent) 0%,
+		color-mix(in oklch, var(--surface-base) 96%, transparent) 28%,
+		var(--surface-base) 100%
+	);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	/* Reserve bottom clearance above the fixed floating dock so the legal row
+	   stays unobstructed at maximum scroll across desktop and mobile viewports. */
+	padding-block: var(--spacing-12) calc(var(--spacing-12) + env(safe-area-inset-bottom, 0px) + 5rem);
+	margin-top: var(--spacing-24);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+	.c-footer {
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+		background: var(--surface-base);
+	}
+}
+
+.c-footer__inner {
+	display: grid;
+	grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+	gap: var(--spacing-8);
+}
+
+.c-footer__col {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+}
+
+.c-footer__tagline {
+	margin: var(--spacing-2) 0 0;
+	max-width: 30ch;
+	font-size: var(--type-small);
+	line-height: var(--leading-relaxed);
+	color: var(--text-secondary);
+}
+
+.c-footer__col a {
+	color: var(--text-secondary);
+	text-decoration: none;
+	font-size: var(--type-small);
+	transition: color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.c-footer__col a:hover {
+	color: var(--text-primary);
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+	text-underline-offset: 0.25em;
+}
+
+.c-footer__title {
+	font-family: var(--font-body);
+	font-size: var(--type-overline);
+	font-weight: var(--font-weight-semibold);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-secondary);
+}
+
+.c-footer__sponsors {
+	margin-top: var(--spacing-10);
+	padding-block: var(--spacing-6);
+	border-top: 1px solid var(--border-default);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-4) var(--spacing-6);
+}
+
+.c-footer__sponsors-label {
+	font-family: var(--font-body);
+	font-size: var(--type-overline);
+	font-weight: var(--font-weight-semibold);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-secondary);
+}
+
+.c-footer__sponsors-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--spacing-3);
+}
+
+.c-footer__sponsor-link {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	min-height: 44px;
+	padding: 0 var(--spacing-4);
+	border: 1px solid var(--border-default);
+	border-radius: var(--radius-sm);
+	background: color-mix(in oklch, var(--surface-raised) 56%, transparent);
+	color: var(--text-primary);
+	text-decoration: none;
+	opacity: 0.9;
+	transition:
+		color var(--motion-duration-fast) var(--motion-ease-standard),
+		border-color var(--motion-duration-fast) var(--motion-ease-standard),
+		background-color var(--motion-duration-fast) var(--motion-ease-standard),
+		opacity var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.c-footer__sponsor-icon {
+	display: block;
+	flex-shrink: 0;
+}
+
+.c-footer__sponsor-icon--anthropic {
+	width: 1.1rem;
+	height: 1.1rem;
+}
+
+.c-footer__sponsor-icon--cloudflare {
+	width: 1.55rem;
+	height: 1.55rem;
+}
+
+.c-footer__sponsor-wordmark {
+	font-family: var(--font-body);
+	font-size: 0.8125rem;
+	font-weight: var(--font-weight-semibold);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	line-height: 1;
+}
+
+.c-footer__sponsor-link:hover {
+	color: var(--accent);
+	border-color: var(--accent);
+	background: color-mix(in oklch, var(--surface-raised) 88%, transparent);
+	opacity: 1;
+}
+
+.c-footer__sponsor-link:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 3px;
+}
+
+.c-footer__locales {
+	padding-block: var(--spacing-5);
+	border-top: 1px solid var(--border-default);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-3) var(--spacing-6);
+}
+
+.c-footer__locales-label {
+	font-family: var(--font-body);
+	font-size: var(--type-overline);
+	font-weight: var(--font-weight-semibold);
+	letter-spacing: var(--ls-overline);
+	text-transform: uppercase;
+	color: var(--text-secondary);
+}
+
+.c-footer__locales-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--spacing-2) var(--spacing-5);
+}
+
+.c-footer__locales-list a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 36px;
+	font-size: var(--type-small);
+	color: var(--text-secondary);
+	text-decoration: none;
+	transition: color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.c-footer__locales-list a:hover {
+	color: var(--text-primary);
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+	text-underline-offset: 0.28em;
+}
+
+.c-footer__locales-list a[aria-current='true'] {
+	color: var(--text-primary);
+	font-weight: var(--font-weight-medium);
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+	text-underline-offset: 0.28em;
+}
+
+.c-footer__legal {
+	padding-top: var(--spacing-5);
+	border-top: 1px solid var(--border-default);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-4);
+	font-size: var(--type-caption);
+	font-variant-numeric: tabular-nums;
+	color: var(--text-muted);
+}
+
+@media (max-width: 960px) {
+	.c-footer__inner {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.c-footer__col--lead {
+		grid-column: 1 / -1;
+	}
+}
+
+@media (max-width: 600px) {
+	.c-footer__inner {
+		grid-template-columns: 1fr;
+	}
+	.c-footer__legal {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+/* ── Scroll cue (silent visual hero affordance) ───────── */
+
+.c-scroll-cue {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	border: 1px solid var(--border-default);
+	border-radius: var(--radius-pill);
+	background: color-mix(in oklch, var(--surface-raised) 82%, transparent);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	color: var(--text-primary);
+	text-decoration: none;
+	box-shadow: 0 2px 12px color-mix(in oklch, var(--text-primary) 6%, transparent);
+	transition:
+		color var(--motion-duration-fast) var(--motion-ease-out),
+		border-color var(--motion-duration-fast) var(--motion-ease-out),
+		transform var(--motion-duration-fast) var(--motion-ease-out),
+		background-color var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.c-scroll-cue:hover {
+	color: var(--accent);
+	border-color: var(--accent);
+	background: color-mix(in oklch, var(--surface-raised) 96%, transparent);
+	transform: translateY(3px);
+}
+
+.c-scroll-cue:active {
+	transform: translateY(4px) scale(0.95);
+}
+
+.c-scroll-cue:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 2px;
+	color: var(--accent);
+}
+
+.c-scroll-cue__icon {
+	display: block;
+	animation: mmn-scroll-cue-drift 2.6s var(--motion-ease-out) infinite;
+}
+
+@keyframes mmn-scroll-cue-drift {
+	0%,
+	100% {
+		transform: translateY(0);
+		opacity: 0.72;
+	}
+	50% {
+		transform: translateY(4px);
+		opacity: 1;
+	}
+}
+
+:root[data-motion='reduced'] .c-scroll-cue__icon {
+	animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root:not([data-motion='full']) .c-scroll-cue__icon {
+		animation: none;
+	}
+}
+
+/* ── Progress bar (top of page) ───────────────────────── */
+
+.c-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: transparent;
+	z-index: calc(var(--z-sticky) + 1);
+	pointer-events: none;
+}
+
+.c-progress__bar {
+	height: 100%;
+	background: var(--accent);
+	width: 0%;
+	transition: width var(--motion-duration-fast) linear;
+}
+
+/* ── Active (press) states ───────────────────────────── */
+
+.c-artifact-cta:active {
+	scale: 0.97;
+}
+
+.c-dock__item:active,
+.c-dock__brand:active,
+.c-icon-switch:active {
+	transform: scale(0.92);
+	transition-duration: 60ms;
+}
+
+/* ── CJK label reset for chrome primitives ──────────── */
+:is(:lang(zh), :lang(ja), :lang(ko))
+	:where(
+		.c-masthead__action,
+		.c-dock__item,
+		.c-artifact-cta,
+		.c-footer__title,
+		.c-footer__sponsors-label,
+		.c-footer__locales-label
+	) {
+	text-transform: none;
+	letter-spacing: normal;
+}

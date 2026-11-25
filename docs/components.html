@@ -150,8 +150,16 @@
 						<td><code>lib/components/layout/AppShell.svelte</code></td>
 						<td>
 							Root shell mounted in <code>+layout.svelte</code>. Stacks <code>WorldLayer</code>, the
-							skip-link, <code>FloatingDock</code>, <code>&lt;main&gt;</code>, and the
-							<code>Footer</code>.
+							skip-link, <code>Masthead</code>, <code>FloatingDock</code>,
+							<code>&lt;main&gt;</code>, and the <code>Footer</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>Masthead</code></td>
+						<td><code>lib/components/layout/Masthead.svelte</code></td>
+						<td>
+							Quiet, non-sticky editorial top header anchored above the hero: left-aligned
+							<code>MemenowMark</code> home link and right-aligned direct YinYang Agent CTA.
 						</td>
 					</tr>
 					<tr>
@@ -177,9 +185,51 @@
 						<td><code>Footer</code></td>
 						<td><code>lib/components/layout/Footer.svelte</code></td>
 						<td>
-							A lead lockup column plus <code>memenow</code> and <code>Legal</code> nav columns,
-							then a localized copyright row. Reads <code>footerSections</code> from
+							A lead lockup column (with studio tagline), followed by three categorized columns
+							(<code>memenow</code>, <code>Contact</code>, <code>Legal</code>), a dedicated credit
+							sponsors row with official <strong>Anthropic</strong> and
+							<strong>Cloudflare</strong> SVG logos, a horizontal 7-locale switcher bar, and a
+							localized copyright/jurisdiction bar. Reads <code>getFooterSections()</code> from
 							<code>lib/data/navigation.ts</code>.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Editorial &amp; product display primitives</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Component</th>
+						<th>Path</th>
+						<th>Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>StatCard</code></td>
+						<td><code>lib/components/editorial/StatCard.svelte</code></td>
+						<td>
+							Display numeral, overline label, and concise description inside
+							<code>.c-stat-grid</code>.
+						</td>
+					</tr>
+					<tr>
+						<td><code>Timeline</code></td>
+						<td><code>lib/components/editorial/Timeline.svelte</code></td>
+						<td>Chronological hairline entries used on the company page.</td>
+					</tr>
+					<tr>
+						<td><code>ComparisonTable</code></td>
+						<td><code>lib/components/editorial/ComparisonTable.svelte</code></td>
+						<td>Accessible comparison table with highlighted YinYang Agent column.</td>
+					</tr>
+					<tr>
+						<td><code>TierGrid</code></td>
+						<td><code>lib/components/editorial/TierGrid.svelte</code></td>
+						<td>
+							5-tier YinYang Agent value ladder rendered from <code>buildTierItems()</code> in
+							<code>src/lib/data/yinyang.ts</code>, with tabular USD pricing and ledger disclaimer.
 						</td>
 					</tr>
 				</tbody>
@@ -199,9 +249,28 @@
 						<td><code>ArtifactCta</code></td>
 						<td><code>lib/components/ui/ArtifactCta.svelte</code></td>
 						<td>
-							The studio's signature call-to-action. Coral pink diamond suffix, magnetic hover.
-							<code>palette</code> picks the surface treatment (<code>celestial</code> outline /
-							<code>ritual</code> filled). Drops the magnet under reduced motion.
+							The studio's signature call-to-action. Warm moon-gold diamond mark, magnetic hover.
+							<code>variant</code> selects <code>outline</code> (default, ink hairline on paper) or
+							<code>filled</code> (ink fill inverting on hover). Drops the magnet under reduced
+							motion.
+						</td>
+					</tr>
+					<tr>
+						<td><code>ScrollCue</code></td>
+						<td><code>lib/components/ui/ScrollCue.svelte</code></td>
+						<td>
+							Silent, clickable downward hairline chevron mounted inside
+							<code>EditorialHero</code> when <code>scrollTarget</code> is passed. Zero visible
+							text; screen-reader <code>aria-label</code> only. Cooperates with Lenis smooth scroll
+							and stops animating under reduced motion.
+						</td>
+					</tr>
+					<tr>
+						<td><code>TrustedHtml</code></td>
+						<td><code>lib/components/ui/TrustedHtml.svelte</code></td>
+						<td>
+							Renders static inline markup (<code>strong</code>, <code>code</code>, <code>a</code>)
+							from repo-authored legal dictionaries only; never accepts user or request input.
 						</td>
 					</tr>
 					<tr>
@@ -252,7 +321,7 @@
 			</p>
 			<pre><code>import { cn } from '$lib/utils/cn';
 
-&lt;a class={cn('c-artifact-cta', palette === 'ritual' &amp;&amp; 'c-artifact-cta--ritual', size !== 'md' &amp;&amp; `c-artifact-cta--${size}`, className)}&gt;
+&lt;a class={cn('c-artifact-cta', variant === 'filled' &amp;&amp; 'c-artifact-cta--filled', size !== 'md' &amp;&amp; `c-artifact-cta--${size}`, className)}&gt;
     {@render children()}
 &lt;/a&gt;</code></pre>
 

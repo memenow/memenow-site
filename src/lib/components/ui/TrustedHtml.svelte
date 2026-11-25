@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
 	 * Renders trusted HTML strings as inline markup. The ONLY legitimate input
-	 * is repo-authored copy from `$lib/i18n/messages.ts` (legal paragraphs that
+	 * is repo-authored copy from `$lib/i18n/dictionaries/` (legal paragraphs that
 	 * need inline <strong>/<code>/<a>). Never feed request- or user-derived
 	 * data through this component.
 	 */

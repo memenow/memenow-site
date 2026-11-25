@@ -60,8 +60,10 @@
 					<tr>
 						<td>SSR hooks</td>
 						<td>
-							Resolves the route family and rewrites the <code>data-route-family</code> placeholder
-							in the HTML stream so per-route fog is correct on first paint.
+							Handles locale redirects (retired 301, case-canonical 301, legacy unprefixed 302),
+							persists <code>memenow.locale</code> on document loads, and rewrites
+							<code>lang</code> and <code>data-route-family</code> in the HTML stream so locale and
+							per-route fog are accurate on first paint.
 						</td>
 						<td><code>src/hooks.server.ts</code></td>
 					</tr>
@@ -88,10 +90,12 @@
 					<tr>
 						<td>Persistent world layer</td>
 						<td>
-							Fixed full-viewport underlay mounted once in <code>AppShell</code>: per-route fog
-							(read from <code>--scene-fog-active</code>) plus a faint Tai Chi geometry watermark.
-							The root layout drives its parallax drift through <code>--world-scroll</code>; reduced
-							motion zeroes it. Decorative and <code>aria-hidden</code>.
+							Fixed full-viewport three-plane ink-wash underlay mounted once in
+							<code>AppShell</code>: painted static fallback plus lazy-mounted
+							<code>WorldCanvas</code> / <code>WorldScene</code> (Threlte + Three.js), per-route fog
+							(<code>--scene-fog-active</code>), and subtle grain. Observes
+							<code>--world-scroll</code> and live <code>data-motion</code> changes; reduced motion
+							pins parallax to rest. Decorative and <code>aria-hidden</code>.
 						</td>
 						<td><code>src/lib/components/layout/WorldLayer.svelte</code></td>
 					</tr>
@@ -111,13 +115,17 @@
 					</tr>
 					<tr>
 						<td>Data sources</td>
-						<td>Single source of truth for navigation, products, and the sitemap URL list.</td>
+						<td>
+							Single sources of truth for navigation, origins &amp; emails, YinYang Agent 5-tier
+							catalog facts, and the sitemap URL list.
+						</td>
 						<td><code>src/lib/data/</code></td>
 					</tr>
 					<tr>
 						<td>Styling</td>
 						<td>
-							Design tokens, scene fog, layout utilities, component primitives, world-layer overlay.
+							Design tokens (Indigo Nocturne), scene fog, layout utilities, core component
+							primitives, editorial/product display primitives, and world-layer overlay.
 						</td>
 						<td><code>src/lib/styles/</code></td>
 					</tr>
@@ -135,23 +143,25 @@
 			</table>
 
 			<h2>Request lifecycle</h2>
-			<p>A first request to <code>/products/yinyang</code> walks the system as follows:</p>
+			<p>A first request to <code>/en/products/yinyang</code> walks the system as follows:</p>
 			<ol>
 				<li>
 					Cloudflare Workers invokes <code>_worker.js</code>. The SvelteKit adapter hands the
 					request to the platform handler.
 				</li>
 				<li>
-					<code>hooks.server.ts</code> calls <code>resolveRouteFamily('/products/yinyang')</code>,
-					gets <code>'threshold'</code>, and rewrites <code>data-route-family="pending"</code> in
-					the HTML stream to <code>data-route-family="threshold"</code>. The CSS selectors in
-					<code>scene.css</code> can now activate the correct fog without waiting for hydration.
+					<code>hooks.server.ts</code> validates the locale prefix via
+					<code>decideLocaleRedirect</code> (301 for retired or non-canonical-case URLs; 302 for
+					legacy unprefixed paths), calls <code>resolveRouteFamily('/en/products/yinyang')</code> to
+					get <code>'threshold'</code>, and rewrites both <code>lang="en"</code> and
+					<code>data-route-family="pending"</code> in the HTML stream so locale and per-route fog
+					are correct on first paint.
 				</li>
 				<li>
-					SvelteKit renders <code>+page.svelte</code> on the Worker (no
-					<code>+page.server.ts</code> for this route, so there is no extra load step) and streams
-					the full document. Only <code>/sitemap.xml</code> is prerendered; every other route is
-					server-rendered on each request.
+					<code>+layout.server.ts</code> loads only the active locale's dictionary from
+					<code>messages.server.ts</code>, and SvelteKit streams the SSR HTML. Only
+					<code>/sitemap.xml</code> is prerendered; every content route is server-rendered per
+					request.
 				</li>
 				<li>
 					The browser receives HTML, runs the inline theme boot script in

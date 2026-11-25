@@ -142,11 +142,20 @@
 				</tbody>
 			</table>
 
-			<h2>The signature ornament</h2>
+			<h2>The signature accent mark</h2>
 			<p>
-				The coral pink diamond is the only ornament in the system. It is rendered as a CSS mask (no
-				extra image asset) via the <code>.c-seal</code> class and pseudo-elements on chapter numbers
-				in <code>components.css</code>. Do not substitute SVG, emoji, or Unicode glyphs.
+				A restrained moon-gold / moonlight diamond mark is the sole geometric accent on narrative
+				CTAs and chapter headers, rendered purely in CSS (no extra image asset) via
+				<code>.c-artifact-cta::after</code> and chapter header pseudo-elements in
+				<code>components.css</code>. Do not substitute emoji or ad-hoc Unicode glyphs.
+			</p>
+
+			<h2>World imagery</h2>
+			<p>
+				<code>static/world/originals/world-007.png</code> is sliced into three parallax planes
+				(<code>world-base</code>, <code>world-mid</code>, <code>world-near</code> in AVIF and WebP)
+				by <code>scripts/build-world-assets.py</code> and consumed by
+				<code>WorldLayer.svelte</code> and <code>WorldScene.svelte</code>.
 			</p>
 
 			<h2>Open Graph imagery</h2>

@@ -6,7 +6,12 @@
  * reveals.
  */
 
-let lenisInstance: { destroy: () => void; stop: () => void; start: () => void } | null = null;
+let lenisInstance: {
+	destroy: () => void;
+	stop: () => void;
+	start: () => void;
+	scrollTo: (target: HTMLElement) => void;
+} | null = null;
 
 /**
  * Resolve whether motion should be suppressed. The in-page toggle writes
@@ -66,13 +71,33 @@ export async function startLenis(): Promise<void> {
 	lenisInstance = {
 		destroy: () => lenis.destroy(),
 		stop: () => lenis.stop(),
-		start: () => lenis.start()
+		start: () => lenis.start(),
+		scrollTo: (target: HTMLElement) => lenis.scrollTo(target)
 	};
 }
 
 export function stopLenis(): void {
 	lenisInstance?.destroy();
 	lenisInstance = null;
+}
+
+/**
+ * Scroll smoothly to an in-page element selector, cooperating with Lenis when
+ * active and falling back to native scrollIntoView (honoring reduced motion).
+ */
+export function scrollToTarget(selector: string): boolean {
+	if (typeof document === 'undefined') return false;
+	const target = document.querySelector<HTMLElement>(selector);
+	if (!target) return false;
+	if (lenisInstance && !prefersReducedMotion()) {
+		lenisInstance.scrollTo(target);
+	} else {
+		target.scrollIntoView({
+			behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+			block: 'start'
+		});
+	}
+	return true;
 }
 
 /**

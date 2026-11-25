@@ -1,6 +1,8 @@
-/** Korean dictionary. Structure is enforced by `MessageSchema`. */
-
 import type { MessageSchema } from './zh';
+
+/**
+ * Korean dictionary — short, concrete, zero-filler copy matching `zh.ts`.
+ */
 
 export const ko: MessageSchema = {
 	common: {
@@ -8,333 +10,385 @@ export const ko: MessageSchema = {
 		home: '홈',
 		products: '제품',
 		company: '소개',
+		contact: '연락처',
 		legal: '약관',
 		privacy: '개인정보',
 		terms: '이용약관',
-		skipToContent: '본문으로 건너뛰기',
+		skipToContent: '본문으로',
+		scrollToContent: '아래로 스크롤',
 		navAriaLabel: '주요 내비게이션',
 		brandHomeAriaLabel: 'memenow 홈',
-		rightsReserved: '© {year} memenow · 모든 권리 보유',
+		mastheadCta: 'YinYang Agent 열기',
+		footerTagline: '당신을 이해하는 AI 동반자',
+		sponsorsLabel: '스폰서',
+		studioRegion: '미국 델라웨어주',
+		rightsReserved: '© {year} memenow LLC · All rights reserved',
 		theme: {
 			switchToDark: '다크 테마로 전환',
 			switchToLight: '라이트 테마로 전환'
 		},
 		motion: {
-			reduce: '움직임 줄이기',
-			allow: '움직임 허용'
+			reduce: '모션 줄이기',
+			allow: '모션 허용'
 		},
 		language: {
-			menuLabel: '언어 변경',
+			menuLabel: '언어',
 			footerTitle: '언어'
+		}
+	},
+	catalog: {
+		freeLabel: '무료',
+		perMonthSuffix: '/월',
+		disclaimer: '결제 화면 금액이 최종입니다.',
+		tiers: {
+			dailyDecree: {
+				badge: '매일 무료',
+				title: '오늘의 첨',
+				summary: '오늘 간지 기반 한 줄 안내.',
+				features: ['로그인 없음', '월간 무료 횟수 별도'],
+				cta: '오늘의 첨'
+			},
+			monthlyFree: {
+				badge: '무료',
+				title: '월간 무료 해석',
+				summary: '매월 2회 기초 배반.',
+				features: ['사주·오행 쉬운 풀이', '과거 연도 대조', '계정 보관'],
+				cta: '명식 보기'
+			},
+			basicCredits: {
+				badge: '횟수 추가',
+				title: '기본 크레딧',
+				summary: '기초 해석 2회 추가.',
+				features: ['유효기간 없음·이월', '무료 소진 후 차감'],
+				cta: '크레딧 보기'
+			},
+			fullReport: {
+				badge: '단건 해제',
+				title: '전체 리포트',
+				summary: '명식 1건 영구 해제.',
+				features: ['애정·커리어·건강·가족 4장', '10년 대운·세운과 추론 근거', '공유용 명식 카드'],
+				cta: '전체 리포트 해제'
+			},
+			monthlyMember: {
+				badge: '월간 구독',
+				title: '월간 멤버',
+				summary: '시운 추적과 명식 대화.',
+				features: [
+					'일·주·월·연 시운 추적',
+					'명식 대화·정기 주제 업데이트',
+					'주기당 전체 리포트 5회'
+				],
+				cta: '월간 멤버 보기'
+			}
+		},
+		platforms: {
+			web: {
+				statusLabel: '운영 중 · 7개 언어',
+				title: '웹 버전',
+				body: 'yinyang.memenow.xyz. 브라우저 즉시 실행.'
+			},
+			ios: {
+				statusLabel: '개발 중',
+				title: 'iPhone 네이티브 앱',
+				body: '전용 iOS 앱. 일상 확인과 알림.'
+			},
+			mcp: {
+				statusLabel: '계획 중',
+				title: 'AI 어시스턴트 연결',
+				body: '자주 쓰는 AI 도구와 연동.'
+			}
 		}
 	},
 	home: {
 		meta: {
-			title: 'memenow — 삶의 흐름을 읽고, 지금의 마음을 비추다',
-			description:
-				'memenow는 자기 이해와 삶의 리듬에 집중하는 AI 스튜디오입니다. 첫 작품 Yinyang Agent는 전통 사주팔자를 따뜻하고 담백한 현대의 글로 풀어내, 나다운 본바탕을 이해하고 일·주·월·년의 때를 가늠하도록 곁에서 돕습니다.',
-			ogTitle: 'memenow — 삶의 흐름을 읽고, 지금의 마음을 비추다',
-			ogDescription:
-				'자기 이해와 삶의 리듬에 집중하는 AI 스튜디오. 첫 작품 Yinyang Agent: 언제든 다시 읽고 이어서 물어볼 수 있는 사주와 시기 감정.'
+			title: 'memenow — 당신을 이해하는 AI 동반자',
+			description: '개인 AI 제품을 독립 개발하는 memenow LLC. 대표작 YinYang Agent.',
+			ogTitle: 'memenow — 당신을 이해하는 AI 동반자',
+			ogDescription: 'YinYang Agent: 진태양시 배반, 전체 리포트, 시운 주기, 명식 대화.'
 		},
 		hero: {
-			eyebrowLeft: 'MEMENOW · 자기 이해와 삶의 리듬',
-			eyebrowRight: '대표작 · YINYANG AGENT',
-			title: '삶의 흐름을 읽고, 지금의 마음을 비추다',
-			lede: '인생의 갈림길에서 필요한 것은 애매한 운명의 단언이 아니라, 맑고 근거 있는 거울입니다. 우리의 첫 작품 Yinyang Agent는 전통 사주팔자를 따뜻하고 담백한 현대의 글로 풀어내, 나다운 본바탕을 이해하고 시간의 굴곡 속에서도 차분히 다음 수를 두도록 돕습니다.',
-			primaryCta: 'Yinyang Agent 무료로 체험하기',
-			secondaryCta: '제품 자세히 보기',
-			cue: '스크롤 · 01 대표작'
+			title: '당신을 이해하는 AI 동반자',
+			primaryCta: 'YinYang Agent 보기',
+			secondaryCta: '바로 열기'
 		},
-		yinyang: {
-			number: '01',
-			label: 'Yinyang Agent',
-			title: '인생의 여러 시기마다 다시 펼쳐 보고 싶은 나에 대한 감정',
-			lede: '생년월일, 출생 시간, 출생지 시간대만 있으면 시작할 수 있습니다. 명리 용어를 몰라도 괜찮습니다. 통찰력 있고 인내심 깊은 어른처럼 당신의 명식에 담긴 흐름을 차근차근 들려주고, 나만의 공간에 오래도록 남겨 둡니다.',
-			p1: 'Yinyang Agent는 진태양시와 절기에 따라 사주를 세우고, 자평의 오행과 조후, 맹파의 전체적인 기세를 함께 아울러 읽습니다. 일간의 기질, 지난 주요 연도의 검증, 그리고 커리어·연애·건강·가족에 걸친 긴 흐름을 하나로 이어지는 깊이 있는 글로 풀어냅니다. 화면을 가득 채운 난해한 기호도, 겁을 주는 단정도 없습니다.',
-			p2: '본명 감정은 당신의 긴 삶의 바탕을 잡아 줍니다. 하루하루가 흘러가는 동안 시기 주기는 당신의 명식을 바탕으로 일·주·월·년의 순풍과 역풍을 짚어 주고, 대화에서는 망설여질 때마다 구체적인 상황을 안고 돌아와 이야기를 이어 갈 수 있습니다.',
+		approach: {
+			title: '제품 원칙',
+			beliefs: [
+				{
+					num: '01',
+					title: '맥락 유지',
+					body: '이전 대화에서 바로 이어갑니다.'
+				},
+				{
+					num: '02',
+					title: '근거 공개',
+					body: '결론과 추론 과정을 함께 표시.'
+				},
+				{
+					num: '03',
+					title: '데이터 자율권',
+					body: '개인 공간 보관, 언제든 내보내기·삭제.'
+				}
+			]
+		},
+		flagship: {
+			title: 'YinYang Agent',
+			kicker: '사주 배반 · 시운 주기 · 명식 대화',
+			meta: 'yinyang.memenow.xyz · 7개 언어',
 			pillars: [
 				{
-					num: '01 · 본명 감정',
-					title: '타고난 본바탕을 이해하다',
-					body: '고전을 뒤적이거나 용어집을 찾을 필요가 없습니다. 담백하고 섬세한 현대의 이야기로 성격의 긴장, 타고난 재능, 그리고 지나온 세월 속 실제 사례를 깊이 있게 풀어 줍니다.'
+					num: '01',
+					title: '진태양시 배반',
+					body: '출생지·절기 정밀 계산, 과거 연도부터 확인.'
 				},
 				{
-					num: '02 · 네 가지 삶의 영역',
-					title: '연애, 커리어, 건강, 가족을 비추다',
-					body: '추상적인 오행의 강약에 머물지 않고, 당신이 정말 신경 쓰는 일상의 과제로 이어집니다. 관계를 어떻게 가꿀지, 언제 힘을 모아 도약할지, 몸과 마음을 어떻게 돌볼지.'
+					num: '02',
+					title: '4장 전체 리포트',
+					body: '애정·커리어·건강·가족, 대운·세운 포함.'
 				},
 				{
-					num: '03 · 시기 주기',
-					title: '일·주·월·년의 나아갈 때와 물러설 때',
-					body: '순풍일 때 무작정 앞서 나가지 않고, 역풍일 때 스스로를 소모하지 않도록. 당신의 명식에 맞춰 지금 힘을 낼 때와 쉬어 갈 때를 짚어 줍니다.'
+					num: '03',
+					title: '시운 주기',
+					body: '일·주·월·연 흐름 추적.'
 				},
 				{
-					num: '04 · 대화',
-					title: '막막할 때마다 이야기를 받아 줄 상대가 있다',
-					body: '매번 처음부터 자신을 설명할 필요가 없습니다. 직장에서의 선택이든 늦은 밤의 고민이든, 새로운 질문을 안고 언제든 돌아와 당신의 명식을 바탕으로 이야기를 이어 가세요.'
+					num: '04',
+					title: '명식 대화',
+					body: '저장 명식으로 질문, 정기 주제 업데이트.'
 				}
 			],
-			cta: '내 사주 무료로 보기',
-			detailLink: 'Yinyang Agent 더 알아보기'
+			cta: '명식 보기',
+			detailLink: '상세'
 		},
-		pullquote: {
-			quote:
-				'물결의 방향을 읽는 것은 파도에 몸을 맡기기 위해서가 아니라, 키를 잡은 손에 확신을 더하기 위해서입니다.',
-			attribution: 'memenow 제품 철학'
-		},
-		studio: {
-			number: '02',
-			label: '스튜디오 철학',
-			title: '조금 느리게, 시간이 지나도 변치 않는 동행을 다듬습니다',
-			lede: '요란한 눈속임도, 이렇게도 저렇게도 해석되는 상투적인 말도 없이. 마음에 닿는 일 하나하나를 성실하게 만듭니다.',
-			p1: '우리는 2024년에 memenow를 세웠습니다. 모두가 누구의 모델이 더 요란하고 더 빨리 생성하는지를 겨룰 때, 우리는 다른 것에 마음을 두었습니다. 누군가 실제 삶의 고민을 안고 AI를 찾아왔을 때, 근거도 있고 온기도 있는 답을 받을 수 있을까 하는 것이었습니다.',
-			p2: '그래서 우리는 조용한 스튜디오가 되기로 했습니다. 첫 작품 Yinyang Agent가 그 기준이 되었습니다. 좋은 작품인지 아닌지는 처음 연 1분이 얼마나 화려한지가 아니라, 한 달 뒤, 일 년 뒤 새로운 갈림길에 섰을 때 다시 열어 읽고 싶어지는지로 판가름 난다고 생각합니다.'
-		},
-		contact: {
-			number: '03',
-			label: '문의',
-			title: '우리와 이야기해요',
-			lede: '제품 사용 후기, 협업 제안, 진지한 의견 나눔 등 무엇이든 ',
-			ledeEnd: '로 편하게 메일을 보내 주세요.',
-			p1: '보내 주신 메일은 모두 팀원이 직접 읽고 답장합니다. 바로 답하지 못할 수도 있지만, 당신에게 쓰는 모든 문장은 화면 너머의 실제 사람이 쓴 것입니다. 성의 없는 자동 템플릿은 쓰지 않습니다.',
-			cta: 'hello@memenow.xyz로 메일 보내기'
+		access: {
+			title: '이용 방식',
+			items: [
+				{
+					num: '무료',
+					title: '오늘의 첨 & 월간 무료',
+					body: '오늘의 첨 무로그인, 로그인 시 매월 2회 무료.'
+				},
+				{
+					num: '유료',
+					title: '단건 또는 월간',
+					body: '크레딧 $3.99 · 전체 리포트 $5.99 · 멤버 $9.99/월.'
+				},
+				{
+					num: '플랫폼',
+					title: '웹 운영 중',
+					body: '7개 언어 지원. iPhone 앱·AI 연결 개발 중.'
+				}
+			],
+			cta: '플랜 및 요금',
+			detailLink: 'YinYang Agent 상세'
 		}
 	},
 	products: {
 		meta: {
-			title: '제품 — memenow',
-			description:
-				'memenow의 작품들. 첫 제품 Yinyang Agent는 무료 데일리 운세와 기본 명식부터 자평·맹파 종합 전체 리포트, 시기 캘린더, 대화까지 제공합니다.',
-			ogTitle: '제품 — memenow',
-			ogDescription:
-				'나를 돌아보고 일상의 선택을 위해 만들었습니다. 첫 제품 Yinyang Agent로 타고난 흐름을 읽고 지금의 리듬을 찾아보세요.'
+			title: '제품 및 플랜 — memenow',
+			description: 'YinYang Agent 플랜 및 공개 요금.',
+			ogTitle: '제품 및 플랜 — memenow',
+			ogDescription: '오늘의 첨, 월간 무료, 크레딧, 전체 리포트, 월간 멤버.'
 		},
 		hero: {
-			eyebrowLeft: 'MEMENOW · 제품',
-			eyebrowRight: '계속 발전 중',
-			title: '나를 돌아보고, 일상을 선택하기 위해',
-			lede: '잠깐 쓰고 마는 도구를 늘어놓는 대신, 오래 곁에 둘 수 있는 작품만 다듬습니다. 첫 제품 Yinyang Agent는 이미 정식 공개되었습니다. 부담 없이 시작하는 무료 명식과 데일리 운세에서 출발해 깊이 있는 자기 이해로 안내합니다.',
-			cue: '스크롤 · 01 Yinyang Agent'
+			title: '제품 및 플랜',
+			primaryCta: '명식 보기',
+			secondaryCta: '제품 상세'
 		},
 		yinyang: {
-			number: '01',
-			label: 'Yinyang Agent',
-			title: '타고난 흐름을 읽고, 나만의 나아갈 리듬을 찾다',
-			lede: '중국 전통 사주팔자를 거울삼아 성격의 바탕과 시간의 주기를 비춥니다. 처음으로 사주가 궁금해진 분도, 눈앞의 선택에 참고할 무언가를 찾는 분도 자신의 속도에 맞춰 차근차근 깊어질 수 있습니다.',
-			steps: [
-				{
-					num: '1단계 · 무료로 만나기',
-					title: '기본 명식과 데일리 운세',
-					body: '생년월일, 출생 시간, 출생지 시간대를 입력하면 사주 명식과 핵심 오행 해석이 바로 나타납니다. 매일 계절에 맞춘 시기 영감을 무료로 뽑아 볼 수도 있습니다.'
-				},
-				{
-					num: '2단계 · 깊이 알기',
-					title: '자평·맹파 종합 전체 리포트',
-					body: '만 자 분량의 깊이 있는 리포트를 잠금 해제하세요. 지난 연도의 검증, 대운과 세운의 흐름, 연애·커리어·건강·가족 네 장에 걸친 현실적인 행동 참고, 그리고 나만의 포트레이트 카드가 담겨 있습니다.'
-				},
-				{
-					num: '3단계 · 일상의 동행',
-					title: '시기 캘린더와 대화',
-					body: '일·주·월·년의 순조로운 때와 신중해야 할 때를 일상에서 언제든 확인하세요. 구체적인 고민이 생기면 대화에서 바로 당신의 명식을 바탕으로 질문하고 정리할 수 있습니다.'
-				},
-				{
-					num: '4단계 · 언제든 확인',
-					title: '사주 라이브러리와 투명한 추론',
-					body: '모든 결론에 명리적 근거를 표시하고, 알기 쉬운 사주 용어와 유파 라이브러리도 함께 제공합니다. 결론만이 아니라 그 뒤에 있는 추론의 흐름까지 확인할 수 있습니다.'
-				}
-			],
-			cta: 'Yinyang Agent 무료로 체험하기',
-			detailLink: '전체 제품 소개 읽기'
+			title: 'YinYang Agent',
+			status: '운영 중 · 7개 언어',
+			summary: '사주 배반, 시운 추적, 명식 대화.',
+			tags: ['진태양시 배반', '전체 리포트', '시운 주기', '명식 대화'],
+			primaryCta: '앱 열기',
+			detailLink: '해석 방법'
+		},
+		plans: {
+			title: '플랜 및 요금',
+			cta: '요금 페이지로',
+			libraryLink: '명리 자료실'
 		}
 	},
 	productYinyang: {
 		meta: {
-			title: 'Yinyang Agent — 사주팔자와 삶의 리듬을 함께하는 동반자 · memenow',
-			description:
-				'Yinyang Agent는 오래된 사주팔자를 지금을 비추는 맑은 글로 풀어냅니다. 진태양시 명식, 자평·맹파 종합 해석, 일·주·월·년 시기 주기, 명식을 이해하는 대화를 하나로 담았습니다.',
-			ogTitle: 'Yinyang Agent — 타고난 흐름을 읽고, 지금의 한 걸음을 단단하게',
-			ogDescription:
-				'사주 기본 명식과 데일리 운세는 무료로 시작하세요. 자평·맹파 종합 전체 리포트, 시기 캘린더, 언제든 곁에 있는 대화로 더 깊이 들어갈 수 있습니다.'
+			title: 'YinYang Agent — memenow',
+			description: '진태양시 배반, 이중 해석, 시운 주기, 명식 대화.',
+			ogTitle: 'YinYang Agent — 움직임과 멈춤 사이, 때가 있다',
+			ogDescription: '진태양시 배반, 전체 리포트, 시운 주기, 명식 대화.'
 		},
 		hero: {
-			eyebrowLeft: '제품 · YINYANG AGENT',
-			eyebrowRight: '무료 체험 가능',
-			title: '오래된 사주팔자를, 지금을 비추는 맑은 글로',
-			lede: '사주는 당신에게 판결을 내리는 숙명론이 아니라, 천 년의 세월을 거쳐 온 자기 관찰의 좌표계입니다. Yinyang Agent는 엄밀한 천문 절기 기반 명식, 자평·맹파 종합 해석, 시기 주기, 대화를 하나로 엮어 복잡한 지금을 함께 정리해 나갑니다.',
-			primaryCta: '내 사주 무료로 보기',
-			cue: '스크롤 · 01 체험과 동행'
+			title: '움직임과 멈춤 사이, 때가 있다',
+			lede: '진태양시 배반, 자평·맹파 이중 관점, 시운 주기, 명식 대화.',
+			primaryCta: '명식 보기',
+			secondaryCta: '플랜 및 요금'
 		},
 		reading: {
-			number: '01',
-			label: '체험과 동행',
-			title: '처음의 놀라운 ‘맞다’는 순간에서, 일상의 든든한 참고로',
-			lede: '무료 데일리 운세나 매월 두 번의 무료 기본 감정으로 가볍게 시작할 수 있습니다. 명식 구조와 현대의 글이 나란히 펼쳐져 일간의 특징과 오행의 균형을 한눈에 보고, 자신의 속도로 깊이 읽어 나갈 수 있습니다.',
-			p1: '전체 리포트를 잠금 해제하면 출생지 시간대와 진태양시 절기에 따라 명식을 정확히 세우고, 지난 구체적인 연도의 경험과의 검증, 대운과 세운의 굴곡, 그리고 연애·커리어·건강·가족 네 장의 현실적인 조언을 차근차근 펼쳐 보입니다. 내장된 사주 라이브러리를 언제든 펼쳐 보거나, 소장하고 공유하고 싶은 나만의 포트레이트 카드를 만들 수도 있습니다.',
-			p2: '모든 감정은 계정에 오래도록 저장되어 흔들리지 않는 나만의 기준이 됩니다. 삶이 흘러가는 동안 시기 주기는 당신의 명식을 바탕으로 일·주·월·년의 순풍과 역풍을 표시하고, 대화와 커리어·연애·건강 전용 채널에서는 새로운 결정을 앞두고 언제든 돌아와 이야기할 수 있습니다.',
+			title: '핵심 기능',
 			highlights: [
 				{
-					num: '01 · 진입 장벽 없이',
-					title: '명식과 글을 나란히, 어려운 말 없이',
-					body: '난해한 천간지지와 십신의 생극을 현대의 삶에 가까운 명료한 이야기로 바꿉니다. 사주를 처음 접하는 분도 편하게 읽을 수 있습니다.'
+					num: '01',
+					title: '배반과 해석',
+					body: '간지·십신과 쉬운 풀이를 나란히 표시.'
 				},
 				{
-					num: '02 · 지난날로 검증',
-					title: '먼저 지난날을 확인하고, 그다음 미래를',
-					body: '지난 주요 연도의 전환점과 체감을 짚어 보며 명식의 흐름을 보정하기 때문에, 앞으로의 대운과 세운에 대한 참고가 실제로 느낄 수 있는 토대 위에 놓입니다.'
+					num: '02',
+					title: '4장 전체 리포트',
+					body: '애정·커리어·건강·가족, 대운과 공유 카드.'
 				},
 				{
-					num: '03 · 살아 있는 리듬',
-					title: '일·주·월·년 시기 캘린더',
-					body: '큰 명식의 흐름을 구체적인 하루, 한 주, 한 달로 옮겨 옵니다. 중요한 결정을 밀고 나가기 좋은 때와 숨을 고르며 힘을 모아야 할 때를 알아보도록 돕습니다.'
+					num: '03',
+					title: '시운 주기',
+					body: '5개 영역을 일·주·월·연으로 추적.'
 				},
 				{
-					num: '04 · 이어지는 깊은 대화',
-					title: '당신의 맥락을 아는 대화',
-					body: '대화 도우미는 저장된 명식 리포트를 모두 읽고, 당신의 실제 성격과 현재 대운을 바탕으로 구체적인 고민을 하나하나 함께 풀어 갑니다.'
+					num: '04',
+					title: '대화와 자료실',
+					body: '저장 명식으로 질문, 내장 명리 자료실.'
 				}
 			]
 		},
-		pullquote: {
-			quote:
-				'좋은 감정은 결코 대신 결정하지 않습니다. 안개를 걷어 내어, 내 안의 목소리를 들을 수 있게 할 뿐입니다.',
-			attribution: 'Yinyang Agent 설계 원칙'
-		},
-		discipline: {
-			number: '02',
-			label: '정성과 방법',
-			title: '왜 몇 분을 들여 리포트 하나를 공들여 다듬는가',
-			lede: '1초 만에 튀어나오는 운세 문구는 훑어보고 지나치기에나 알맞습니다. 세월이 흘러도 견주어 볼 수 있는 인생의 긴 기록으로 사주를 쓰려면, 추론에도 검토에도 조금의 수고도 아낄 수 없습니다.',
-			p1: '출생 정보를 제출하면 Yinyang Agent는 먼저 출생지 시간대와 천문 절기에 따라 명식을 세운 뒤, 자평(오행의 생극과 한난 조후를 가늠)과 맹파(전체 기세와 쓰임의 효율을 추론)라는 두 고전적 관점에서 동시에 해석합니다. 글을 완성해 전달하기 전에는 전체 결론을 명식의 사실, 연도의 경계와 하나하나 대조해 공허하고 과장된 상투어를 걸러 냅니다. 몇 분 더 기다리는 대신, 한 글자 한 글자 근거 있는 안심을 얻게 됩니다.',
+		method: {
+			title: '해석 방법',
+			lede: '절기 배반 → 자평·맹파 이중 분석 → 과거 연도 대조.',
 			comparison: {
-				caption: 'Yinyang Agent가 패스트푸드식 AI 운세와 전혀 다른 이유',
-				genericLabel: '패스트푸드식 AI 운세 / 범용 챗봇',
-				yinyangLabel: 'Yinyang Agent',
+				caption: 'YinYang Agent vs 일반 AI',
+				genericLabel: '일반 AI 채팅',
+				yinyangLabel: 'YinYang Agent',
 				rows: [
 					{
-						feature: '명식 기준',
-						generic: '출생지 시간대와 절기 교체를 놓치기 쉽고, 사주의 간지조차 잘못 세우기도 함',
-						yinyang:
-							'출생지 IANA 시간대와 천문 절기에 엄격히 따라 명식을 세워, 명식의 사실이 흔들리지 않음'
+						feature: '배반',
+						generic: '시차·절기 경계 누락 잦음',
+						yinyang: '출생지 진태양시 + 천문 절기'
 					},
 					{
-						feature: '해석의 깊이',
-						generic: '한 번의 프롬프트로 짜깁기한, 누구에게나 들어맞는 바넘식 상투어',
-						yinyang:
-							'자평의 오행 강약과 맹파의 전체 쓰임이라는 두 관점을 종합해 큰 틀과 세부를 함께 봄'
+						feature: '분석',
+						generic: '단발성 일반 문구',
+						yinyang: '자평 조후 + 맹파 격국'
 					},
 					{
-						feature: '신뢰성 검증',
-						generic: '즉흥적으로 답하고 앞뒤가 맞지 않으며, 질문을 바꾸면 결론도 바뀜',
-						yinyang:
-							'지난 연도의 검증을 바탕으로, 글을 완성하기 전 전체 사실과 연도 경계를 교차 검토'
+						feature: '근거',
+						generic: '결론만 있고 출처 없음',
+						yinyang: '추론 과정 + 내장 자료실'
 					},
 					{
-						feature: '이후의 동행',
-						generic:
-							'한 번 보고 끝나는 화면 기록으로, 대화가 끝나면 사라져 이후 삶의 변화를 이어받지 못함',
-						yinyang:
-							'리포트는 계속 저장되고, 일·주·월·년 시기 주기 및 명식을 이해하는 대화와 연결됨'
+						feature: '검증',
+						generic: '질문 바꾸면 앞뒤 모순',
+						yinyang: '과거 주요 연도 먼저 대조'
+					},
+					{
+						feature: '연속성',
+						generic: '창 닫으면 처음부터',
+						yinyang: '명식 저장·시운·대화 연동'
 					}
 				]
-			},
-			cta: 'yinyang.memenow.xyz에서 감정 시작하기'
+			}
+		},
+		platforms: {
+			title: '지원 플랫폼',
+			plansCta: '플랜 및 요금',
+			libraryLink: '명리 자료실'
 		}
 	},
 	company: {
 		meta: {
 			title: '소개 — memenow',
-			description:
-				'memenow는 2024년에 설립된, 미국과 중화권에 걸친 독립 AI 스튜디오입니다. 동양의 인문 사상과 엄밀하고 투명한 AI를 결합해, 오래도록 곁에 머무는 작품을 만듭니다.',
-			ogTitle: '소개 — memenow',
-			ogDescription:
-				'2024년에 설립된 독립 AI 스튜디오. 동양의 인문 사상과 현대 엔지니어링의 장인 정신을 이어, 오래도록 다시 읽고 싶은 작품을 만듭니다.'
+			description: '2024년 델라웨어 설립. 개인 AI 제품을 독립 개발하는 memenow LLC.',
+			ogTitle: 'memenow 소개',
+			ogDescription: '독립 AI 회사 memenow LLC. 대표작 YinYang Agent.'
 		},
 		hero: {
-			eyebrowLeft: '소개 · MEMENOW 스튜디오',
-			eyebrowRight: '2024년 설립',
-			title: '조용히 작품을 다듬는 독립 스튜디오',
-			lede: '2024년에 설립되었습니다. 태평양 양쪽에 걸쳐 동양의 전통 사상과 근거를 추적할 수 있는 현대 AI를 하나로 엮습니다. 서두르지 않고 공들여, 시간이 지나도 변치 않는 개인의 동반자가 될 작품만 만듭니다.',
-			cue: '스크롤 · 01 우리 팀'
+			title: 'memenow 소개',
+			lede: '개인 AI 제품을 독립 개발합니다.'
 		},
 		studio: {
-			number: '01',
-			label: '우리 팀',
-			title: '시간대를 넘어, 같은 미감과 절제로 모이다',
-			lede: '회사는 미국 델라웨어주에서 설립되었으며, 팀원들은 미국과 중화권의 여러 도시에서 일하고 있습니다.',
-			p1: '우리 중에는 인공지능과 분산 시스템을 깊이 다뤄 온 엔지니어도 있고, 동양의 전통문화를 오래 공부해 온 창작자도 있습니다. 모두 요란하고 과장된 마케팅을 좋아하지 않고, 차분히 마음을 담아 복잡한 기술을 따뜻하고 세심하며 안심할 수 있는 일상의 경험으로 바꾸고 싶어 합니다. 바로 이 공감대가 우리를 하나로 모았습니다.',
+			title: 'memenow LLC',
 			stats: {
 				foundedYear: '2024',
-				foundedLabel: '스튜디오 설립',
-				foundedDesc: '‘진솔하고 근거 있게, 오래도록 함께’라는 제품 철학을 세웠습니다.',
-				productCount: '1',
-				productLabel: '대표작',
-				productDesc: 'Yinyang Agent: 사주팔자 장문 감정, 시기 주기, 대화.',
-				teamRegion: 'US · CN',
-				teamLabel: '다문화 팀',
-				teamDesc: '현대 AI 엔지니어링의 엄밀함과 동양 인문의 통찰을 잇습니다.'
+				foundedLabel: '설립',
+				foundedDesc: '독립 운영.',
+				jurisdictionValue: '델라웨어',
+				jurisdictionLabel: '등록지',
+				jurisdictionDesc: '미국 LLC.',
+				localeCount: '7',
+				localeLabel: '언어',
+				localeDesc: '간·번·영·일·한·스·프.'
 			}
 		},
-		work: {
-			number: '02',
-			label: '일하는 원칙',
-			title: '우리가 제품을 다듬는 방식',
-			lede: '사람의 마음에 정말 닿아 있는 질문 하나를 골라, 절제하고 투명하게, 서두르지 않고 제대로 답합니다.',
-			p1: '우리는 AI가 정말 오랜 동반자가 될 수 있는 일만 합니다. AI가 건네는 내용은 소중히 간직하고 다시 읽으며, 삶이 새로운 장을 맞을 때 질문을 안고 돌아와 견주어 볼 만한 것이어야 합니다. Yinyang Agent가 그 첫 번째 답입니다. 눈에 거슬리는 팝업이나 불안을 조장하는 말로 결제를 재촉하지 않습니다. 정말 좋은 경험이라면 자연스럽게 머물고 싶어지기 때문입니다.',
-			p2: '확신할 수 있는 추론은 그 근거를 펼쳐 놓고 분명하게 설명합니다. 알 수 있는 범위를 넘어서는 것은 솔직하게 여백으로 남깁니다. 모델의 결과가 충분히 안정적이지 않으면 기준을 넘을 때까지 다시 다듬습니다. 대단한 원칙은 아닙니다. 화면 앞의 당신이 든든함과 존중을 느끼도록 하기 위한 것일 뿐입니다.',
-			timeline: [
+		principles: {
+			title: '제품 기준',
+			items: [
 				{
-					year: '2024',
-					title: 'memenow 설립',
-					body: '첫 코드 한 줄을 쓰기 전에 ‘불안을 팔지 않고, 한 번 쓰고 버리는 장난감을 만들지 않는다’는 스튜디오 원칙부터 정했습니다.'
+					num: '01',
+					title: '쉬운 문장',
+					body: '용어 남발 없이 핵심만.'
 				},
 				{
-					year: '2024–2026',
-					title: 'Yinyang Agent 출시와 발전',
-					body: '첫 대표작을 정식 출시하고 꾸준히 개선해 왔습니다. 진태양시 명식, 자평과 맹파 두 관점의 종합 해석, 전체 사실 검토, 일·주·월·년 시기 주기, 그리고 대화 경험을 완성했습니다.'
+					num: '02',
+					title: '근거 제시',
+					body: '블랙박스 없이 추론 공개.'
+				},
+				{
+					num: '03',
+					title: '방해 없음',
+					body: '팝업 없음, 라이트·다크 지원.'
+				},
+				{
+					num: '04',
+					title: '추적 제로',
+					body: '사이트 통계 없음, 앱 데이터 내보내기·삭제.'
 				}
 			]
 		},
-		contact: {
-			number: '03',
-			label: '문의',
-			title: '당신의 이야기를 기다립니다',
-			lede: '언론 인터뷰, 비즈니스 협업, 제품 사용 소감 나눔 등 무엇이든 ',
-			ledeEnd: '로 편하게 메일을 보내 주세요.',
-			p1: '모든 메일은 우리가 직접 읽고 직접 답장합니다. 차가운 티켓 번호도, 천편일률적인 자동 응답도 없습니다.',
-			cta: 'hello@memenow.xyz로 메일 보내기'
+		work: {
+			title: '연혁',
+			thanks: 'Anthropic·Cloudflare 크레딧 후원.',
+			timeline: [
+				{
+					year: '2024',
+					title: 'memenow LLC 설립',
+					body: '델라웨어 등록, 개인 AI 개발 착수.'
+				},
+				{
+					year: '2025',
+					title: 'YinYang Agent 출시',
+					body: '웹 버전 공개, 절기 배반·이중 해석.'
+				},
+				{
+					year: '2026',
+					title: '7개 언어 & 멀티 플랫폼',
+					body: '7개 언어·공개 플랜, iPhone 앱·AI 연결 진행.'
+				}
+			]
 		}
 	},
 	privacy: {
 		meta: {
 			title: '개인정보 처리방침 — memenow',
-			description: 'memenow.xyz 개인정보 보호 안내.'
+			description: 'memenow.xyz 개인정보 처리방침.'
 		},
 		hero: {
-			eyebrowLeft: '법적 고지 · 개인정보 처리방침',
-			eyebrowRight: '2026-10-15 업데이트',
-			title: '당신의 개인정보, 명확하고 투명하게',
-			lede: 'memenow.xyz 공식 웹사이트는 개인정보를 거의 수집하지 않습니다. 어떤 설정이 당신의 기기에만 남고, 어떤 기본 로그가 보안 운영에만 쓰이는지 가장 쉬운 말로 설명합니다.',
-			cue: '스크롤 · 개인정보 안내'
+			updated: '2026-11-24 업데이트',
+			title: '개인정보 처리방침',
+			lede: '광고·추적 없음. 화면 설정만 로컬 저장.'
 		},
+		summaryTitle: '요약',
+		summaryPoints: [
+			'제3자 광고·추적 스크립트 없음.',
+			'테마·모션 설정은 브라우저에만 보관.',
+			'내보내기·삭제: privacy@memenow.xyz.'
+		],
 		scope: {
-			number: '01',
-			label: '적용 범위',
-			title: '이 안내가 다루는 범위',
-			body: '이 안내는 <strong>memenow.xyz</strong> 공식 웹사이트의 공개 페이지에 적용됩니다. 개별 제품(예: Yinyang Agent)은 각 앱 화면 안에서 별도의 개인정보 처리방침과 데이터 관리 옵션을 제공합니다.'
+			title: '적용 범위',
+			body: '<strong>memenow LLC</strong> 운영 <strong>memenow.xyz</strong> 공개 페이지에 적용. YinYang Agent는 앱 내 별도 정책을 따릅니다.'
 		},
 		data: {
-			number: '02',
-			label: '데이터 안내',
-			title: '수집하는 것과 수집하지 않는 것',
-			p1: '이 사이트는 제3자 추적·분석 스크립트를 전혀 사용하지 않으며 광고도 게재하지 않습니다. 라이트/다크 테마와 움직임 설정(브라우저 로컬 저장소 키 <code class="prose-code">memenow.theme</code> 및 <code class="prose-code">memenow.motion</code>)은 전적으로 당신의 브라우저에만 보관되며 전송되지 않습니다. 언어 설정(<code class="prose-code">memenow.locale</code>)은 퍼스트파티 쿠키로 저장되며, 선택한 언어로 페이지를 보여 주는 데에만 사용됩니다.',
-			p2: '호스팅 인프라인 Cloudflare는 사이트의 보안과 안정적인 운영을 위해 업계 관행에 따라 기본 요청 메타데이터(IP 주소, User-Agent, 타임스탬프, 접속 경로)를 기록합니다. 우리는 이러한 로그를 어떠한 개인 신원과도 연결하지 않습니다.'
+			title: '로컬 설정 및 로그',
+			p1: '제3자 분석·광고 없음. 테마·모션(<code class="prose-code">memenow.theme</code>, <code class="prose-code">memenow.motion</code>)은 브라우저 저장, 언어(<code class="prose-code">memenow.locale</code>)는 표시용 1차 쿠키만 사용.',
+			p2: 'Cloudflare는 보안용 기본 요청 메타데이터(IP, UA, 시각, 경로)만 기록하며 신원과 결합하지 않습니다.'
 		},
 		email: {
-			number: '03',
-			label: '메일 소통',
-			title: '보내 주신 메일과 연락처',
-			body: '<a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>로 메일을 보내시면, 메일 내용과 주소는 우리가 답장을 드리는 데에만 사용되며 어떠한 제3자에게도 판매하거나 공유하지 않습니다.'
+			title: '데이터 요청',
+			body: '개인정보·데이터 요청: <a href="mailto:privacy@memenow.xyz">privacy@memenow.xyz</a>, 일반 문의: <a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>. 회신에만 사용.'
 		}
 	},
 	terms: {
@@ -343,65 +397,55 @@ export const ko: MessageSchema = {
 			description: 'memenow.xyz 이용약관.'
 		},
 		hero: {
-			eyebrowLeft: '법적 고지 · 이용약관',
-			eyebrowRight: '2026-10-15 업데이트',
-			title: '간결하고 알기 쉬운 이용약관',
-			lede: 'memenow.xyz를 방문해 주셔서 감사합니다. 아래 약관은 이 사이트의 서비스 범위, 문화적 탐구로서의 성격, 그리고 당신의 정당한 권리를 명확히 설명합니다.',
-			cue: '스크롤 · 이용약관'
+			updated: '2026-11-24 업데이트',
+			title: '이용약관',
+			lede: '적용 범위, 문화적 참고 기준 및 권리.'
 		},
+		summaryTitle: '요약',
+		summaryPoints: [
+			'사주 콘텐츠는 문화 참고용이며 의료·법률·재무 자문이 아닙니다.',
+			'개인 해석과 리포트는 영구 보관·비상업 공유 가능.',
+			'문의: hello@memenow.xyz / support@memenow.xyz.'
+		],
 		scope: {
-			number: '01',
-			label: '적용 범위',
-			title: '이 약관이 다루는 범위',
-			body: '이 약관은 <strong>memenow.xyz</strong>의 모든 공개 페이지에 적용됩니다. 이 사이트에 접속하거나 이용하는 것은 이 약관을 읽고 동의했음을 의미합니다. 개별 제품(예: Yinyang Agent)은 각 서비스 페이지에서 별도의 제품 이용약관을 제공합니다.'
+			title: '적용 범위',
+			body: '<strong>memenow LLC</strong> 운영 <strong>memenow.xyz</strong> 공개 페이지에 적용. YinYang Agent는 별도 약관과 환불 규정을 따릅니다.'
 		},
 		disclaimer: {
-			number: '02',
-			label: '문화 및 AI 면책',
-			title: '문화적 탐구로서의 성격과 AI 생성 안내',
-			p1: 'memenow의 제품(Yinyang Agent 포함)이 제공하는 사주팔자와 오행 콘텐츠는 중국 전통 철학과 인문 유산에서 비롯되었으며, 자기 성찰과 일상의 돌아봄을 위한 문화적 관점을 제공하는 것을 목적으로 합니다. <strong>이는 전문적인 의료, 심리 상담, 법률 또는 재무·투자 조언에 해당하지 않으며 이를 대신할 수도 없습니다</strong>.',
-			p2: '감정 내용은 인공지능 모델의 도움을 받아 생성되며, 본질적으로 서사적 해석에 해당합니다. 우리는 미래의 어떠한 확정적 결과에 대해서도 명시적이든 묵시적이든 약속하지 않습니다. 명식은 출발점일 뿐이며, 삶의 모든 구체적인 결정은 언제나 당신이 스스로 판단하고 책임집니다.'
+			title: '문화적 참고 및 AI',
+			p1: '사주·오행은 전통 문화 기반 성찰 참고 자료이며 <strong>의료·심리·법률·재무 자문을 대체하지 않습니다</strong>.',
+			p2: '명식 사실과 AI 작문을 결합한 해석으로 미래를 보장하지 않으며 결정 책임은 본인에게 있습니다.'
 		},
 		warranty: {
-			number: '03',
-			label: '서비스 상태',
 			title: '있는 그대로 제공',
-			body: '이 사이트의 콘텐츠는 ‘있는 그대로’ 제공됩니다. 우리는 정보의 정확성과 사이트의 안정적인 운영을 유지하기 위해 꾸준히 노력하지만, 특정 목적에의 적합성, 완전성 또는 실시간성에 대해 추가로 보증하지 않습니다.'
+			body: '‘있는 그대로’ 제공하며 추가 명시적·묵시적 보증은 없습니다.'
 		},
 		offer: {
-			number: '04',
-			label: '금융 청약 아님',
-			title: '어떠한 금융·투자 청약도 아닙니다',
-			body: '이 사이트의 어떠한 글이나 콘텐츠도 증권, 펀드 지분 또는 금융 상품의 매도 청약에 해당하지 않으며, 투자 권유나 재무 조언에도 해당하지 않습니다.'
+			title: '금융 권유 아님',
+			body: '증권·금융상품 매도 제안이나 투자 자문이 아닙니다.'
 		},
 		ip: {
-			number: '05',
-			label: '지식재산권',
-			title: '브랜드 표지와 당신의 개인 감정에 대한 권리',
-			p1: '‘memenow’ 명칭, 로고 및 사이트의 시각 디자인은 모두 memenow에 귀속됩니다. 언급된 기타 상표는 각 권리자에게 귀속됩니다.',
-			p2: 'Yinyang Agent 등의 제품에서 당신이 생성한 개인 명식 감정은 언제까지나 당신이 열람하고, 개인적으로 소장하며, 비상업적으로 공유할 수 있습니다.'
+			title: '권리',
+			p1: '‘memenow’·‘YinYang Agent’ 상표와 디자인은 memenow LLC 소유입니다.',
+			p2: '생성된 개인 해석과 리포트는 영구 열람·보관·비상업 공유할 수 있습니다.'
 		},
 		law: {
-			number: '06',
-			label: '준거법',
-			title: '준거법 및 개정 안내',
-			p1: '이 약관은 미국 델라웨어주 법률에 따라 규율되고 해석됩니다(법률 충돌 규칙은 제외).',
-			p2: '우리는 사업의 발전에 따라 이 약관을 수시로 업데이트할 수 있으며, 페이지 상단의 ‘업데이트’ 날짜는 항상 가장 최근의 개정일을 나타냅니다. 궁금한 점이 있으시면 <a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>로 언제든 문의해 주세요.'
+			title: '준거법',
+			p1: '미국 델라웨어주 법(국제사법 제외)을 따릅니다.',
+			p2: '약관: <a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>, 제품·결제: <a href="mailto:support@memenow.xyz">support@memenow.xyz</a>.'
 		}
 	},
 	error: {
 		meta: {
 			title: '{status} · memenow'
 		},
-		notFoundTitle: '이 페이지는 안개 속으로 사라졌어요',
-		serverErrorTitle: '연결에 잠시 물결이 일었어요',
-		notFoundLede:
-			'찾으시는 페이지가 다른 곳으로 옮겨졌거나, 이름이 바뀌었거나, 처음부터 없었을 수도 있습니다. 홈으로 돌아가 다시 시작해 보세요.',
-		serverErrorLede: '서비스가 잠시 혼잡합니다. 잠시 후 다시 시도해 주세요.',
-		returnHome: '홈으로 돌아가기',
+		notFoundTitle: '페이지를 찾을 수 없습니다',
+		serverErrorTitle: '일시 이용 불가',
+		notFoundLede: '페이지가 없거나 이동했습니다.',
+		serverErrorLede: '일시 오류가 발생했습니다. 잠시 후 다시 시도하세요.',
+		returnHome: '홈으로',
 		statusLabel: '상태 · {status}',
-		notFoundLabel: '페이지를 찾을 수 없음',
-		errorLabel: '서비스 오류',
-		cueHome: '돌아가기 · 홈'
+		notFoundLabel: '없음',
+		errorLabel: '일시 불가'
 	}
 };

@@ -55,6 +55,25 @@ describe('MotionSwitch', () => {
 		expect(lenis.start).toHaveBeenCalled();
 	});
 
+	it('notifies MutationObserver subscribers on data-motion changes so WorldScene updates while stationary', async () => {
+		const observed: string[] = [];
+		const observer = new MutationObserver(() => {
+			observed.push(document.documentElement.getAttribute('data-motion') ?? '');
+		});
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ['data-motion']
+		});
+		try {
+			const screen = await render(MotionSwitch, { context });
+			await screen.getByLabelText('减弱动效').click();
+			await Promise.resolve();
+			expect(observed).toEqual(['reduced']);
+		} finally {
+			observer.disconnect();
+		}
+	});
+
 	it('still flips motion when localStorage.setItem throws', async () => {
 		// Simulate Safari private mode / quota-exceeded: the component should
 		// swallow the error and keep the in-page motion update intact.

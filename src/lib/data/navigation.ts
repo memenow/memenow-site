@@ -1,4 +1,5 @@
 import type { Locale, MessageSchema } from '$lib/i18n';
+import { SITE_EMAILS } from './site';
 
 export interface NavLink {
 	label: string;
@@ -45,16 +46,26 @@ export function getFooterSections(locale: Locale, common: CommonCopy): FooterSec
 		{
 			title: common.brand,
 			links: [
+				{ label: common.home, href: `/${locale}` },
 				{ label: common.products, href: `/${locale}/products` },
+				{ label: 'YinYang Agent', href: `/${locale}/products/yinyang` },
 				{ label: common.company, href: `/${locale}/company` }
+			]
+		},
+		{
+			title: common.contact,
+			links: [
+				{ label: SITE_EMAILS.hello, href: `mailto:${SITE_EMAILS.hello}` },
+				{ label: SITE_EMAILS.support, href: `mailto:${SITE_EMAILS.support}` },
+				{ label: SITE_EMAILS.privacy, href: `mailto:${SITE_EMAILS.privacy}` },
+				{ label: 'GitHub', href: 'https://github.com/memenow', external: true }
 			]
 		},
 		{
 			title: common.legal,
 			links: [
 				{ label: common.privacy, href: `/${locale}/privacy` },
-				{ label: common.terms, href: `/${locale}/terms` },
-				{ label: 'GitHub', href: 'https://github.com/memenow', external: true }
+				{ label: common.terms, href: `/${locale}/terms` }
 			]
 		}
 	];

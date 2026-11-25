@@ -1,7 +1,6 @@
 <script lang="ts">
 	import EditorialHero from '$lib/components/home/EditorialHero.svelte';
 	import Chapter from '$lib/components/home/Chapter.svelte';
-	import ArtifactCta from '$lib/components/ui/ArtifactCta.svelte';
 	import Timeline from '$lib/components/editorial/Timeline.svelte';
 	import StatCard from '$lib/components/editorial/StatCard.svelte';
 	import { useMessages } from '$lib/i18n';
@@ -20,23 +19,9 @@
 	<meta name="twitter:image" content="{SITE_ORIGIN}/og/og-company.jpeg" />
 </svelte:head>
 
-<EditorialHero
-	eyebrowLeft={t.hero.eyebrowLeft}
-	eyebrowRight={t.hero.eyebrowRight}
-	title={t.hero.title}
-	lede={t.hero.lede}
-	cue={t.hero.cue}
-/>
+<EditorialHero title={t.hero.title} lede={t.hero.lede} scrollTarget="#studio" />
 
-<Chapter
-	id="studio"
-	number={t.studio.number}
-	label={t.studio.label}
-	headless
-	title={t.studio.title}
->
-	<p class="c-chapter__lede">{t.studio.lede}</p>
-	<p class="c-chapter__prose">{t.studio.p1}</p>
+<Chapter id="studio" align="left" headless title={t.studio.title}>
 	<div class="c-stat-grid">
 		<StatCard
 			value={t.studio.stats.foundedYear}
@@ -44,40 +29,31 @@
 			description={t.studio.stats.foundedDesc}
 		/>
 		<StatCard
-			value={t.studio.stats.productCount}
-			label={t.studio.stats.productLabel}
-			description={t.studio.stats.productDesc}
+			value={t.studio.stats.jurisdictionValue}
+			label={t.studio.stats.jurisdictionLabel}
+			description={t.studio.stats.jurisdictionDesc}
 		/>
 		<StatCard
-			value={t.studio.stats.teamRegion}
-			label={t.studio.stats.teamLabel}
-			description={t.studio.stats.teamDesc}
+			value={t.studio.stats.localeCount}
+			label={t.studio.stats.localeLabel}
+			description={t.studio.stats.localeDesc}
 		/>
 	</div>
 </Chapter>
 
-<Chapter id="how" number={t.work.number} label={t.work.label} align="left" title={t.work.title}>
-	<p class="c-chapter__lede">{t.work.lede}</p>
-	<p class="c-chapter__prose">{t.work.p1}</p>
-	<p class="c-chapter__prose">{t.work.p2}</p>
-	<Timeline items={t.work.timeline} />
+<Chapter id="principles" align="split" headless title={t.principles.title}>
+	<div class="c-stack-grid">
+		{#each t.principles.items as item (item.num)}
+			<div class="c-stack-grid__item">
+				<span class="c-stack-grid__num">{item.num}</span>
+				<h3 class="c-stack-grid__title">{item.title}</h3>
+				<p class="c-stack-grid__body">{item.body}</p>
+			</div>
+		{/each}
+	</div>
 </Chapter>
 
-<Chapter
-	id="contact"
-	number={t.contact.number}
-	label={t.contact.label}
-	align="split"
-	title={t.contact.title}
->
-	<p class="c-chapter__lede">
-		{t.contact.lede}<a href="mailto:hello@memenow.xyz">hello@memenow.xyz</a>{t.contact.ledeEnd}
-	</p>
-	<p class="c-chapter__prose">{t.contact.p1}</p>
-
-	{#snippet cta()}
-		<ArtifactCta href="mailto:hello@memenow.xyz" palette="celestial" size="lg">
-			{t.contact.cta}
-		</ArtifactCta>
-	{/snippet}
+<Chapter id="timeline" align="left" headless title={t.work.title}>
+	<Timeline items={t.work.timeline} />
+	<p class="c-chapter__prose">{t.work.thanks}</p>
 </Chapter>

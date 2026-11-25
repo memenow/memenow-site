@@ -115,16 +115,17 @@
 				Classification logic lives in <code>src/lib/utils/route-family.ts</code>.
 			</p>
 
-			<h2>Home — <code>/</code></h2>
+			<h2>Home — <code>/[locale]</code></h2>
 			<p>
 				The home page is the canonical example of how the site reads. An
-				<code>EditorialHero</code> sits above four <code>Chapter</code> sections.
+				<code>EditorialHero</code> sits above three focused <code>Chapter</code> sections—zero
+				duplication with the footer and zero decorative slogan interstitials.
 			</p>
 			<table>
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Label</th>
+						<th>Section</th>
 						<th>Title</th>
 						<th>Notes</th>
 					</tr>
@@ -133,55 +134,77 @@
 					<tr>
 						<td>—</td>
 						<td>Hero</td>
-						<td>Know your rhythm. Choose with clarity.</td>
+						<td>An AI companion that truly understands you</td>
 						<td>
-							Stage CTA links to <code>yinyang.memenow.xyz</code> + <code>/products/yinyang</code>
+							Company headline + stage CTAs to <code>/products/yinyang</code> (primary) and
+							<code>yinyang.memenow.xyz</code> (secondary)
 						</td>
 					</tr>
 					<tr>
 						<td>01</td>
-						<td>Yinyang Agent</td>
-						<td>A personal reading written to live with you</td>
+						<td><code>#approach</code></td>
+						<td>Personal AI that truly gets you</td>
 						<td>
-							Left alignment; 4-pillar scenario grid; CTA links to <code>yinyang.memenow.xyz</code>
+							Split alignment, headless; sticky heading + 3 product principles (Context,
+							Transparency, Ownership)
 						</td>
 					</tr>
 					<tr>
 						<td>02</td>
-						<td>Our Philosophy</td>
-						<td>Quiet craft for questions that stay with you</td>
-						<td>Left alignment; studio ethos chapter</td>
+						<td><code>#flagship</code></td>
+						<td>YinYang Agent</td>
+						<td>
+							Tactile <code>.c-showcase</code> paper band with 4 pillars; links to
+							<code>yinyang.memenow.xyz</code> and <code>/products/yinyang</code>
+						</td>
 					</tr>
 					<tr>
 						<td>03</td>
-						<td>Contact</td>
-						<td>Start a conversation</td>
-						<td>CTA: mailto <code>hello@memenow.xyz</code></td>
+						<td><code>#access</code></td>
+						<td>Start free, go deeper by choice</td>
+						<td>
+							3-column overview of free start, on-demand depth, and platform availability; links to
+							<code>/products#plans</code> and <code>/products/yinyang</code>
+						</td>
 					</tr>
 				</tbody>
 			</table>
 
-			<h2>Products — <code>/products</code> and children</h2>
-			<p><code>/products</code> is the index.</p>
+			<h2>Products — <code>/[locale]/products</code> and children</h2>
+			<p>
+				<code>/[locale]/products</code> serves as the portfolio hub and single canonical pricing
+				page: a compact YinYang Agent <code>.c-showcase</code> overview card (<code>#yinyang</code>)
+				above the 5-tier <code>TierGrid</code> (<code>#plans</code>, driven by
+				<code>src/lib/data/yinyang.ts</code>).
+			</p>
 			<ul>
 				<li>
-					<strong><code>/products/yinyang</code></strong> — narrative pitch for the Yinyang Agent.
-					Two chapters (<em>Reading &amp; cycles</em>, <em>Synthesis &amp; review</em>) and a CTA
-					out to the product domain. Defines its own OG image (<code>/og/og-yinyang.jpeg</code>).
+					<strong><code>/[locale]/products/yinyang</code></strong> — flagship deep dive for YinYang
+					Agent: three chapters (<code>#reading</code> Core Features; <code>#method</code> How It
+					Works with 5-row <code>ComparisonTable</code>; <code>#platforms</code> Web, native iPhone
+					in progress, and daily AI assistant connections with CTA back to
+					<code>/products#plans</code> and BaZi Library). Defines its own OG image
+					(<code>/og/og-yinyang.jpeg</code>).
 				</li>
 			</ul>
 
-			<h2>Company — <code>/company</code></h2>
+			<h2>Company — <code>/[locale]/company</code></h2>
 			<p>
-				Studio page. Three chapters: <em>The studio</em>, <em>How we work</em>,
-				<em>Get in touch</em>.
+				<code>memenow LLC</code> studio page. Three chapters: <em>memenow LLC</em> (3 aligned
+				<code>StatCard</code> entries: <code>2024</code>, <code>Delaware</code>,
+				<code>7</code> languages), <em>Product Standards</em> (split alignment, 4 commitments), and
+				<em>Timeline</em> (3-milestone history plus acknowledgment of Anthropic &amp; Cloudflare
+				credit sponsorship). Direct contact addresses live in the global footer's
+				<code>Contact</code> column.
 			</p>
 
 			<h2>Legal pair — <code>/privacy</code>, <code>/terms</code></h2>
 			<p>
-				Both carry <code>&lt;meta name="robots" content="noindex"&gt;</code> and have no hero image
-				— the page renders against the legal fog only. They are still listed in the sitemap because
-				the URLs are stable and we want them discoverable from the footer.
+				Both carry <code>&lt;meta name="robots" content="noindex"&gt;</code> and open with an
+				editorial <code>.c-legal-summary</code> overview card (three plain-language points plus an
+				in-page section jump bar) above left-aligned chapters rendered against the legal fog. They
+				are still listed in the sitemap because the URLs are stable and discoverable from the
+				footer.
 			</p>
 			<p>
 				<strong><code>/privacy</code></strong> is intentionally short: no third-party analytics, no

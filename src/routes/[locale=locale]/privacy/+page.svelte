@@ -7,6 +7,11 @@
 
 	const messages = useMessages();
 	const t = $derived(messages().privacy);
+	const toc = $derived([
+		{ href: '#scope', label: t.scope.title },
+		{ href: '#data', label: t.data.title },
+		{ href: '#email', label: t.email.title }
+	]);
 </script>
 
 <svelte:head>
@@ -20,29 +25,44 @@
 </svelte:head>
 
 <EditorialHero
-	eyebrowLeft={t.hero.eyebrowLeft}
-	eyebrowRight={t.hero.eyebrowRight}
+	eyebrowLeft={t.hero.updated}
 	title={t.hero.title}
 	lede={t.hero.lede}
-	cue={t.hero.cue}
+	scrollTarget="#overview"
 />
 
-<Chapter id="scope" number={t.scope.number} label={t.scope.label} title={t.scope.title}>
+<section id="overview" class="c-legal-overview" aria-labelledby="privacy-summary-title">
+	<div class="c-legal-summary">
+		<h2 id="privacy-summary-title" class="c-legal-summary__title">{t.summaryTitle}</h2>
+		<ul class="c-legal-summary__points">
+			{#each t.summaryPoints as point (point)}
+				<li>{point}</li>
+			{/each}
+		</ul>
+		<nav class="c-legal-toc" aria-label={t.summaryTitle}>
+			{#each toc as item (item.href)}
+				<a href={item.href}>{item.label}</a>
+			{/each}
+		</nav>
+	</div>
+</section>
+
+<Chapter id="scope" align="left" headless title={t.scope.title}>
 	<p class="c-chapter__lede">
 		<TrustedHtml html={t.scope.body} />
 	</p>
 </Chapter>
 
-<Chapter id="data" number={t.data.number} label={t.data.label} title={t.data.title}>
+<Chapter id="data" align="left" headless title={t.data.title}>
 	<p class="c-chapter__lede">
 		<TrustedHtml html={t.data.p1} />
 	</p>
-	<p class="c-chapter__lede">
+	<p class="c-chapter__prose">
 		<TrustedHtml html={t.data.p2} />
 	</p>
 </Chapter>
 
-<Chapter id="email" number={t.email.number} label={t.email.label} title={t.email.title}>
+<Chapter id="email" align="left" headless title={t.email.title}>
 	<p class="c-chapter__lede">
 		<TrustedHtml html={t.email.body} />
 	</p>
